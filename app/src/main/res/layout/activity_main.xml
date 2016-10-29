@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -7,110 +8,94 @@
     android:background="@color/colorPrimaryDark">
 
     <!--First button-->
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="160dp">
-        <TextView
-            android:id="@+id/quote"
-            android:text="@string/quote"
-            android:fontFamily="sans-serif-light"
-            android:textSize="24dp"
-            android:gravity="right"
-            android:textColor="@color/colorWhite"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="20dp">
-        </TextView>
-        <TextView
-            android:text="@string/author"
-            android:fontFamily="sans-serif-light"
-            android:textSize="24dp"
-            android:gravity="right"
-            android:textColor="@color/colorWhite"
-            android:layout_centerVertical="true"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_below="@id/quote">
-        </TextView>
-    </RelativeLayout>
 
     <!--First button-->
-    <RelativeLayout
-        android:clickable="true"
-        android:onClick="helpMeSpeakSelected"
-        android:background="@color/colorAccent"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
-        <View android:id="@+id/green_bar"
-            android:layout_width="20dp"
-            android:layout_height="100dp"
-            android:layout_alignParentTop="true"
-            android:background="@color/green"
-            android:visibility="visible"/>
-        <TextView
-            android:text="@string/help_me_speak"
-            android:fontFamily="sans-serif-light"
-            android:textSize="28dp"
-            android:textColor="@color/colorWhite"
-            android:layout_toRightOf="@id/green_bar"
-            android:layout_centerVertical="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"></TextView>
-    </RelativeLayout>
 
     <!--Second button-->
-    <RelativeLayout
-        android:clickable="true"
-        android:onClick="learnSelected"
-        android:background="@color/colorAccent"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
-        <View android:id="@+id/orange_bar"
-            android:layout_width="20dp"
-            android:layout_height="100dp"
-            android:layout_alignParentTop="true"
-            android:background="@color/orange"
-            android:visibility="visible" />
-        <TextView
-            android:text="@string/learn"
-            android:fontFamily="sans-serif-light"
-            android:textSize="28dp"
-            android:textColor="@color/colorWhite"
-            android:layout_toRightOf="@id/orange_bar"
-            android:layout_centerVertical="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"></TextView>
-    </RelativeLayout>
 
     <!--Third button-->
-    <RelativeLayout
+
+    <ImageView
+        android:layout_height="72dp"
+        app:srcCompat="@color/colorAccent"
+        android:layout_width="0dp"
         android:clickable="true"
-        android:onClick="remindersSelected"
-        android:background="@color/colorAccent"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
-        <View android:id="@+id/pink_bar"
-            android:layout_width="20dp"
-            android:layout_height="100dp"
-            android:layout_alignParentTop="true"
-            android:background="@color/pink"
-            android:visibility="visible"/>
-        <TextView
-            android:text="@string/reminders"
-            android:fontFamily="sans-serif-light"
-            android:textSize="28dp"
-            android:textColor="@color/colorWhite"
-            android:layout_toRightOf="@id/pink_bar"
-            android:layout_centerVertical="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"></TextView>
-    </RelativeLayout>
-</LinearLayout>
+        android:id="@+id/helpMeSpeakButton"
+        android:layout_marginStart="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <ImageView
+        app:srcCompat="@color/colorAccent"
+        android:id="@+id/remindersButton"
+        android:layout_width="0dp"
+        android:clickable="true"
+        android:layout_height="72dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/learnButton" />
+
+    <ImageView
+        app:srcCompat="@color/colorAccent"
+        android:id="@+id/learnButton"
+        android:layout_width="568dp"
+        android:clickable="true"
+        android:layout_height="72dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginRight="16dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/helpMeSpeakButton"
+        android:layout_marginTop="8dp" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_height="244dp"
+        android:id="@+id/textView4"
+        android:background="@color/colorWhite"
+        android:layout_width="360dp"
+        tools:layout_editor_absoluteY="4dp"
+        tools:layout_editor_absoluteX="7dp" />
+
+    <ImageView
+        android:layout_width="20dp"
+        app:srcCompat="@color/green"
+        android:id="@+id/greenBar"
+        android:layout_height="72dp"
+        app:layout_constraintLeft_toLeftOf="@+id/helpMeSpeakButton"
+        app:layout_constraintTop_toTopOf="@+id/helpMeSpeakButton" />
+
+    <ImageView
+        android:layout_width="20dp"
+        app:srcCompat="@color/orange"
+        android:id="@+id/orangeBar"
+        android:layout_height="72dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="16dp"
+        app:layout_constraintTop_toTopOf="@+id/learnButton" />
+
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="72dp"
+        app:srcCompat="@color/pink"
+        android:id="@+id/pinkBar"
+        android:layout_marginStart="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/learnButton" />
+
+</android.support.constraint.ConstraintLayout>
