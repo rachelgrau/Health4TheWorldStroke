@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <!--gray square-->
+    <View
+        android:id="@+id/read_thumbnail_background"
+        android:layout_width="73dp"
+        android:layout_height="73dp"
+        android:background="@color/gray"/>
+    <!--book icon, centered in gray square -->
+    <ImageView
+        android:id="@+id/read_thumbnail_image"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_marginLeft="9dp"
+        android:layout_marginTop="9dp"
+        android:layout_alignTop="@id/read_thumbnail_background"
+        android:layout_alignBottom="@id/read_thumbnail_background"
+        android:layout_alignLeft="@id/read_thumbnail_background"
+        android:layout_alignRight="@id/read_thumbnail_background"
+        android:scaleType="fitXY"
+        android:src="@mipmap/book_icon"
+        />
+
+    <RelativeLayout
+        android:id="@+id/recipe_list_text_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@id/read_thumbnail_background"
+        android:layout_toRightOf="@id/read_thumbnail_background">
+
+        <TextView
+            android:id="@+id/learn_content_title"
+            android:layout_width="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="14dp"
+            android:layout_marginRight="8dp"
+            android:textSize="18sp"
+            tools:text="Title"
+            />
+        <!--Pink arrow button-->
+        <ImageView
+            android:id="@+id/pink_arrow"
+            android:layout_width="29dp"
+            android:layout_height="29dp"
+            android:layout_marginRight="14dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:scaleType="fitXY"
+            android:src="@mipmap/pink_arrow"
+            />
+    </RelativeLayout>
+
+</RelativeLayout>

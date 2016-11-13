@@ -7,6 +7,7 @@ import java.util.ArrayList;
  */
 
 public class VideoLearnContent {
+    private String title;
 
     public static ArrayList<VideoLearnContent> getVideoContent() {
         ArrayList<VideoLearnContent> content = new ArrayList<VideoLearnContent>();

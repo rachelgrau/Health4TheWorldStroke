@@ -6,8 +6,9 @@ import java.util.ArrayList;
  * Created by rachel on 11/7/16.
  */
 
-public class ReadLearnContent extends LearnContent {
-    private String text;
+public class ReadLearnContent {
+    public String title;
+    public String text;
 
     public static ArrayList<ReadLearnContent> getReadContent() {
         ArrayList<ReadLearnContent> content = new ArrayList<ReadLearnContent>();
