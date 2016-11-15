@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -48,8 +49,16 @@ public class ReadLearnAdapter extends BaseAdapter {
         View rowView = mInflater.inflate(R.layout.list_item_learn_content, parent, false);
         TextView titleTextView =
                 (TextView) rowView.findViewById(com.example.rachel.health4theworldstroke.R.id.learn_content_title);
-//        ImageView thumbnailImageView =
-//                (ImageView) rowView.findViewById(com.example.rachel.health4theworldstroke.R.id.read_thumbnail);
+        ImageButton arrowButton = (ImageButton) rowView.findViewById(R.id.pink_arrow);
+        arrowButton.setOnClickListener(new View.OnClickListener()   {
+            public void onClick(View v)  {
+                try {
+                    System.out.println("HERE!");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
         // Populate view with relevant content
         ReadLearnContent contentItem = (ReadLearnContent) getItem(position);
@@ -58,5 +67,9 @@ public class ReadLearnAdapter extends BaseAdapter {
 //        Picasso.with(mContext).load(contentItem.imageUrl).placeholder(R.mipmap.ic_launcher).into(thumbnailImageView);
 
         return rowView;
+    }
+
+    public void onClick() {
+
     }
 }

@@ -43,7 +43,18 @@
             tools:text="Title"
             />
         <!--Pink arrow button-->
-        <ImageView
+        <!--<ImageView-->
+            <!--android:id="@+id/pink_arrow"-->
+            <!--android:layout_width="29dp"-->
+            <!--android:layout_height="29dp"-->
+            <!--android:layout_marginRight="14dp"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:scaleType="fitXY"-->
+            <!--android:src="@mipmap/pink_arrow"-->
+            <!--/>-->
+
+        <ImageButton
             android:id="@+id/pink_arrow"
             android:layout_width="29dp"
             android:layout_height="29dp"
@@ -51,8 +62,9 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:scaleType="fitXY"
-            android:src="@mipmap/pink_arrow"
-            />
+            android:background="@mipmap/pink_arrow"
+            android:clickable="true"
+            android:onClick="onClick" />
     </RelativeLayout>
 
 </RelativeLayout>
