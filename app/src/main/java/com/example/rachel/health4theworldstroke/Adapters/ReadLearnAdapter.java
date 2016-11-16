@@ -53,16 +53,6 @@ public class ReadLearnAdapter extends BaseAdapter {
         TextView titleTextView =
                 (TextView) rowView.findViewById(com.example.rachel.health4theworldstroke.R.id.learn_content_title);
         ImageButton arrowButton = (ImageButton) rowView.findViewById(R.id.pink_arrow);
-//        arrowButton.setOnClickListener(new View.OnClickListener()   {
-//            public void onClick(View v)  {
-//                try {
-//                    System.out.println("HERE!");
-//                    ((ImageButton)v).setBackgroundResource(R.mipmap.white_arrow);
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
 
         // Populate view with relevant content
         ReadLearnContent contentItem = (ReadLearnContent) getItem(position);

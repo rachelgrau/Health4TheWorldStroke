@@ -52,10 +52,10 @@ public class LearnActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)  {
                 /* Transition to content activity */
-                ReadLearnContent selectedRecipe = learnContent.get(position);
+                ReadLearnContent selectedContent = learnContent.get(position);
                 Intent readIntent = new Intent(context, ReadContentActivity.class);
-                readIntent.putExtra("title", selectedRecipe.title);
-//        detailIntent.putExtra("url", selectedRecipe.instructionUrl);
+                readIntent.putExtra("title", selectedContent.title);
+                readIntent.putExtra("text", selectedContent.text);
                 startActivity(readIntent);
             }
         });
