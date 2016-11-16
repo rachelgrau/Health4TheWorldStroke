@@ -1,4 +1,4 @@
-package com.example.rachel.health4theworldstroke;
+package com.example.rachel.health4theworldstroke.Adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,6 +7,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import com.example.rachel.health4theworldstroke.Models.ReadLearnContent;
+import com.example.rachel.health4theworldstroke.R;
 
 import java.util.ArrayList;
 
@@ -50,15 +53,16 @@ public class ReadLearnAdapter extends BaseAdapter {
         TextView titleTextView =
                 (TextView) rowView.findViewById(com.example.rachel.health4theworldstroke.R.id.learn_content_title);
         ImageButton arrowButton = (ImageButton) rowView.findViewById(R.id.pink_arrow);
-        arrowButton.setOnClickListener(new View.OnClickListener()   {
-            public void onClick(View v)  {
-                try {
-                    System.out.println("HERE!");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+//        arrowButton.setOnClickListener(new View.OnClickListener()   {
+//            public void onClick(View v)  {
+//                try {
+//                    System.out.println("HERE!");
+//                    ((ImageButton)v).setBackgroundResource(R.mipmap.white_arrow);
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
 
         // Populate view with relevant content
         ReadLearnContent contentItem = (ReadLearnContent) getItem(position);
@@ -69,7 +73,4 @@ public class ReadLearnAdapter extends BaseAdapter {
         return rowView;
     }
 
-    public void onClick() {
-
-    }
 }

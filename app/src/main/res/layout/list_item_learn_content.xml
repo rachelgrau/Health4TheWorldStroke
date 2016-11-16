@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:descendantFocusability="blocksDescendants">
     <!--gray square-->
     <View
         android:id="@+id/read_thumbnail_background"
@@ -43,17 +44,6 @@
             tools:text="Title"
             />
         <!--Pink arrow button-->
-        <!--<ImageView-->
-            <!--android:id="@+id/pink_arrow"-->
-            <!--android:layout_width="29dp"-->
-            <!--android:layout_height="29dp"-->
-            <!--android:layout_marginRight="14dp"-->
-            <!--android:layout_alignParentRight="true"-->
-            <!--android:layout_centerVertical="true"-->
-            <!--android:scaleType="fitXY"-->
-            <!--android:src="@mipmap/pink_arrow"-->
-            <!--/>-->
-
         <ImageButton
             android:id="@+id/pink_arrow"
             android:layout_width="29dp"
@@ -62,9 +52,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:scaleType="fitXY"
-            android:background="@mipmap/pink_arrow"
-            android:clickable="true"
-            android:onClick="onClick" />
+            android:background="@mipmap/pink_arrow"/>
     </RelativeLayout>
 
 </RelativeLayout>

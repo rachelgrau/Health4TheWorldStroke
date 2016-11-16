@@ -1,4 +1,4 @@
-package com.example.rachel.health4theworldstroke;
+package com.example.rachel.health4theworldstroke.Models;
 
 import java.util.ArrayList;
 

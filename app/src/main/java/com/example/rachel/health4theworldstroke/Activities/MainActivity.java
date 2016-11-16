@@ -1,9 +1,11 @@
-package com.example.rachel.health4theworldstroke;
+package com.example.rachel.health4theworldstroke.Activities;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+
+import com.example.rachel.health4theworldstroke.R;
 
 public class MainActivity extends AppCompatActivity {
     public final static String EXTRA_MESSAGE = "com.example.health4theworldstroke.MESSAGE";
