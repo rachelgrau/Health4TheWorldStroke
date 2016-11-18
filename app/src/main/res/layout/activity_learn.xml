@@ -30,12 +30,35 @@
 
     </android.support.v7.widget.Toolbar>
 
+    <!--Read / Video Tabs-->
+    <LinearLayout
+        android:id="@+id/button_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/learn_toolbar">
+        <!--Read Tab-->
+        <View
+            android:id="@+id/testbutton"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="@color/colorPrimaryDark">
+        </View>
+        <!--Video Tab-->
+        <View
+            android:id="@+id/cancelButton"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="@color/green"/>
+    </LinearLayout>
+
     <!--ListView-->
     <ListView
         android:id="@+id/learn_content_list_view"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:layout_below="@+id/learn_toolbar">
+        android:layout_below="@id/button_container">
     </ListView>
 
 </RelativeLayout>
