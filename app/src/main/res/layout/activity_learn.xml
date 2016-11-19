@@ -37,20 +37,44 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/learn_toolbar">
         <!--Read Tab-->
-        <View
-            android:id="@+id/testbutton"
+        <LinearLayout
+            android:id="@+id/read_button"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_weight="1"
-            android:background="@color/colorPrimaryDark">
-        </View>
+            android:orientation="vertical">
+            <View
+                android:id="@+id/read_button_top"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@color/colorPrimaryDark">
+            </View>
+            <View
+                android:id="@+id/read_button_gray_bottom"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="@color/gray">
+            </View>
+        </LinearLayout>
         <!--Video Tab-->
-        <View
-            android:id="@+id/cancelButton"
+        <LinearLayout
+            android:id="@+id/video_button"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_weight="1"
-            android:background="@color/green"/>
+            android:orientation="vertical">
+            <View
+                android:id="@+id/video_button_top"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@color/colorPrimaryDark"/>
+            <View
+                android:id="@+id/video_button_gray_bottom"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="@color/gray">
+            </View>
+        </LinearLayout>
     </LinearLayout>
 
     <!--ListView-->
