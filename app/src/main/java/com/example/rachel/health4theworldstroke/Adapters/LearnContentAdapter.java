@@ -6,9 +6,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.rachel.health4theworldstroke.Models.LearnContent;
+import com.example.rachel.health4theworldstroke.Models.ReadLearnContent;
 import com.example.rachel.health4theworldstroke.R;
 
 import java.util.ArrayList;
@@ -58,10 +60,18 @@ public class LearnContentAdapter extends BaseAdapter {
         TextView titleTextView =
                 (TextView) rowView.findViewById(com.example.rachel.health4theworldstroke.R.id.learn_content_title);
         ImageButton arrowButton = (ImageButton) rowView.findViewById(R.id.pink_arrow);
+        ImageView icon = (ImageView) rowView.findViewById(R.id.content_icon);
 
         // Populate view with relevant content
         LearnContent contentItem = (LearnContent) getItem(position);
         titleTextView.setText(contentItem.title);
+        if (contentItem instanceof ReadLearnContent) {
+            /* Read icon */
+//            icon.setImageResource(R.mipmap.book_icon);
+        } else {
+            /* Video image*/
+            icon.setImageResource(R.mipmap.video_icon);
+        }
 
 //        Picasso.with(mContext).load(contentItem.imageUrl).placeholder(R.mipmap.ic_launcher).into(thumbnailImageView);
 
