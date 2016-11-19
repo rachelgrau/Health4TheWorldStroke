@@ -6,11 +6,10 @@ import java.util.ArrayList;
  * Created by rachel on 11/7/16.
  */
 
-public class VideoLearnContent {
-    private String title;
+public class VideoLearnContent extends LearnContent{
 
-    public static ArrayList<VideoLearnContent> getVideoContent() {
-        ArrayList<VideoLearnContent> content = new ArrayList<VideoLearnContent>();
+    public static ArrayList<LearnContent> getVideoContent() {
+        ArrayList<LearnContent> content = new ArrayList<LearnContent>();
         return content;
     }
 }

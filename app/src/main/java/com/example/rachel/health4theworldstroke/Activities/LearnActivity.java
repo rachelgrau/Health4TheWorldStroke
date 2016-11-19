@@ -11,8 +11,10 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.rachel.health4theworldstroke.Adapters.ReadLearnAdapter;
+import com.example.rachel.health4theworldstroke.Adapters.LearnContentAdapter;
+import com.example.rachel.health4theworldstroke.Models.LearnContent;
 import com.example.rachel.health4theworldstroke.Models.ReadLearnContent;
+import com.example.rachel.health4theworldstroke.Models.VideoLearnContent;
 import com.example.rachel.health4theworldstroke.R;
 
 import java.util.ArrayList;
@@ -21,14 +23,18 @@ public class LearnActivity extends AppCompatActivity {
     public static final String READ_TAB = "Read";
     public static final String VIDEO_TAB = "Video";
 
-    private ListView readListView; // list of read content
-    private ListView videosListView; // list of video content
+    private ListView listView; // list of read or video content, depending which tab is selected
+    private LearnContentAdapter adapter;
     private String tabSelected; // current tab selected
+    private ArrayList<LearnContent> readContent;
+    private ArrayList<LearnContent> videoContent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         tabSelected = READ_TAB;
+        readContent = ReadLearnContent.getReadContent();
+        videoContent = VideoLearnContent.getVideoContent();
         setContentView(R.layout.activity_learn);
         setUpToolbar();
         setUpListView();
@@ -45,32 +51,42 @@ public class LearnActivity extends AppCompatActivity {
     }
 
     private void setUpListView() {
-        readListView = (ListView)findViewById(R.id.learn_content_list_view);
-        final ArrayList<ReadLearnContent> learnContent = ReadLearnContent.getReadContent();
-        ReadLearnAdapter adapter = new ReadLearnAdapter(this, learnContent);
-        readListView.setAdapter(adapter);
+        /* Populate list view with read content to start */
+        listView = (ListView)findViewById(R.id.learn_content_list_view);
+        adapter = new LearnContentAdapter(this, readContent);
+        listView.setAdapter(adapter);
 
         /* Set up callback for when an item in the list is selected. */
         final Context context = this;
-        readListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)  {
                 /* Transition to content activity */
-                ReadLearnContent selectedContent = learnContent.get(position);
-                Intent readIntent = new Intent(context, ReadContentActivity.class);
-                readIntent.putExtra("title", selectedContent.title);
-                readIntent.putExtra("text", selectedContent.text);
-                startActivity(readIntent);
+                if (tabSelected.equals(READ_TAB)) {
+                    ReadLearnContent selectedContent = (ReadLearnContent)readContent.get(position);
+                    Intent readIntent = new Intent(context, ReadContentActivity.class);
+                    readIntent.putExtra("title", selectedContent.title);
+//                readIntent.putExtra("text", selectedContent.text);
+                    startActivity(readIntent);
+                } else {
+                    // To video activity
+                }
             }
         });
     }
 
-    /* When they click the read tab, we update the views of each tab.
+    /* When they click the read tab, we update the views of each tab and update the displayed list view.
      * We add a 5dp gray bar below the read tab, and make the read tab shorter (45dp) to fit this bar.
      * We remove the gray bar below the video tab, and make the video tab taller (50dp) to fill the space. */
     public void clickReadTab(View v) {
         if (!tabSelected.equals(READ_TAB)) {
             tabSelected = READ_TAB;
+
+            /* Update the list view to show read content. */
+            adapter.setDataSource(readContent);
+
+            /* UPDATE THE VIEWS OF THE TABS
+            * ------------------------------ */
             /* Update the heights of each tab. */
             TextView readButtonTop = (TextView) findViewById(R.id.read_button_top);
             TextView videoButtonTop = (TextView) findViewById(R.id.video_button_top);
@@ -91,12 +107,18 @@ public class LearnActivity extends AppCompatActivity {
         }
     }
 
-    /* When they click the video tab, we update the views of each tab.
+    /* When they click the video tab, we update the views of each tab and update the displayed list view.
      * We add a 5dp gray bar below the video tab, and make the video tab shorter (45dp) to fit this bar.
      * We remove the gray bar below the read tab, and make the read tab taller (50dp) to fill the space. */
     public void clickVideoTab(View v) {
         if (!tabSelected.equals(VIDEO_TAB)) {
             tabSelected = VIDEO_TAB;
+
+            /* Update the list view to show video content. */
+            adapter.setDataSource(videoContent);
+
+            /* UPDATE THE VIEWS OF THE TABS
+            * ------------------------------ */
             /* Update the heights of each tab. */
             TextView readButtonTop = (TextView) findViewById(R.id.read_button_top);
             TextView videoButtonTop = (TextView) findViewById(R.id.video_button_top);

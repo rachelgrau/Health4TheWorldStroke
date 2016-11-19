@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.rachel.health4theworldstroke.Models.LearnContent;
 import com.example.rachel.health4theworldstroke.Models.ReadLearnContent;
 import com.example.rachel.health4theworldstroke.R;
 
@@ -20,15 +21,20 @@ import java.util.ArrayList;
  * a list of the different content the user can read.
  */
 
-public class ReadLearnAdapter extends BaseAdapter {
+public class LearnContentAdapter extends BaseAdapter {
     private Context mContext;
     private LayoutInflater mInflater;
-    private ArrayList<ReadLearnContent> mDataSource;
+    private ArrayList<LearnContent> mDataSource;
 
-    public ReadLearnAdapter(Context context, ArrayList<ReadLearnContent> items) {
+    public LearnContentAdapter(Context context, ArrayList<LearnContent> items) {
         mContext = context;
         mDataSource = items;
         mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    }
+
+    public void setDataSource(ArrayList<LearnContent> newData) {
+        mDataSource = newData;
+        this.notifyDataSetChanged();
     }
 
     @Override
