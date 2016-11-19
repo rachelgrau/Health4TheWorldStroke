@@ -9,7 +9,6 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.rachel.health4theworldstroke.Models.LearnContent;
-import com.example.rachel.health4theworldstroke.Models.ReadLearnContent;
 import com.example.rachel.health4theworldstroke.R;
 
 import java.util.ArrayList;
@@ -61,7 +60,7 @@ public class LearnContentAdapter extends BaseAdapter {
         ImageButton arrowButton = (ImageButton) rowView.findViewById(R.id.pink_arrow);
 
         // Populate view with relevant content
-        ReadLearnContent contentItem = (ReadLearnContent) getItem(position);
+        LearnContent contentItem = (LearnContent) getItem(position);
         titleTextView.setText(contentItem.title);
 
 //        Picasso.with(mContext).load(contentItem.imageUrl).placeholder(R.mipmap.ic_launcher).into(thumbnailImageView);
