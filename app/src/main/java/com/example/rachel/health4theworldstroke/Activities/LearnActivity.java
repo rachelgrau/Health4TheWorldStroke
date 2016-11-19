@@ -63,13 +63,17 @@ public class LearnActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)  {
                 /* Transition to content activity */
                 if (tabSelected.equals(READ_TAB)) {
+                    // To read activity
                     ReadLearnContent selectedContent = (ReadLearnContent)readContent.get(position);
                     Intent readIntent = new Intent(context, ReadContentActivity.class);
                     readIntent.putExtra("title", selectedContent.title);
-//                readIntent.putExtra("text", selectedContent.text);
                     startActivity(readIntent);
                 } else {
                     // To video activity
+                    VideoLearnContent selectedContent = (VideoLearnContent)videoContent.get(position);
+                    Intent videoIntent = new Intent(context, VideoContentActivity.class);
+                    videoIntent.putExtra("title", selectedContent.title);
+                    startActivity(videoIntent);
                 }
             }
         });

@@ -18,7 +18,8 @@
         <activity android:name=".Activities.HelpMeSpeakActivity" />
         <activity android:name=".Activities.LearnActivity" />
         <activity android:name=".Activities.RemindersActivity" />
-        <activity android:name=".Activities.ReadContentActivity"></activity>
+        <activity android:name=".Activities.ReadContentActivity" />
+        <activity android:name=".Activities.VideoContentActivity"></activity>
     </application>
 
 </manifest>
