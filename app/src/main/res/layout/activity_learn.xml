@@ -43,18 +43,22 @@
             android:layout_height="50dp"
             android:layout_weight="1"
             android:orientation="vertical">
-            <View
+            <TextView
                 android:id="@+id/read_button_top"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:background="@color/colorPrimaryDark">
-            </View>
+                android:text="@string/read_tab"
+                android:textColor="@color/colorWhite"
+                android:textSize="8pt"
+                android:gravity="center"
+                android:onClick="clickReadTab"
+                android:clickable="true"
+                android:background="@color/colorPrimaryDark"/>
             <View
                 android:id="@+id/read_button_gray_bottom"
                 android:layout_width="match_parent"
                 android:layout_height="5dp"
-                android:background="@color/gray">
-            </View>
+                android:background="@color/gray"/>
         </LinearLayout>
         <!--Video Tab-->
         <LinearLayout
@@ -63,17 +67,22 @@
             android:layout_height="50dp"
             android:layout_weight="1"
             android:orientation="vertical">
-            <View
+            <TextView
                 android:id="@+id/video_button_top"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="50dp"
+                android:text="@string/video_tab"
+                android:textColor="@color/colorWhite"
+                android:textSize="8pt"
+                android:gravity="center"
+                android:onClick="clickVideoTab"
+                android:clickable="true"
                 android:background="@color/colorPrimaryDark"/>
             <View
                 android:id="@+id/video_button_gray_bottom"
                 android:layout_width="match_parent"
                 android:layout_height="5dp"
-                android:background="@color/gray">
-            </View>
+                android:background="@color/gray"/>
         </LinearLayout>
     </LinearLayout>
 
