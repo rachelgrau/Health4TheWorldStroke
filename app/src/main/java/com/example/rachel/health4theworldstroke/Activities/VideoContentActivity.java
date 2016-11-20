@@ -13,6 +13,9 @@ import com.example.rachel.health4theworldstroke.R;
 public class VideoContentActivity extends AppCompatActivity {
     public String title;
 
+    /* Video titles */
+    public static final String KNEE_FLEXION = "KneeFlexion";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,10 +38,21 @@ public class VideoContentActivity extends AppCompatActivity {
 
     private void loadVideo() {
         VideoView vidView = (VideoView) findViewById(R.id.video_view);
-        String uriPath = "android.resource://com.example.rachel.health4theworldstroke/" + R.raw.female_knee_flexion;
+        String uriPath = getUriPath(KNEE_FLEXION);
         Uri uri2 = Uri.parse(uriPath);
         vidView.setVideoURI(uri2);
         vidView.requestFocus();
         vidView.start();
+    }
+
+    /* Returns the URI Path to the video with the given name, or the empty string if there is none. */
+    private String getUriPath(String videoName) {
+        String uriPath = "android.resource://com.example.rachel.health4theworldstroke/";
+        if (videoName.equals(KNEE_FLEXION)) {
+            uriPath += R.raw.female_knee_flexion;
+        } else {
+            uriPath = "";
+        }
+        return uriPath;
     }
 }
