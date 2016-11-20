@@ -32,14 +32,14 @@ public class SpeakObject {
         ArrayList<SpeakObject> speakObjects = new ArrayList<SpeakObject>();
 
         speakObjects.add(new SpeakObject(context.getResources().getString(R.string.yes), R.mipmap.yes_icon));
-        speakObjects.add(new SpeakObject(context.getResources().getString(R.string.no), R.mipmap.yes_icon));
-        speakObjects.add(new SpeakObject(context.getResources().getString(R.string.thanks), R.mipmap.yes_icon));
-        speakObjects.add(new SpeakObject(context.getResources().getString(R.string.bathroom), R.mipmap.yes_icon));
-        speakObjects.add(new SpeakObject(context.getResources().getString(R.string.water), R.mipmap.yes_icon));
-        speakObjects.add(new SpeakObject(context.getResources().getString(R.string.hungry), R.mipmap.yes_icon));
-        speakObjects.add(new SpeakObject(context.getResources().getString(R.string.notgivingup), R.mipmap.yes_icon));
-        speakObjects.add(new SpeakObject(context.getResources().getString(R.string.pain), R.mipmap.yes_icon));
-        speakObjects.add(new SpeakObject(context.getResources().getString(R.string.cantspeak), R.mipmap.yes_icon));
+        speakObjects.add(new SpeakObject(context.getResources().getString(R.string.no), R.mipmap.no_icon));
+        speakObjects.add(new SpeakObject(context.getResources().getString(R.string.thanks), R.mipmap.thanks_icon));
+        speakObjects.add(new SpeakObject(context.getResources().getString(R.string.bathroom), R.mipmap.bathroom_icon));
+        speakObjects.add(new SpeakObject(context.getResources().getString(R.string.water), R.mipmap.water_icon));
+        speakObjects.add(new SpeakObject(context.getResources().getString(R.string.hungry), R.mipmap.food_icon));
+        speakObjects.add(new SpeakObject(context.getResources().getString(R.string.notgivingup), R.mipmap.not_giving_up_icon));
+        speakObjects.add(new SpeakObject(context.getResources().getString(R.string.pain), R.mipmap.pain_icon));
+        speakObjects.add(new SpeakObject(context.getResources().getString(R.string.cantspeak), R.mipmap.cant_speak_icon));
 
         return speakObjects;
     }
