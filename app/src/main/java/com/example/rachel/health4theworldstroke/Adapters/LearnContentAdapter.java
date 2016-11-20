@@ -18,8 +18,8 @@ import java.util.ArrayList;
 
 /**
  * Created by rachel on 11/11/16.
- * Adapter for the ReadLearnContent List View, which displays
- * a list of the different content the user can read.
+ * Adapter for the LearnContent List View (in LearnActivity) which displays
+ * a list of the different content the user can read or videos they can watch.
  */
 
 public class LearnContentAdapter extends BaseAdapter {

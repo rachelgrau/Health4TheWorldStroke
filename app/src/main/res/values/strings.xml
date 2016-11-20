@@ -8,4 +8,15 @@
     <string name="thumbnail">Thumbnail</string>
     <string name="read_tab">READ</string>
     <string name="video_tab">VIDEO</string>
+
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="thanks">Thank you</string>
+    <string name="bathroom">I need a bathroom</string>
+    <string name="water">I need water</string>
+    <string name="hungry">I\'m hungry</string>
+    <string name="notgivingup">I\'m not giving up</string>
+    <string name="pain">I\'m in pain</string>
+    <string name="cantspeak">Sorry, I can\'t speak</string>
+
 </resources>
