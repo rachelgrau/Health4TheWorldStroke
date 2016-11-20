@@ -34,13 +34,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/help_me_speak_toolbar"
-        android:gravity="center"
+        android:paddingLeft="0dp"
         android:columnWidth="100dp"
+        android:gravity="center"
         android:numColumns="auto_fit"
-        android:verticalSpacing="24dp"
-        android:horizontalSpacing="10dp"
         android:stretchMode="spacingWidthUniform"
-        android:background="@color/gray"
+        android:verticalSpacing="10dp"
         />
 
 </RelativeLayout>
