@@ -12,26 +12,34 @@ import java.util.ArrayList;
 
 public class SpeakObject {
     public String text;
-    public String imageName;
+    public int imgResource;
 
-    public SpeakObject(String text, String imageName) {
+    public SpeakObject(String text, int imgResource) {
         this.text = text;
-        this.imageName = imageName;
+        this.imgResource = imgResource;
+    }
+
+    public int getImageResource() {
+        return imgResource;
+    }
+
+    public String getText() {
+        return text;
     }
 
     /* Returns an ArrayList of all speak objects */
     public static ArrayList<SpeakObject> getSpeakObjects(Context context) {
         ArrayList<SpeakObject> speakObjects = new ArrayList<SpeakObject>();
 
-        speakObjects.add(new SpeakObject(context.getResources().getString(R.string.yes), ""));
-        speakObjects.add(new SpeakObject(context.getResources().getString(R.string.no), ""));
-        speakObjects.add(new SpeakObject(context.getResources().getString(R.string.thanks), ""));
-        speakObjects.add(new SpeakObject(context.getResources().getString(R.string.bathroom), ""));
-        speakObjects.add(new SpeakObject(context.getResources().getString(R.string.water), ""));
-        speakObjects.add(new SpeakObject(context.getResources().getString(R.string.hungry), ""));
-        speakObjects.add(new SpeakObject(context.getResources().getString(R.string.notgivingup), ""));
-        speakObjects.add(new SpeakObject(context.getResources().getString(R.string.pain), ""));
-        speakObjects.add(new SpeakObject(context.getResources().getString(R.string.cantspeak), ""));
+        speakObjects.add(new SpeakObject(context.getResources().getString(R.string.yes), R.mipmap.yes_icon));
+        speakObjects.add(new SpeakObject(context.getResources().getString(R.string.no), R.mipmap.yes_icon));
+        speakObjects.add(new SpeakObject(context.getResources().getString(R.string.thanks), R.mipmap.yes_icon));
+        speakObjects.add(new SpeakObject(context.getResources().getString(R.string.bathroom), R.mipmap.yes_icon));
+        speakObjects.add(new SpeakObject(context.getResources().getString(R.string.water), R.mipmap.yes_icon));
+        speakObjects.add(new SpeakObject(context.getResources().getString(R.string.hungry), R.mipmap.yes_icon));
+        speakObjects.add(new SpeakObject(context.getResources().getString(R.string.notgivingup), R.mipmap.yes_icon));
+        speakObjects.add(new SpeakObject(context.getResources().getString(R.string.pain), R.mipmap.yes_icon));
+        speakObjects.add(new SpeakObject(context.getResources().getString(R.string.cantspeak), R.mipmap.yes_icon));
 
         return speakObjects;
     }

@@ -4,6 +4,8 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.TextView;
 
@@ -27,6 +29,16 @@ public class HelpMeSpeakActivity extends AppCompatActivity {
         GridView gridView = (GridView)findViewById(R.id.grid_view);
         SpeakAdapter speakAdapter = new SpeakAdapter(this, speakObjects);
         gridView.setAdapter(speakAdapter);
+
+        /* Set up call view for selecting an item in grid */
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView parent, View view, int position, long id) {
+                String toRead = speakObjects.get(position).getText();
+                /* TO DO: read |toRead| out loud here. */
+                System.out.println(toRead);
+            }
+        });
     }
 
     /* Sets up the top toolbar. */
