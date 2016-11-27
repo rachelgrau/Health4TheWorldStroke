@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_help_me_speak"
@@ -17,7 +18,7 @@
         tools:layout_editor_absoluteX="8dp" >
 
         <TextView
-            style="@style/ToolBarStyle"
+            android:theme="@style/ToolBarStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/help_me_speak"
@@ -28,11 +29,43 @@
 
     </android.support.v7.widget.Toolbar>
 
+    <!--Search bar-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_below="@id/help_me_speak_toolbar"
+        android:id="@+id/search_bar"
+        android:background="@color/colorWhite">
+        <EditText
+            android:theme="@style/AppTheme"
+            android:id="@+id/search_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:hint="@string/hms_search_placeholder"
+            android:textColorHint="@color/medGray"
+            android:paddingLeft="20dp"
+            android:textSize="25sp"
+            android:textColor="@color/red"
+            android:gravity="center_vertical"
+            android:background="@android:color/transparent"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/medGray"
+            android:layout_marginTop="54dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            />
+
+    </RelativeLayout>
+
+
+    <!--Grid of Help Me Speak Buttons-->
     <GridView
         android:id="@+id/grid_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/help_me_speak_toolbar"
+        android:layout_below="@id/search_bar"
         android:paddingTop="10dp"
         android:columnWidth="100dp"
         android:gravity="center"

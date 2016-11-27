@@ -7,4 +7,6 @@
     <color name="orange">#ffc328</color>
     <color name="red">#DE5570</color>
     <color name="gray">#F1F1F1</color>
+    <color name="darkGray">#ACACAC</color>
+    <color name="medGray">#C2C2C2</color>
 </resources>

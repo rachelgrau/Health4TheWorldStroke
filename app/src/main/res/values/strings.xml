@@ -19,4 +19,5 @@
     <string name="pain">I\'m in pain</string>
     <string name="cantspeak">Sorry, I can\'t speak</string>
 
+    <string name="hms_search_placeholder">I\'m hungry</string>
 </resources>
