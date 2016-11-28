@@ -10,6 +10,7 @@ public class Reminder {
     private boolean isToday;
     private String title;
 
+    /* Returns a list of fake reminders */
     public static ArrayList<Reminder> getFakeReminders() {
         ArrayList<Reminder> reminders = new ArrayList<Reminder>();
 

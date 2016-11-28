@@ -20,4 +20,7 @@
     <string name="cantspeak">Sorry, I can\'t speak</string>
 
     <string name="hms_search_placeholder">I\'m hungry</string>
+
+    <string name="todays_reminders">Today\'s Reminders</string>
+    <string name="all_reminders">All Reminders</string>
 </resources>

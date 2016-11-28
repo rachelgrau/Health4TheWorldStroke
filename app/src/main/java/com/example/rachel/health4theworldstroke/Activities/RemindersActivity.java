@@ -30,15 +30,22 @@ public class RemindersActivity extends AppCompatActivity {
         generateRemindersForListView();
     }
 
+    /* Loads a list of all reminders. Then loops through them and adds each on to the adapter's
+     * data source in the correct order, adding section headers where needed. */
     private void generateRemindersForListView() {
+        /* Load all reminders */
         ArrayList<Reminder> allReminders = Reminder.getFakeReminders();
-        adapter.addSectionHeaderItem(new Reminder("Today's Reminder"));
+        /* Add first section header – today's reminders */
+        adapter.addSectionHeaderItem(new Reminder(getResources().getString(R.string.todays_reminders)));
+        /* Loop through all reminders and only add those that are for today to the adapter's data source. */
         for (Reminder r:allReminders) {
             if (r.isToday()) {
                 adapter.addItem(r);
             }
         }
-        adapter.addSectionHeaderItem(new Reminder("All Reminders"));
+        /* Add second section header – all reminders */
+        adapter.addSectionHeaderItem(new Reminder(getResources().getString(R.string.all_reminders)));
+        /* Loop through all reminders and add each one to the data source. */
         for (Reminder r:allReminders) {
             adapter.addItem(r);
         }
@@ -54,6 +61,7 @@ public class RemindersActivity extends AppCompatActivity {
         setSupportActionBar(myToolbar);
     }
 
+    /* Initializes an adapter (with empty data source) for the list view. */
     private void setUpListView() {
         /* Populate list view with read content to start */
         listView = (ListView)findViewById(R.id.reminders_list_view);
