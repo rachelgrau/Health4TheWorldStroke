@@ -1,11 +1,14 @@
 package com.example.rachel.health4theworldstroke.Activities;
 
 import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -18,11 +21,14 @@ import com.example.rachel.health4theworldstroke.Models.SpeakObject;
 import com.example.rachel.health4theworldstroke.R;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
-public class HelpMeSpeakActivity extends AppCompatActivity implements View.OnClickListener {
+public class HelpMeSpeakActivity extends AppCompatActivity implements View.OnClickListener,
+        TextToSpeech.OnInitListener {
     /* All speak icons */
     private ArrayList<SpeakObject> allSpeakObjects;
     private SpeakAdapter adapter;
+    private TextToSpeech tts;
 
     /* Only speak icons that fit current search criteria */
     private ArrayList<SpeakObject> speakObjectsToDisplay;
@@ -45,8 +51,12 @@ public class HelpMeSpeakActivity extends AppCompatActivity implements View.OnCli
             @Override
             public void onItemClick(AdapterView parent, View view, int position, long id) {
                 String toRead = speakObjectsToDisplay.get(position).getText();
-                /* TO DO: read |toRead| out loud here. */
-                System.out.println(toRead);
+                /* Read the text out loud */
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    tts.speak(toRead,TextToSpeech.QUEUE_FLUSH,null, null);
+                } else {
+                    tts.speak(toRead, TextToSpeech.QUEUE_FLUSH, null);
+                }
             }
         });
 
@@ -56,6 +66,9 @@ public class HelpMeSpeakActivity extends AppCompatActivity implements View.OnCli
         /* Set up search button */
         ImageButton searchButton = (ImageButton)findViewById(R.id.search_button);
         searchButton.setOnClickListener(this);
+
+        /* Set up text reader */
+        tts = new TextToSpeech(this, this);
     }
 
     public void onClick(View v) {
@@ -121,5 +134,30 @@ public class HelpMeSpeakActivity extends AppCompatActivity implements View.OnCli
         TextView toolbarTitle = (TextView) myToolbar.findViewById(R.id.toolbar_title);
         toolbarTitle.setTypeface(font);
         setSupportActionBar(myToolbar);
+    }
+
+    @Override
+    public void onInit(int status) {
+        if (status == TextToSpeech.SUCCESS) {
+
+            int result = tts.setLanguage(Locale.US);
+
+            if (result == TextToSpeech.LANG_MISSING_DATA
+                    || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                Log.e("TTS", "This Language is not supported");
+            }
+        } else {
+            Log.e("TTS", "Initilization Failed!");
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        // Don't forget to shutdown tts!
+        if (tts != null) {
+            tts.stop();
+            tts.shutdown();
+        }
+        super.onDestroy();
     }
 }
