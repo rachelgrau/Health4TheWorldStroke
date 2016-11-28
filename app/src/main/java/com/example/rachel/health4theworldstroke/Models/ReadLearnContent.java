@@ -12,22 +12,38 @@ public class ReadLearnContent extends LearnContent{
     public static ArrayList<LearnContent> getReadContent() {
         ArrayList<LearnContent> content = new ArrayList<LearnContent>();
 
-        ReadLearnContent aboutStrokes = new ReadLearnContent();
-        aboutStrokes.title = "About Strokes";
-
-        ReadLearnContent nutrition = new ReadLearnContent();
-        nutrition.title = "Nutrition";
+        ReadLearnContent bloodPressure = new ReadLearnContent();
+        bloodPressure.title = "Blood Pressure";
 
         ReadLearnContent heartRate = new ReadLearnContent();
-        heartRate.title = "Heart Rate";
+        heartRate.title = "Heart Rate/Exercise";
 
-        ReadLearnContent homeModification = new ReadLearnContent();
-        homeModification.title = "Home Modification";
+        ReadLearnContent diet = new ReadLearnContent();
+        diet.title = "Diet";
 
-        content.add(aboutStrokes);
-        content.add(nutrition);
+        ReadLearnContent bath = new ReadLearnContent();
+        bath.title = "Bath";
+
+        ReadLearnContent bladderBowel = new ReadLearnContent();
+        bladderBowel.title = "Bladder/bowel";
+
+        ReadLearnContent homeMod = new ReadLearnContent();
+        homeMod.title = "Home Modification";
+
+        ReadLearnContent bloodSugar = new ReadLearnContent();
+        bloodSugar.title = "Blood Sugar";
+
+        ReadLearnContent faq = new ReadLearnContent();
+        faq.title = "FAQ";
+
+        content.add(bloodPressure);
         content.add(heartRate);
-        content.add(homeModification);
+        content.add(diet);
+        content.add(bath);
+        content.add(bladderBowel);
+        content.add(homeMod);
+        content.add(bloodSugar);
+        content.add(faq);
 
         return content;
     }

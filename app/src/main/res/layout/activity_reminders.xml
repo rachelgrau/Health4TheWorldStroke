@@ -29,5 +29,12 @@
 
     </android.support.v7.widget.Toolbar>
 
-
+    <!--ListView-->
+    <ListView
+        android:id="@+id/reminders_list_view"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_below="@id/reminders_toolbar"
+        android:elevation="0dp">
+    </ListView>
 </RelativeLayout>
