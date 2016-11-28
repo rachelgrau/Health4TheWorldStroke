@@ -54,11 +54,19 @@
             android:background="@color/medGray"
             android:layout_marginTop="54dp"
             android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginRight="40dp"
             />
-
+        <ImageButton
+            android:id="@+id/search_button"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="5dp"
+            android:src="@mipmap/search_icon"
+            android:scaleType="fitXY"
+            android:layout_alignParentRight="true"
+            android:background="?android:attr/selectableItemBackground"/>
     </RelativeLayout>
-
 
     <!--Grid of Help Me Speak Buttons-->
     <GridView
