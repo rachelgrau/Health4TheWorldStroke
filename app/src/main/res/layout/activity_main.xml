@@ -44,7 +44,7 @@
         android:onClick="learnSelected" />
 
     <TextView
-        android:text="“The world you desired can be won. It exists.. it is real.. it is possible.. it’s yours.”\n\n - Ayn Rand"
+        android:text="@string/quote"
         android:layout_height="244dp"
         android:id="@+id/quoteLabel"
         android:layout_width="0dp"

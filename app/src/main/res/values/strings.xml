@@ -3,12 +3,11 @@
     <string name="help_me_speak">Help me speak</string>
     <string name="learn">Learn</string>
     <string name="reminders">Reminders</string>
-    <string name="quote"> “The world you desired can be won. It exists.. it is real.. it is possible.. it’s yours.” </string>
-    <string name="author">- Ayn Rand</string>
+    <string name="quote"> \“The sun himself is weak when he first rises, and gathers strength and courage as the day gets on.\”\n\n - Charles Dickens </string>
+    <string name="author">- Charles Dickens</string>
     <string name="thumbnail">Thumbnail</string>
     <string name="read_tab">READ</string>
     <string name="video_tab">VIDEO</string>
-
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="thanks">Thank you</string>
@@ -23,4 +22,5 @@
 
     <string name="todays_reminders">Today\'s Reminders</string>
     <string name="all_reminders">All Reminders</string>
+    <string name="create_reminder">Create Reminder</string>
 </resources>

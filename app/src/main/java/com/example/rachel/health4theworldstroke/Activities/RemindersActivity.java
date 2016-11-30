@@ -1,12 +1,14 @@
 package com.example.rachel.health4theworldstroke.Activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -16,7 +18,7 @@ import com.example.rachel.health4theworldstroke.R;
 
 import java.util.ArrayList;
 
-public class RemindersActivity extends AppCompatActivity {
+public class RemindersActivity extends AppCompatActivity implements View.OnClickListener {
 
     private RemindersAdapter adapter;
     private ListView listView;
@@ -28,6 +30,21 @@ public class RemindersActivity extends AppCompatActivity {
         setUpToolbar();
         setUpListView();
         generateRemindersForListView();
+
+        /* Set up listener for new reminder button */
+        ImageButton addReminderButton = (ImageButton)findViewById(R.id.add_reminder_button);
+        addReminderButton.setOnClickListener(this);
+    }
+
+    public void onClick(View v) {
+        ImageButton addReminderButton = (ImageButton)findViewById(R.id.add_reminder_button);
+        if (v.equals(addReminderButton)) {
+            /* Add new reminder */
+            Intent intent = new Intent(this, CreateReminderActivity.class);
+            startActivity(intent);
+        } else {
+
+        }
     }
 
     /* Loads a list of all reminders. Then loops through them and adds each on to the adapter's
