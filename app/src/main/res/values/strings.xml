@@ -23,4 +23,7 @@
     <string name="todays_reminders">Today\'s Reminders</string>
     <string name="all_reminders">All Reminders</string>
     <string name="create_reminder">Create Reminder</string>
+
+    <string name="create_reminder_title_header">Remind me to...</string>
+    <string name="create_reminder_title_placeholder">Take my medicine</string>
 </resources>

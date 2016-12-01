@@ -28,4 +28,65 @@
 
     </android.support.v7.widget.Toolbar>
 
+    <!--Reminder title-->
+    <TextView
+        android:id="@+id/title_header"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/gray"
+        android:layout_below="@id/create_reminder_toolbar"
+        android:text="@string/create_reminder_title_header"
+        android:textColor="@color/darkestGray"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dp"
+        />
+    <RelativeLayout
+        android:id="@+id/title_creator"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_below="@id/title_header"
+        android:background="@color/colorWhite">
+        <EditText
+            android:theme="@style/AppTheme"
+            android:id="@+id/title_creator_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:hint="@string/create_reminder_title_placeholder"
+            android:textColorHint="@color/medGray"
+            android:paddingLeft="20dp"
+            android:textSize="25sp"
+            android:textColor="@color/red"
+            android:gravity="center_vertical"
+            android:background="@android:color/transparent"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/medGray"
+            android:layout_marginTop="54dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="40dp"
+            />
+        <ImageButton
+            android:id="@+id/clear_button"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="5dp"
+            android:src="@mipmap/x_icon"
+            android:visibility="invisible"
+            android:scaleType="fitXY"
+            android:layout_alignParentRight="true"
+            android:background="?android:attr/selectableItemBackground"/>
+    </RelativeLayout>
+
+    <!--Reminder frequency-->
+
+
+    <!--Reminder time-->
+    <Button
+        android:id="@+id/create_reminder_button"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/title_creator"
+        />
 </RelativeLayout>

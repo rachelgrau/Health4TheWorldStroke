@@ -41,9 +41,21 @@ public class RemindersActivity extends AppCompatActivity implements View.OnClick
         if (v.equals(addReminderButton)) {
             /* Add new reminder */
             Intent intent = new Intent(this, CreateReminderActivity.class);
-            startActivity(intent);
+            startActivityForResult(intent, 1);
         } else {
 
+        }
+    }
+
+    /* Call back for when an activity started from this activity finished. */
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            if(resultCode == RESULT_OK){
+                /* TO DO: get info sent from create reminder */
+                String test = data.getStringExtra("test");
+                System.out.println(test);
+            }
         }
     }
 

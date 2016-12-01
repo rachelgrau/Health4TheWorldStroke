@@ -9,4 +9,5 @@
     <color name="gray">#F1F1F1</color>
     <color name="darkGray">#ACACAC</color>
     <color name="medGray">#C2C2C2</color>
+    <color name="darkestGray">#575757</color>
 </resources>
