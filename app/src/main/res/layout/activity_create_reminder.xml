@@ -80,13 +80,102 @@
     </RelativeLayout>
 
     <!--Reminder frequency-->
+    <LinearLayout
+        android:id="@+id/frequency_creator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="4dp"
+        android:layout_below="@id/title_creator">
+        <!--Daily Tab-->
+        <LinearLayout
+            android:id="@+id/daily_tab"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/daily_tab_top"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:text="@string/daily"
+                android:textColor="@color/red"
+                android:textSize="8pt"
+                android:gravity="center"
+                android:onClick="clickDailyTab"
+                android:clickable="true"
+                android:background="@color/gray"/>
+            <View
+                android:id="@+id/daily_tab_red_bottom"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="@color/red"/>
+        </LinearLayout>
+        <!--Weekly Tab-->
+        <LinearLayout
+            android:id="@+id/weekly_tab"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/weekly_tab_top"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="@string/weekly"
+                android:textColor="@color/red"
+                android:textSize="8pt"
+                android:gravity="center"
+                android:onClick="clickWeeklyTab"
+                android:clickable="true"
+                android:background="@color/gray"/>
+            <View
+                android:id="@+id/weekly_tab_red_bottom"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="@color/red"/>
+        </LinearLayout>
+        <!--Custom tab-->
+        <LinearLayout
+            android:id="@+id/custom_tab"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/custom_tab_top"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="@string/custom"
+                android:textColor="@color/red"
+                android:textSize="8pt"
+                android:gravity="center"
+                android:onClick="clickCustomTab"
+                android:clickable="true"
+                android:background="@color/gray"/>
+            <View
+                android:id="@+id/custom_tab_red_bottom"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="@color/red"/>
+        </LinearLayout>
+    </LinearLayout>
 
+
+</RelativeLayout>
 
     <!--Reminder time-->
+
+    <!--Create Reminder Button-->
     <Button
         android:id="@+id/create_reminder_button"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_below="@id/title_creator"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:textColor="@color/colorWhite"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:fontFamily="Roboto-Light.tff"
+        android:textSize="12pt"
+        android:layout_below="@id/frequency_creator"
+        android:text="@string/create_reminder"
         />
 </RelativeLayout>
