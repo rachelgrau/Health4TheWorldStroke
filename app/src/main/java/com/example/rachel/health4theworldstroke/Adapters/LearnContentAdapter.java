@@ -67,14 +67,11 @@ public class LearnContentAdapter extends BaseAdapter {
         titleTextView.setText(contentItem.title);
         if (contentItem instanceof ReadLearnContent) {
             /* Read icon */
-//            icon.setImageResource(R.mipmap.book_icon);
+            icon.setImageResource(R.mipmap.book_icon);
         } else {
             /* Video image*/
             icon.setImageResource(R.mipmap.video_icon);
         }
-
-//        Picasso.with(mContext).load(contentItem.imageUrl).placeholder(R.mipmap.ic_launcher).into(thumbnailImageView);
-
         return rowView;
     }
 

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:descendantFocusability="blocksDescendants"
+    android:background="@color/colorWhite">
+    <RelativeLayout
+        android:id="@+id/reminder_times_list_view_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true">
+        <TextView
+            android:id="@+id/time_text"
+            android:layout_width="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="14dp"
+            android:layout_marginRight="8dp"
+            android:textSize="20pt"
+            android:textColor="@color/darkGray"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            />
+        <!--Add button-->
+        <ImageButton
+            android:id="@+id/time_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="14dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:scaleType="fitXY"
+            android:background="@mipmap/add_button"
+            android:onClick="timeButtonPressed"/>
+    </RelativeLayout>
+
+</RelativeLayout>

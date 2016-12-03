@@ -13,8 +13,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.rachel.health4theworldstroke.Adapters.ReminderTimesAdapter;
+import com.example.rachel.health4theworldstroke.Models.ReminderTime;
 import com.example.rachel.health4theworldstroke.R;
 
 import java.util.ArrayList;
@@ -31,6 +35,10 @@ public class CreateReminderActivity extends AppCompatActivity implements View.On
     private String frequencyTabSelected; // current tab selected
     private ArrayList<TextView> days; // ArrayList of the day buttons
 
+    private ArrayList<ReminderTime> reminderTimes;
+    private ListView listView;
+    private ReminderTimesAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,8 +54,14 @@ public class CreateReminderActivity extends AppCompatActivity implements View.On
         /* Set up reminder title listener */
         setUpTitleListener();
 
+        /* Set up reminder frequency stuff */
         setUpDayButtons();
         frequencyTabSelected = DAILY_TAB;
+
+        /* Set up reminder time list view + stuff */
+        reminderTimes = new ArrayList<ReminderTime>();
+        reminderTimes.add(new ReminderTime());
+        setUpListView();
     }
 
     /* Adds all the selectable day textviews to the arraylist "days" */
@@ -237,7 +251,6 @@ public class CreateReminderActivity extends AppCompatActivity implements View.On
                 clearTitleButton.setClickable(false);
             }
         } else {
-
         }
     }
 
@@ -250,4 +263,27 @@ public class CreateReminderActivity extends AppCompatActivity implements View.On
         toolbarTitle.setTypeface(font);
         setSupportActionBar(myToolbar);
     }
+
+    private void setUpListView() {
+        /* Populate list view with read content to start */
+        listView = (ListView)findViewById(R.id.reminder_times_list_view);
+        adapter = new ReminderTimesAdapter(this, reminderTimes);
+        listView.setAdapter(adapter);
+    }
+
+    /* Called when the button (which might be add or remove) on a reminder time is pressed. */
+    public void timeButtonPressed(View v) {
+        RelativeLayout vwParentRow = (RelativeLayout)v.getParent();
+        int index = (int)v.getTag(); // index in list view
+        if (index == (reminderTimes.size() - 1)) {
+            /* They want to add a new time */
+            reminderTimes.add(new ReminderTime());
+        } else {
+            /* They want to remove the time at index |index| */
+            reminderTimes.remove(index);
+        }
+        adapter.notifyDataSetChanged();
+    }
 }
+
+
