@@ -24,6 +24,9 @@ public class CreateReminderActivity extends AppCompatActivity implements View.On
     public static final String WEEKLY_TAB = "weekly";
     public static final String CUSTOM_TAB = "custom";
 
+    public static final int DAY_IS_SELECTED = 0;
+    public static final int DAY_IS_UNSELECTED = 1;
+
     private String reminderTitle;
     private String frequencyTabSelected; // current tab selected
     private ArrayList<TextView> days; // ArrayList of the day buttons
@@ -44,6 +47,7 @@ public class CreateReminderActivity extends AppCompatActivity implements View.On
         setUpTitleListener();
 
         setUpDayButtons();
+        frequencyTabSelected = DAILY_TAB;
     }
 
     /* Adds all the selectable day textviews to the arraylist "days" */
@@ -56,11 +60,50 @@ public class CreateReminderActivity extends AppCompatActivity implements View.On
         days.add((TextView)findViewById(R.id.thursday));
         days.add((TextView)findViewById(R.id.friday));
         days.add((TextView)findViewById(R.id.saturday));
+        for (TextView day: days) {
+            /* Starts out with tab on daily, so all days are selected */
+            day.setTag(DAY_IS_SELECTED);
+        }
     }
 
-    /* Callback for when the user clicks on one of the days of the week */
+    /* Callback for when the user clicks on one of the days of the week. If the day is already selected, then
+     * this method unselects that day. If the day isn't yet selected, then it selects the day. */
     public void clickedDay(View v) {
-        System.out.println("HERE");
+        /* Days are only selectable in the "weekly" and "custom" tabs; in "daily" they're just all selected. */
+        TextView day = (TextView)v;
+        if (frequencyTabSelected.equals(WEEKLY_TAB)) {
+            if ((int)day.getTag() == DAY_IS_SELECTED) {
+                /* Deselect day */
+                day.setBackgroundColor(ContextCompat.getColor(this, R.color.colorWhite));
+                day.setTextColor(ContextCompat.getColor(this, R.color.red));
+                day.setTag(DAY_IS_UNSELECTED);
+            } else {
+                /* Select day */
+                day.setBackgroundColor(ContextCompat.getColor(this, R.color.red));
+                day.setTextColor(ContextCompat.getColor(this, R.color.colorWhite));
+                day.setTag(DAY_IS_SELECTED);
+            }
+            /* Deselect all other days */
+            for (TextView currDay: days) {
+                if (!currDay.equals(day)) {
+                    currDay.setBackgroundColor(ContextCompat.getColor(this, R.color.colorWhite));
+                    currDay.setTextColor(ContextCompat.getColor(this, R.color.red));
+                    currDay.setTag(DAY_IS_UNSELECTED);
+                }
+            }
+        } else if (frequencyTabSelected.equals(CUSTOM_TAB)) {
+            if ((int)day.getTag() == DAY_IS_SELECTED) {
+                /* Deselect day */
+                day.setBackgroundColor(ContextCompat.getColor(this, R.color.colorWhite));
+                day.setTextColor(ContextCompat.getColor(this, R.color.red));
+                day.setTag(DAY_IS_UNSELECTED);
+            } else {
+                /* Select day */
+                day.setBackgroundColor(ContextCompat.getColor(this, R.color.red));
+                day.setTextColor(ContextCompat.getColor(this, R.color.colorWhite));
+                day.setTag(DAY_IS_SELECTED);
+            }
+        }
     }
 
     /* Callback for when the user clicks on the "daily" "weekly" or "custom" tab.
@@ -95,6 +138,7 @@ public class CreateReminderActivity extends AppCompatActivity implements View.On
             for (TextView day: days) {
                 day.setBackgroundColor(ContextCompat.getColor(this, R.color.red));
                 day.setTextColor(ContextCompat.getColor(this, R.color.colorWhite));
+                day.setTag(DAY_IS_SELECTED);
             }
             LinearLayout weekCalendar = (LinearLayout)findViewById(R.id.week_calendar);
             weekCalendar.setBackgroundColor(ContextCompat.getColor(this, R.color.colorWhite));
@@ -112,6 +156,7 @@ public class CreateReminderActivity extends AppCompatActivity implements View.On
             for (TextView day: days) {
                 day.setBackgroundColor(ContextCompat.getColor(this, R.color.colorWhite));
                 day.setTextColor(ContextCompat.getColor(this, R.color.red));
+                day.setTag(DAY_IS_UNSELECTED);
             }
             LinearLayout weekCalendar = (LinearLayout)findViewById(R.id.week_calendar);
             weekCalendar.setBackgroundColor(ContextCompat.getColor(this, R.color.red));
@@ -129,6 +174,7 @@ public class CreateReminderActivity extends AppCompatActivity implements View.On
             for (TextView day: days) {
                 day.setBackgroundColor(ContextCompat.getColor(this, R.color.colorWhite));
                 day.setTextColor(ContextCompat.getColor(this, R.color.red));
+                day.setTag(DAY_IS_UNSELECTED);
             }
             LinearLayout weekCalendar = (LinearLayout)findViewById(R.id.week_calendar);
             weekCalendar.setBackgroundColor(ContextCompat.getColor(this, R.color.red));
@@ -191,7 +237,6 @@ public class CreateReminderActivity extends AppCompatActivity implements View.On
                 clearTitleButton.setClickable(false);
             }
         } else {
-            /* One of the weekdays */
 
         }
     }
