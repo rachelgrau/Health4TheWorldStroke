@@ -29,6 +29,8 @@
     </android.support.v7.widget.Toolbar>
 
     <!--Reminder title-->
+    <!--==================-->
+
     <TextView
         android:id="@+id/title_header"
         android:layout_width="match_parent"
@@ -80,6 +82,9 @@
     </RelativeLayout>
 
     <!--Reminder frequency-->
+    <!--==================-->
+
+    <!--Tabs (daily, weekly, custom) -->
     <LinearLayout
         android:id="@+id/frequency_creator"
         android:layout_width="match_parent"
@@ -101,7 +106,7 @@
                 android:textColor="@color/red"
                 android:textSize="8pt"
                 android:gravity="center"
-                android:onClick="clickDailyTab"
+                android:onClick="clickedFrequencyTab"
                 android:clickable="true"
                 android:background="@color/gray"/>
             <View
@@ -125,7 +130,7 @@
                 android:textColor="@color/red"
                 android:textSize="8pt"
                 android:gravity="center"
-                android:onClick="clickWeeklyTab"
+                android:onClick="clickedFrequencyTab"
                 android:clickable="true"
                 android:background="@color/gray"/>
             <View
@@ -149,7 +154,7 @@
                 android:textColor="@color/red"
                 android:textSize="8pt"
                 android:gravity="center"
-                android:onClick="clickCustomTab"
+                android:onClick="clickedFrequencyTab"
                 android:clickable="true"
                 android:background="@color/gray"/>
             <View
@@ -160,10 +165,177 @@
         </LinearLayout>
     </LinearLayout>
 
+    <!--Day buttons-->
+    <LinearLayout
+        android:id="@+id/week_calendar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:elevation="0dp"
+        android:layout_below="@id/frequency_creator"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="25dp"
+        android:background="@color/colorWhite">
+        <!--Sunday-->
+        <LinearLayout
+            android:id="@+id/sunday_button"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:paddingLeft="1dp"
+            android:paddingRight="1dp">
+            <TextView
+                android:id="@+id/sunday"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="@string/sunday"
+                android:textColor="@color/colorWhite"
+                android:textSize="8pt"
+                android:gravity="center"
+                android:onClick="clickedDay"
+                android:clickable="true"
+                android:background="@color/red"/>
+        </LinearLayout>
+        <!--Monday-->
+        <LinearLayout
+            android:id="@+id/monday_button"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:paddingLeft="1dp"
+            android:paddingTop="1dp"
+            android:paddingBottom="1dp">
+            <TextView
+                android:id="@+id/monday"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="@string/monday"
+                android:textColor="@color/colorWhite"
+                android:textSize="8pt"
+                android:gravity="center"
+                android:onClick="clickedDay"
+                android:clickable="true"
+                android:background="@color/red"/>
+        </LinearLayout>
+        <!--Tuesday-->
+        <LinearLayout
+            android:id="@+id/tuesday_button"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:paddingLeft="1dp"
+            android:paddingTop="1dp"
+            android:paddingBottom="1dp">
+            <TextView
+                android:id="@+id/tuesday"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="@string/tuesday"
+                android:textColor="@color/colorWhite"
+                android:textSize="8pt"
+                android:gravity="center"
+                android:onClick="clickedDay"
+                android:clickable="true"
+                android:background="@color/red"/>
+        </LinearLayout>
+        <!--Wednesday-->
+        <LinearLayout
+            android:id="@+id/wednesday_button"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:paddingLeft="1dp"
+            android:paddingTop="1dp"
+            android:paddingBottom="1dp">
+            <TextView
+                android:id="@+id/wednesday"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="@string/wednesday"
+                android:textColor="@color/colorWhite"
+                android:textSize="8pt"
+                android:gravity="center"
+                android:onClick="clickedDay"
+                android:clickable="true"
+                android:background="@color/red"/>
+        </LinearLayout>
+        <!--Thursday-->
+        <LinearLayout
+            android:id="@+id/thursday_button"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:paddingLeft="1dp"
+            android:paddingTop="1dp"
+            android:paddingBottom="1dp">
+            <TextView
+                android:id="@+id/thursday"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="@string/thursday"
+                android:textColor="@color/colorWhite"
+                android:textSize="8pt"
+                android:gravity="center"
+                android:onClick="clickedDay"
+                android:clickable="true"
+                android:background="@color/red"/>
+        </LinearLayout>
+        <!--Friday-->
+        <LinearLayout
+            android:id="@+id/friday_button"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:paddingLeft="1dp"
+            android:paddingTop="1dp"
+            android:paddingBottom="1dp">
+            <TextView
+                android:id="@+id/friday"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="@string/friday"
+                android:textColor="@color/colorWhite"
+                android:textSize="8pt"
+                android:gravity="center"
+                android:onClick="clickedDay"
+                android:clickable="true"
+                android:background="@color/red"/>
+        </LinearLayout>
+        <!--Saturday-->
+        <LinearLayout
+            android:id="@+id/saturday_button"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:paddingLeft="1dp"
+            android:paddingTop="1dp"
+            android:paddingBottom="1dp"
+            android:paddingRight="1dp">
+            <TextView
+                android:id="@+id/saturday"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="@string/saturday"
+                android:textColor="@color/colorWhite"
+                android:textSize="8pt"
+                android:gravity="center"
+                android:onClick="clickedDay"
+                android:clickable="true"
+                android:background="@color/red"/>
+        </LinearLayout>
+    </LinearLayout>
 
-</RelativeLayout>
 
     <!--Reminder time-->
+    <!--==================-->
 
     <!--Create Reminder Button-->
     <Button
@@ -175,7 +347,7 @@
         android:layout_marginRight="10dp"
         android:fontFamily="Roboto-Light.tff"
         android:textSize="12pt"
-        android:layout_below="@id/frequency_creator"
+        android:layout_below="@id/week_calendar"
         android:text="@string/create_reminder"
         />
 </RelativeLayout>

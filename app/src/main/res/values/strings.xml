@@ -31,4 +31,11 @@
     <string name="daily">Daily</string>
     <string name="weekly">Weekly</string>
     <string name="custom">Custom</string>
+    <string name="sunday">S</string>
+    <string name="monday">M</string>
+    <string name="tuesday">T</string>
+    <string name="wednesday">W</string>
+    <string name="thursday">Th</string>
+    <string name="friday">F</string>
+    <string name="saturday">S</string>
 </resources>
