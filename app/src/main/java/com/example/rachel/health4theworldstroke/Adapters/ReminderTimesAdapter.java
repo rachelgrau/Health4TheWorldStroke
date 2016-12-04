@@ -5,8 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.TextView;
 
 import com.example.rachel.health4theworldstroke.Models.ReminderTime;
 import com.example.rachel.health4theworldstroke.R;
@@ -53,8 +53,10 @@ public class ReminderTimesAdapter extends BaseAdapter {
         // Get views for this row item
         View rowView = mInflater.inflate(R.layout.list_item_reminder_time, parent, false);
         ReminderTime time = (ReminderTime)getItem(position);
-        TextView timeTextView = (TextView)rowView.findViewById(R.id.time_text);
-        timeTextView.setText(time.getTimeString());
+        EditText hourTextView = (EditText) rowView.findViewById(R.id.hour_text);
+        EditText minTextView = (EditText)rowView.findViewById(R.id.minute_text);
+        hourTextView.setText(time.getHourString());
+        minTextView.setText(time.getMinuteString());
         ImageButton timeButton = (ImageButton)rowView.findViewById(R.id.time_button);
         if (position < (mDataSource.size() - 1)) {
             /* If it's not the last element, the button should be a remove button. */

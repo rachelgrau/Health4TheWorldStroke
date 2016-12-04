@@ -42,6 +42,23 @@ public class ReminderTime {
         return timeStr;
     }
 
+    /* Returns string of the form "[hour]:" e.g. "9:"*/
+    public String getHourString() {
+        String hrStr = Integer.toString(hour) + ":";
+        if (hrStr.length() == 2) {
+            hrStr = "0" + hrStr;
+        }
+        return hrStr;
+    }
+
+    public String getMinuteString() {
+        String minStr = Integer.toString(minute);
+        if (minStr.length() == 1) {
+            minStr = "0" + minStr;
+        }
+        return minStr;
+    }
+
     public void userSetTime() {
         isSet = true;
     }
