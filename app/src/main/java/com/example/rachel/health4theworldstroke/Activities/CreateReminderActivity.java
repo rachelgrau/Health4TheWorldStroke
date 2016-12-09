@@ -13,13 +13,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.rachel.health4theworldstroke.Adapters.ReminderTimesAdapter;
 import com.example.rachel.health4theworldstroke.Models.ReminderTime;
 import com.example.rachel.health4theworldstroke.R;
+import com.example.rachel.health4theworldstroke.Views.ReminderTimeView;
 
 import java.util.ArrayList;
 
@@ -36,8 +34,7 @@ public class CreateReminderActivity extends AppCompatActivity implements View.On
     private ArrayList<TextView> days; // ArrayList of the day buttons
 
     private ArrayList<ReminderTime> reminderTimes;
-    private ListView listView;
-    private ReminderTimesAdapter adapter;
+    private ArrayList<ReminderTimeView> reminderTimeViews;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +48,10 @@ public class CreateReminderActivity extends AppCompatActivity implements View.On
         Button createButton = (Button)findViewById(R.id.create_reminder_button);
         createButton.setOnClickListener(this);
 
+        /* Set up listener for add reminder time button */
+        ImageButton addReminderTimeButton = (ImageButton)findViewById(R.id.add_reminder_time_button);
+        addReminderTimeButton.setOnClickListener(this);
+
         /* Set up reminder title listener */
         setUpTitleListener();
 
@@ -59,9 +60,7 @@ public class CreateReminderActivity extends AppCompatActivity implements View.On
         frequencyTabSelected = DAILY_TAB;
 
         /* Set up reminder time list view + stuff */
-        reminderTimes = new ArrayList<ReminderTime>();
-        reminderTimes.add(new ReminderTime());
-        setUpListView();
+        setUpReminderTimes();
     }
 
     /* Adds all the selectable day textviews to the arraylist "days" */
@@ -234,7 +233,7 @@ public class CreateReminderActivity extends AppCompatActivity implements View.On
     public void onClick(View v) {
         Button createButton = (Button)findViewById(R.id.create_reminder_button);
         ImageButton clearTitleButton = (ImageButton)findViewById(R.id.clear_button);
-
+        ImageButton addReminderTimeButton = (ImageButton)findViewById(R.id.add_reminder_time_button);
         if (v.equals(createButton)) {
             /* Create reminder */
             Intent intent = new Intent();
@@ -250,7 +249,10 @@ public class CreateReminderActivity extends AppCompatActivity implements View.On
                 clearTitleButton.setVisibility(View.INVISIBLE);
                 clearTitleButton.setClickable(false);
             }
+        } else if (v.equals(addReminderTimeButton)) {
+            addTime();
         } else {
+
         }
     }
 
@@ -264,25 +266,70 @@ public class CreateReminderActivity extends AppCompatActivity implements View.On
         setSupportActionBar(myToolbar);
     }
 
-    private void setUpListView() {
-        /* Populate list view with read content to start */
-        listView = (ListView)findViewById(R.id.reminder_times_list_view);
-        adapter = new ReminderTimesAdapter(this, reminderTimes);
-        listView.setAdapter(adapter);
+    /* REMINDER TIME STUFF */
+
+    /* Initialized ArrayLists of views and models and adds one blank reminder time. */
+    private void setUpReminderTimes() {
+        reminderTimes = new ArrayList<ReminderTime>();
+        reminderTimeViews = new ArrayList<ReminderTimeView>();
+        addTime();
     }
 
-    /* Called when the button (which might be add or remove) on a reminder time is pressed. */
-    public void timeButtonPressed(View v) {
-        RelativeLayout vwParentRow = (RelativeLayout)v.getParent();
-        int index = (int)v.getTag(); // index in list view
-        if (index == (reminderTimes.size() - 1)) {
-            /* They want to add a new time */
-            reminderTimes.add(new ReminderTime());
+    /* Adds a new reminder time both to the layout (a view) and the model (the ArrayList) */
+    private void addTime() {
+        /* Add new reminder time to model */
+        ReminderTime reminderTime = new ReminderTime();
+        reminderTimes.add(reminderTime);
+
+        /* Add blank reminder time view */
+        LinearLayout linearLayout = (LinearLayout)findViewById(R.id.reminder_times);
+        ReminderTimeView timeView = new ReminderTimeView(this);
+
+        /* If it's the only reminder time, don't show the remove button. Otherwise make sure all the
+         * reminder time views are showing the remove button. */
+        if (reminderTimes.size() == 1) {
+            timeView.hideButton();
         } else {
-            /* They want to remove the time at index |index| */
-            reminderTimes.remove(index);
+            for (ReminderTimeView v: reminderTimeViews) {
+                v.showButton();
+            }
         }
-        adapter.notifyDataSetChanged();
+
+        /* We set the ID of the button to be the index of this reminder time in the list of reminder times.
+         *  This way, when we get the callback that a remove button was pressed, we can look at the ID of that
+         *  remove button to know which reminder time it belongs to. */
+        timeView.setButtonId(reminderTimes.size() - 1);
+        reminderTimeViews.add(timeView);
+
+        linearLayout.addView(timeView);
+
+    }
+
+    /* Remove the reminder view */
+    public void reminderTimeButtonPressed(View v) {
+        ImageButton buttonPressed = (ImageButton)v;
+        int indexPressed = buttonPressed.getId();
+
+        System.out.println(indexPressed);
+        ReminderTimeView toRemove = reminderTimeViews.get(indexPressed);
+
+        /* Remove reminder time view */
+        LinearLayout linearLayout = (LinearLayout)findViewById(R.id.reminder_times);
+        linearLayout.removeView(toRemove);
+
+        reminderTimeViews.remove(indexPressed);
+        reminderTimes.remove(indexPressed);
+
+        /* If there's only one reminder time view left, hide its remove button */
+        if (reminderTimeViews.size() == 1) {
+            reminderTimeViews.get(0).hideButton();
+        }
+
+        /* Update indices */
+        for (int i=0; i < reminderTimeViews.size(); i++) {
+            ReminderTimeView cur = reminderTimeViews.get(i);
+            cur.setButtonId(i);
+        }
     }
 }
 

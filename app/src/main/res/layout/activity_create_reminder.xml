@@ -344,14 +344,25 @@
         <!--==================-->
 
         <!--ListView-->
-        <ListView
-            android:id="@+id/reminder_times_list_view"
-            android:layout_height="wrap_content"
+        <LinearLayout
+            android:id="@+id/reminder_times"
             android:layout_width="match_parent"
-            android:layout_below="@id/week_calendar"
-            android:layout_weight="1.0"
-            android:elevation="0dp">
-        </ListView>
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_below="@id/week_calendar">
+        </LinearLayout>
+
+        <!--Add reminder Time Button-->
+        <ImageButton
+            android:id="@+id/add_reminder_time_button"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_below="@id/reminder_times"
+            android:layout_gravity="center_horizontal"
+            android:scaleType="fitXY"
+            android:background="@mipmap/add_button"
+            android:onClick="reminderTimeButtonPressed"
+            />
 
         <!--Create Reminder Button-->
         <Button
@@ -363,7 +374,7 @@
             android:layout_marginRight="10dp"
             android:fontFamily="Roboto-Light.tff"
             android:textSize="12pt"
-            android:layout_below="@id/reminder_times_list_view"
+            android:layout_below="@id/add_reminder_time_button"
             android:text="@string/create_reminder"
             />
     </LinearLayout>
