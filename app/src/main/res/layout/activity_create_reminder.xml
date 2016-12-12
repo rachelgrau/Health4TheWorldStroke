@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:background="@color/gray"
         tools:context="com.example.rachel.health4theworldstroke.Activities.CreateReminderActivity">
 
         <!--Toolbar-->
@@ -343,13 +344,26 @@
         <!--Reminder time-->
         <!--==================-->
 
-        <!--ListView-->
+        <!--Header-->
+        <TextView
+            android:id="@+id/add_time_header"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/gray"
+            android:layout_below="@id/week_calendar"
+            android:text="@string/create_reminder_pick_time_header"
+            android:textColor="@color/darkestGray"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            />
+
+        <!--List View-->
         <LinearLayout
             android:id="@+id/reminder_times"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_below="@id/week_calendar">
+            android:layout_below="@id/add_time_header">
         </LinearLayout>
 
         <!--Add reminder Time Button-->
@@ -357,11 +371,12 @@
             android:id="@+id/add_reminder_time_button"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_below="@id/reminder_times"
+            android:layout_below="@id/add_time_header"
             android:layout_gravity="center_horizontal"
             android:scaleType="fitXY"
             android:background="@mipmap/add_button"
             android:onClick="reminderTimeButtonPressed"
+            android:layout_marginTop="10dp"
             />
 
         <!--Create Reminder Button-->

@@ -13,23 +13,22 @@ import com.example.rachel.health4theworldstroke.R;
  */
 
 public class ReminderTimeView extends RelativeLayout {
-    private EditText hour;
-    private EditText minute;
+    private EditText timeText;
     private ImageButton button;
 
-    public ReminderTimeView(Context context) {
+    public ReminderTimeView(Context context, String time) {
         super(context);
-        init();
+        init(time);
     }
 
-    public ReminderTimeView(Context context, AttributeSet attrs) {
+    public ReminderTimeView(Context context, AttributeSet attrs, String time) {
         super(context, attrs);
-        init();
+        init(time);
     }
 
-    public ReminderTimeView(Context context, AttributeSet attrs, int defStyle) {
+    public ReminderTimeView(Context context, AttributeSet attrs, int defStyle, String time) {
         super(context, attrs, defStyle);
-        init();
+        init(time);
     }
 
     /* Sets the ID of the ImageButton */
@@ -37,21 +36,10 @@ public class ReminderTimeView extends RelativeLayout {
         this.button.setId(idNum);
     }
 
-    public void showButton() {
-        this.button.setVisibility(VISIBLE);
-    }
-
-    public void hideButton() {
-        this.button.setVisibility(INVISIBLE);
-    }
-
-    private void init() {
+    private void init(String time) {
         inflate(getContext(), R.layout.reminder_time, this);
-        this.hour = (EditText)findViewById(R.id.hour_text);
-        this.minute = (EditText) findViewById(R.id.minute_text);
+        this.timeText = (EditText)findViewById(R.id.time_text);
         this.button = (ImageButton) findViewById(R.id.time_button);
-
-        this.hour.setText("00:");
-        this.minute.setText("00");
+        this.timeText.setText(time);
     }
 }

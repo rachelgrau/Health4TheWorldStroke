@@ -1,5 +1,6 @@
 package com.example.rachel.health4theworldstroke.Activities;
 
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.rachel.health4theworldstroke.Models.ReminderTime;
+import com.example.rachel.health4theworldstroke.Models.TimePickerFragment;
 import com.example.rachel.health4theworldstroke.R;
 import com.example.rachel.health4theworldstroke.Views.ReminderTimeView;
 
@@ -250,7 +252,9 @@ public class CreateReminderActivity extends AppCompatActivity implements View.On
                 clearTitleButton.setClickable(false);
             }
         } else if (v.equals(addReminderTimeButton)) {
-            addTime();
+            DialogFragment newFragment = new TimePickerFragment();
+            newFragment.show(getFragmentManager(),"TimePicker");
+
         } else {
 
         }
@@ -272,28 +276,18 @@ public class CreateReminderActivity extends AppCompatActivity implements View.On
     private void setUpReminderTimes() {
         reminderTimes = new ArrayList<ReminderTime>();
         reminderTimeViews = new ArrayList<ReminderTimeView>();
-        addTime();
     }
 
-    /* Adds a new reminder time both to the layout (a view) and the model (the ArrayList) */
-    private void addTime() {
+    /* Adds a new reminder time both to the layout (a view) and the model (the ArrayList)
+     * Also gets called when the user finishes setting a time in the TimePicker. */
+    public void addTime(String timeStr) {
         /* Add new reminder time to model */
         ReminderTime reminderTime = new ReminderTime();
         reminderTimes.add(reminderTime);
 
         /* Add blank reminder time view */
         LinearLayout linearLayout = (LinearLayout)findViewById(R.id.reminder_times);
-        ReminderTimeView timeView = new ReminderTimeView(this);
-
-        /* If it's the only reminder time, don't show the remove button. Otherwise make sure all the
-         * reminder time views are showing the remove button. */
-        if (reminderTimes.size() == 1) {
-            timeView.hideButton();
-        } else {
-            for (ReminderTimeView v: reminderTimeViews) {
-                v.showButton();
-            }
-        }
+        ReminderTimeView timeView = new ReminderTimeView(this, timeStr);
 
         /* We set the ID of the button to be the index of this reminder time in the list of reminder times.
          *  This way, when we get the callback that a remove button was pressed, we can look at the ID of that
@@ -319,11 +313,6 @@ public class CreateReminderActivity extends AppCompatActivity implements View.On
 
         reminderTimeViews.remove(indexPressed);
         reminderTimes.remove(indexPressed);
-
-        /* If there's only one reminder time view left, hide its remove button */
-        if (reminderTimeViews.size() == 1) {
-            reminderTimeViews.get(0).hideButton();
-        }
 
         /* Update indices */
         for (int i=0; i < reminderTimeViews.size(); i++) {
