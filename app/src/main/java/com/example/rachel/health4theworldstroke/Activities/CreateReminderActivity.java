@@ -1,10 +1,13 @@
 package com.example.rachel.health4theworldstroke.Activities;
 
 import android.app.DialogFragment;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
@@ -34,6 +37,8 @@ public class CreateReminderActivity extends AppCompatActivity implements View.On
     private String reminderTitle;
     private String frequencyTabSelected; // current tab selected
     private ArrayList<TextView> days; // ArrayList of the day buttons
+    private Button createButton; // Button they press to create reminder
+    private EditText reminderTitleEditText; // Edit text where they put title of reminder
 
     private ArrayList<ReminderTime> reminderTimes;
     private ArrayList<ReminderTimeView> reminderTimeViews;
@@ -45,10 +50,6 @@ public class CreateReminderActivity extends AppCompatActivity implements View.On
         setUpToolbar();
 
         reminderTitle = "";
-
-        /* Set up listener for new reminder button */
-        Button createButton = (Button)findViewById(R.id.create_reminder_button);
-        createButton.setOnClickListener(this);
 
         /* Set up listener for add reminder time button */
         ImageButton addReminderTimeButton = (ImageButton)findViewById(R.id.add_reminder_time_button);
@@ -63,6 +64,41 @@ public class CreateReminderActivity extends AppCompatActivity implements View.On
 
         /* Set up reminder time list view + stuff */
         setUpReminderTimes();
+
+        /* Set up listener for new reminder button */
+        this.createButton = (Button)findViewById(R.id.create_reminder_button);
+        enableCreateButtonIfNeeded();
+        createButton.setOnClickListener(this);
+    }
+
+    /* Enables the create button if there is a reminder text, and at least one time added. */
+    private void enableCreateButtonIfNeeded() {
+        boolean shouldActivate = true;
+
+        /* If the reminder title is empty, or the user hasn't added any times, then disactivate the button. */
+        if (reminderTitleEditText.getText().length() == 0) {
+            shouldActivate = false;
+        }
+        if (reminderTimes.size() == 0) {
+            shouldActivate = false;
+        }
+
+        /* Set the button's appearance (color) based on whether it's activated. */
+        if (shouldActivate) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                createButton.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.button_enabled, null));
+            } else {
+                createButton.setBackgroundDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.button_enabled, null));
+            }
+        } else {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                createButton.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.button_disabled, null));
+            } else {
+                createButton.setBackgroundDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.button_disabled, null));
+            }
+        }
+
+        createButton.setEnabled(shouldActivate);
     }
 
     /* Adds all the selectable day textviews to the arraylist "days" */
@@ -204,8 +240,9 @@ public class CreateReminderActivity extends AppCompatActivity implements View.On
         ImageButton clearButton = (ImageButton)findViewById(R.id.clear_button);
         clearButton.setOnClickListener(this);
         /* Set up EditText on change listener*/
-        EditText editText = (EditText)findViewById(R.id.title_creator_edit_text);
-        editText.addTextChangedListener(new TextWatcher() {
+        reminderTitleEditText = (EditText)findViewById(R.id.title_creator_edit_text);
+        Context c = this;
+        reminderTitleEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             }
@@ -228,6 +265,7 @@ public class CreateReminderActivity extends AppCompatActivity implements View.On
                     clearButton.setClickable(false);
                 }
                 reminderTitle = editText.getText().toString();
+                enableCreateButtonIfNeeded();
             }
         });
     }
@@ -296,7 +334,7 @@ public class CreateReminderActivity extends AppCompatActivity implements View.On
         reminderTimeViews.add(timeView);
 
         linearLayout.addView(timeView);
-
+        enableCreateButtonIfNeeded();
     }
 
     /* Remove the reminder view */
@@ -319,6 +357,7 @@ public class CreateReminderActivity extends AppCompatActivity implements View.On
             ReminderTimeView cur = reminderTimeViews.get(i);
             cur.setButtonId(i);
         }
+        enableCreateButtonIfNeeded();
     }
 }
 

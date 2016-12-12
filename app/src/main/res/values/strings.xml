@@ -28,6 +28,7 @@
     <string name="create_reminder_title_placeholder">Take my medicine</string>
     <string name="create_reminder_frequency_header">How often?</string>
     <string name="create_reminder_pick_time_header">At what time(s)?</string>
+    <string name="create_reminder_button_text">Create Reminder</string>
 
     <string name="daily">Daily</string>
     <string name="weekly">Weekly</string>

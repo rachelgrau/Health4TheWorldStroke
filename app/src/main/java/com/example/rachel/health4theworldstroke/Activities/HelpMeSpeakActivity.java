@@ -139,7 +139,6 @@ public class HelpMeSpeakActivity extends AppCompatActivity implements View.OnCli
     @Override
     public void onInit(int status) {
         if (status == TextToSpeech.SUCCESS) {
-
             int result = tts.setLanguage(Locale.US);
 
             if (result == TextToSpeech.LANG_MISSING_DATA
