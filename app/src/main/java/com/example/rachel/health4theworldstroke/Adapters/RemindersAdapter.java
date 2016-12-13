@@ -38,6 +38,12 @@ public class RemindersAdapter extends BaseAdapter {
         this.notifyDataSetChanged();
     }
 
+    public void clearDataSource() {
+        mDataSource.clear();
+        sectionHeader.clear();
+        this.notifyDataSetChanged();
+    }
+
     /* Adds a reminder to the data source by appending it to the end. */
     public void addItem(final Reminder item) {
         mDataSource.add(item);

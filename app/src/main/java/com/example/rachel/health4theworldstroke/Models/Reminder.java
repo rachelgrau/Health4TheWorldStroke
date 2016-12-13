@@ -1,14 +1,18 @@
 package com.example.rachel.health4theworldstroke.Models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by rachel on 11/28/16.
  */
 
-public class Reminder {
-    private boolean isToday;
+public class Reminder implements Serializable {
     private String title;
+    private String frequency;
+    private ArrayList<ReminderTime> times;
+
+    private boolean isToday;
 
     /* Returns a list of fake reminders */
     public static ArrayList<Reminder> getFakeReminders() {
@@ -45,7 +49,9 @@ public class Reminder {
 
     public Reminder() {
         this.title = "";
+        this.frequency = "";
         this.isToday = false;
+        this.times = new ArrayList<ReminderTime>();
     }
 
     public Reminder(String title) {
@@ -62,5 +68,13 @@ public class Reminder {
 
     public boolean isToday() {
         return this.isToday;
+    }
+
+    public void setFrequency(String freq) {
+        this.frequency = freq;
+    }
+
+    public void addTime(ReminderTime time) {
+        this.times.add(time);
     }
 }

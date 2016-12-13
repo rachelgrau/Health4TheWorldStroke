@@ -19,7 +19,12 @@ import com.example.rachel.health4theworldstroke.R;
 import java.util.ArrayList;
 
 public class RemindersActivity extends AppCompatActivity implements View.OnClickListener {
+    public static final int CREATE_REMINDER = 0;
 
+    private static final int TODAYS_REMINDER_SECTION = 0;
+    private static final int ALL_REMINDER_SECTION = 1;
+
+    private ArrayList<Reminder> allReminders;
     private RemindersAdapter adapter;
     private ListView listView;
 
@@ -29,6 +34,7 @@ public class RemindersActivity extends AppCompatActivity implements View.OnClick
         setContentView(R.layout.activity_reminders);
         setUpToolbar();
         setUpListView();
+        allReminders = new ArrayList<Reminder>();
         generateRemindersForListView();
 
         /* Set up listener for new reminder button */
@@ -41,7 +47,7 @@ public class RemindersActivity extends AppCompatActivity implements View.OnClick
         if (v.equals(addReminderButton)) {
             /* Add new reminder */
             Intent intent = new Intent(this, CreateReminderActivity.class);
-            startActivityForResult(intent, 1);
+            startActivityForResult(intent, CREATE_REMINDER);
         } else {
 
         }
@@ -50,11 +56,15 @@ public class RemindersActivity extends AppCompatActivity implements View.OnClick
     /* Call back for when an activity started from this activity finished. */
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1) {
+        if (requestCode == CREATE_REMINDER) {
+            System.out.println("Result code is: " + resultCode);
+            System.out.println("Result code should be: " + RESULT_OK);
             if(resultCode == RESULT_OK){
+                System.out.println("result ok!");
                 /* TO DO: get info sent from create reminder */
-                String test = data.getStringExtra("test");
-                System.out.println(test);
+                Reminder newReminder = (Reminder)data.getSerializableExtra("created_reminder");
+                allReminders.add(newReminder);
+                generateRemindersForListView();
             }
         }
     }
@@ -62,8 +72,7 @@ public class RemindersActivity extends AppCompatActivity implements View.OnClick
     /* Loads a list of all reminders. Then loops through them and adds each on to the adapter's
      * data source in the correct order, adding section headers where needed. */
     private void generateRemindersForListView() {
-        /* Load all reminders */
-        ArrayList<Reminder> allReminders = Reminder.getFakeReminders();
+        adapter.clearDataSource();
         /* Add first section header – today's reminders */
         adapter.addSectionHeaderItem(new Reminder(getResources().getString(R.string.todays_reminders)));
         /* Loop through all reminders and only add those that are for today to the adapter's data source. */

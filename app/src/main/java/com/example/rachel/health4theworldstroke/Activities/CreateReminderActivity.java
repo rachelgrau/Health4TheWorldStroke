@@ -19,6 +19,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.rachel.health4theworldstroke.Models.Reminder;
 import com.example.rachel.health4theworldstroke.Models.ReminderTime;
 import com.example.rachel.health4theworldstroke.Models.TimePickerFragment;
 import com.example.rachel.health4theworldstroke.R;
@@ -278,7 +279,9 @@ public class CreateReminderActivity extends AppCompatActivity implements View.On
             /* Create reminder */
             Intent intent = new Intent();
             /* TO DO: pass new reminder back in intent */
-            intent.putExtra("test", "HELLO!");
+            Reminder newReminder = new Reminder();
+            newReminder.setTitle(this.reminderTitle);
+            intent.putExtra("created_reminder", newReminder);
             setResult(RESULT_OK, intent);
             finish();
         } else if (v.equals(clearTitleButton)) {
