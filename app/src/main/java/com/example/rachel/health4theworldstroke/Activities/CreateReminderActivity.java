@@ -26,14 +26,7 @@ import com.example.rachel.health4theworldstroke.R;
 import com.example.rachel.health4theworldstroke.Views.ReminderTimeView;
 
 import java.util.ArrayList;
-
-import static com.example.rachel.health4theworldstroke.Models.Reminder.FRI;
-import static com.example.rachel.health4theworldstroke.Models.Reminder.MON;
-import static com.example.rachel.health4theworldstroke.Models.Reminder.SAT;
-import static com.example.rachel.health4theworldstroke.Models.Reminder.SUN;
-import static com.example.rachel.health4theworldstroke.Models.Reminder.THURS;
-import static com.example.rachel.health4theworldstroke.Models.Reminder.TUES;
-import static com.example.rachel.health4theworldstroke.Models.Reminder.WED;
+import java.util.Calendar;
 
 public class CreateReminderActivity extends AppCompatActivity implements View.OnClickListener {
     public static final String DAILY_TAB = "Daily";
@@ -293,28 +286,28 @@ public class CreateReminderActivity extends AppCompatActivity implements View.On
             for (int i=0; i < days.size(); i++) {
                 TextView day = days.get(i);
                 if ((Integer)day.getTag() == DAY_IS_SELECTED) {
-                    String dayToAdd = "";
+                    int dayToAdd = -1;
                     switch (i) {
                         case 0:
-                            dayToAdd = SUN;
+                            dayToAdd = Calendar.SUNDAY;
                             break;
                         case 1:
-                            dayToAdd = MON;
+                            dayToAdd = Calendar.MONDAY;
                             break;
                         case 2:
-                            dayToAdd = TUES;
+                            dayToAdd = Calendar.TUESDAY;
                             break;
                         case 3:
-                            dayToAdd = WED;
+                            dayToAdd = Calendar.WEDNESDAY;
                             break;
                         case 4:
-                            dayToAdd = THURS;
+                            dayToAdd = Calendar.THURSDAY;
                             break;
                         case 5:
-                            dayToAdd = FRI;
+                            dayToAdd = Calendar.FRIDAY;
                             break;
                         case 6:
-                            dayToAdd = SAT;
+                            dayToAdd = Calendar.SATURDAY;
                             break;
                     }
                     newReminder.addDayToFrequency(dayToAdd);
@@ -339,7 +332,6 @@ public class CreateReminderActivity extends AppCompatActivity implements View.On
         } else if (v.equals(addReminderTimeButton)) {
             DialogFragment newFragment = new TimePickerFragment();
             newFragment.show(getFragmentManager(),"TimePicker");
-
         } else {
 
         }

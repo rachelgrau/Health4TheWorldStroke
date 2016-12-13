@@ -2,6 +2,7 @@ package com.example.rachel.health4theworldstroke.Models;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import static com.example.rachel.health4theworldstroke.Activities.CreateReminderActivity.CUSTOM_TAB;
 import static com.example.rachel.health4theworldstroke.Activities.CreateReminderActivity.DAILY_TAB;
@@ -16,7 +17,7 @@ public class Reminder implements Serializable {
     private String frequencyType;
 
     //if it's weekly or custom, this holds the days
-    private ArrayList<String> frequencyDays;
+    private ArrayList<Integer> frequencyDays;
 
     private ArrayList<ReminderTime> times;
     private boolean isSectionHeader;
@@ -31,6 +32,27 @@ public class Reminder implements Serializable {
     public static String FRI = "Fridays";
     public static String SAT = "Saturdays";
     public static String SUN = "Sundays";
+
+    public static String getPluralDayStringFromDay(int day) {
+        switch (day) {
+            case Calendar.SUNDAY:
+                return SUN;
+            case Calendar.MONDAY:
+                return MON;
+            case Calendar.TUESDAY:
+                return TUES;
+            case Calendar.WEDNESDAY:
+                return WED;
+            case Calendar.THURSDAY:
+                return THURS;
+            case Calendar.FRIDAY:
+                return FRI;
+            case Calendar.SATURDAY:
+                return SAT;
+            default:
+                return "";
+        }
+    }
 
     /* Returns a list of fake reminders */
     public static ArrayList<Reminder> getFakeReminders() {
@@ -78,13 +100,15 @@ public class Reminder implements Serializable {
         if (r.frequencyType.equals(DAILY_TAB)) {
             /* Add a list of times */
         } else if (r.frequencyType.equals(WEEKLY_TAB)) {
-            str += (r.frequencyDays.get(0) + " ");
+            String freqDay = Reminder.getPluralDayStringFromDay(r.frequencyDays.get(0));
+            str += (freqDay + " ");
         } else if (r.frequencyType.equals(CUSTOM_TAB)) {
             for (int i=0; i < r.frequencyDays.size(); i++) {
+                String freqDay = Reminder.getPluralDayStringFromDay(r.frequencyDays.get(i));
                 if (i < r.frequencyDays.size() - 1) {
-                    str += (r.frequencyDays.get(i) + ", ");
+                    str += (freqDay + ", ");
                 } else {
-                    str += (r.frequencyDays.get(i) + " ");
+                    str += (freqDay + " ");
                 }
             }
         }
@@ -107,10 +131,10 @@ public class Reminder implements Serializable {
         this.title = "";
         this.frequencyType = "";
         this.isToday = false;
-        this.isSectionHeader = true;
+        this.isSectionHeader = false;
         this.isCompleted = false;
         this.times = new ArrayList<ReminderTime>();
-        this.frequencyDays = new ArrayList<String>();
+        this.frequencyDays = new ArrayList<Integer>();
     }
 
     public Reminder(String title) {
@@ -154,7 +178,11 @@ public class Reminder implements Serializable {
     }
 
     /* Adds a day to include this reminder on. */
-    public void addDayToFrequency(String day) {
+    public void addDayToFrequency(int day) {
         this.frequencyDays.add(day);
+        /* Update isToday field */
+        Calendar calendar = Calendar.getInstance();
+        int today = calendar.get(Calendar.DAY_OF_WEEK);
+        if (today == day) this.isToday = true;
     }
 }

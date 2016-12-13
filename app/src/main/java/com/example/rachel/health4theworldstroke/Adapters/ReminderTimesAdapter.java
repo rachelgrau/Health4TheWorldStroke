@@ -60,7 +60,6 @@ public class ReminderTimesAdapter extends BaseAdapter {
             /* If it's not the last element, the button should be a remove button. */
             timeButton.setBackgroundResource(R.mipmap.remove_button);
         }
-
         timeButton.setTag(position);
         return rowView;
     }

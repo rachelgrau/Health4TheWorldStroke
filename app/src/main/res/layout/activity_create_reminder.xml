@@ -390,7 +390,7 @@
             android:fontFamily="Roboto-Light.tff"
             android:textSize="12pt"
             android:layout_below="@id/add_reminder_time_button"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="5dp"
             android:background="@drawable/button_disabled"
             android:text="@string/create_reminder_button_text"

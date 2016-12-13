@@ -94,12 +94,33 @@ public class RemindersAdapter extends BaseAdapter {
             holder = new ViewHolder();
             switch (rowType) {
                 case TYPE_ITEM:
-                    Reminder theReminder = mDataSource.get(position);
                     convertView = mInflater.inflate(R.layout.list_item_reminder, null);
                     holder.textView = (TextView) convertView.findViewById(R.id.reminder_title);
-                    /* Set up callback for completing this reminder. */
-                    ImageButton checkButton = (ImageButton) convertView.findViewById(R.id.check_icon);
+                    break;
+                case TYPE_SEPARATOR:
+                    convertView = mInflater.inflate(R.layout.reminder_section_header, null);
+                    holder.textView = (TextView) convertView.findViewById(R.id.textSeparator);
+                    break;
+            }
+            convertView.setTag(holder);
+        } else {
+            holder = (ViewHolder) convertView.getTag();
+        }
+
+        switch (rowType) {
+            case TYPE_ITEM:
+                Reminder theReminder = mDataSource.get(position);
+                    /* Set up image of icon. If the reminder is today, make the image clickable
+                       with a callback for completing this reminder. */
+                ImageButton checkButton = (ImageButton) convertView.findViewById(R.id.check_icon);
+                if (isInFirstSection(position)) {
+                    checkButton.setEnabled(true);
                     checkButton.setTag(position); // set position
+                    if (theReminder.isCompleted()) {
+                        checkButton.setBackgroundResource(R.mipmap.check_selected);
+                    } else {
+                        checkButton.setBackgroundResource(R.mipmap.check_deselected);
+                    }
                     checkButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -118,35 +139,58 @@ public class RemindersAdapter extends BaseAdapter {
                             }
                         }
                     });
+                } else {
+                    checkButton.setBackgroundResource(R.mipmap.clock_icon);
+                    checkButton.setEnabled(false);
+                }
                     /* Set up callback for clicking on edit button. */
-                    ImageButton editButton = (ImageButton) convertView.findViewById(R.id.info_button);
-                    editButton.setTag(position);
-                    editButton.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            Integer position = (Integer)view.getTag();
-                            Reminder r = mDataSource.get(position);
-                            if (mContext instanceof RemindersActivity){
-                                ((RemindersActivity)mContext).clickedEditButton(r);
-                            }
+                ImageButton editButton = (ImageButton) convertView.findViewById(R.id.info_button);
+                editButton.setTag(position);
+                editButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Integer position = (Integer)view.getTag();
+                        Reminder r = mDataSource.get(position);
+                        if (mContext instanceof RemindersActivity){
+                            ((RemindersActivity)mContext).clickedEditButton(r);
                         }
-                    });
+                    }
+                });
                     /* Set subtitle */
-                    TextView subtitle = (TextView) convertView.findViewById(R.id.reminder_subtitle);
-                    subtitle.setText(Reminder.generateSubtitle(theReminder));
-                    break;
-                case TYPE_SEPARATOR:
-                    convertView = mInflater.inflate(R.layout.reminder_section_header, null);
-                    holder.textView = (TextView) convertView.findViewById(R.id.textSeparator);
-                    break;
-            }
-            convertView.setTag(holder);
-        } else {
-            holder = (ViewHolder) convertView.getTag();
+                TextView subtitle = (TextView) convertView.findViewById(R.id.reminder_subtitle);
+                subtitle.setText(Reminder.generateSubtitle(theReminder));
+                break;
+            case TYPE_SEPARATOR:
+                break;
         }
         holder.textView.setText(mDataSource.get(position).getTitle());
-
+        convertView.setTag(holder);
         return convertView;
+    }
+
+    private boolean isInFirstSection(int position) {
+        System.out.println("Checking if position " + position + " is in first section.");
+        int numSectionsPassed = 0;
+        int indexOfSecondSection = 0;
+        for (int i=0; i < mDataSource.size(); i++) {
+            Reminder r = mDataSource.get(i);
+            if (r.isSectionHeader()) {
+                System.out.println(r.getTitle() + " is a section header");
+                numSectionsPassed++;
+                if (numSectionsPassed > 1) {
+                    indexOfSecondSection = i;
+                    break;
+                }
+            }
+        }
+        System.out.println("Index of second section: " + indexOfSecondSection);
+        boolean isInFirstSection = (position < indexOfSecondSection);
+        if (isInFirstSection) {
+            System.out.println("Is in first section!");
+        } else {
+            System.out.println("NOT in first section!");
+        }
+        return isInFirstSection;
     }
 
     public static class ViewHolder {
