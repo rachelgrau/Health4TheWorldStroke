@@ -169,13 +169,11 @@ public class RemindersAdapter extends BaseAdapter {
     }
 
     private boolean isInFirstSection(int position) {
-        System.out.println("Checking if position " + position + " is in first section.");
         int numSectionsPassed = 0;
         int indexOfSecondSection = 0;
         for (int i=0; i < mDataSource.size(); i++) {
             Reminder r = mDataSource.get(i);
             if (r.isSectionHeader()) {
-                System.out.println(r.getTitle() + " is a section header");
                 numSectionsPassed++;
                 if (numSectionsPassed > 1) {
                     indexOfSecondSection = i;
@@ -183,13 +181,7 @@ public class RemindersAdapter extends BaseAdapter {
                 }
             }
         }
-        System.out.println("Index of second section: " + indexOfSecondSection);
         boolean isInFirstSection = (position < indexOfSecondSection);
-        if (isInFirstSection) {
-            System.out.println("Is in first section!");
-        } else {
-            System.out.println("NOT in first section!");
-        }
         return isInFirstSection;
     }
 

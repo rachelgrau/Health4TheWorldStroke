@@ -20,6 +20,8 @@ import java.util.ArrayList;
 
 public class RemindersActivity extends AppCompatActivity implements View.OnClickListener {
     public static final int CREATE_REMINDER = 0;
+    public static final String EXTRA_IS_EDITING = "isEditing";
+    public static final String EXTRA_REMINDER = "reminder";
 
     private static final int TODAYS_REMINDER_SECTION = 0;
     private static final int ALL_REMINDER_SECTION = 1;
@@ -47,6 +49,7 @@ public class RemindersActivity extends AppCompatActivity implements View.OnClick
         if (v.equals(addReminderButton)) {
             /* Add new reminder */
             Intent intent = new Intent(this, CreateReminderActivity.class);
+            intent.putExtra(EXTRA_IS_EDITING, false);
             startActivityForResult(intent, CREATE_REMINDER);
         } else {
 
@@ -132,6 +135,9 @@ public class RemindersActivity extends AppCompatActivity implements View.OnClick
     /* Callback for when the user clicks the info button on a reminder. */
     public void clickedEditButton(Reminder reminderSelected) {
         /* TO DO: start new activity in edit mode */
-        System.out.println("Wants to edit reminder: " + reminderSelected.getTitle());
+        Intent intent = new Intent(this, CreateReminderActivity.class);
+        intent.putExtra(EXTRA_IS_EDITING, true);
+        intent.putExtra(EXTRA_REMINDER, reminderSelected);
+        startActivityForResult(intent, CREATE_REMINDER);
     }
 }

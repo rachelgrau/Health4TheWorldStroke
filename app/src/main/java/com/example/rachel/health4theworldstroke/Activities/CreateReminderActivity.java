@@ -28,7 +28,15 @@ import com.example.rachel.health4theworldstroke.Views.ReminderTimeView;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import static com.example.rachel.health4theworldstroke.Activities.RemindersActivity.EXTRA_IS_EDITING;
+import static com.example.rachel.health4theworldstroke.Activities.RemindersActivity.EXTRA_REMINDER;
+
 public class CreateReminderActivity extends AppCompatActivity implements View.OnClickListener {
+    /* True if the user is editing this reminder, false if they're creating a new one */
+    private boolean isEditing;
+    /* The reminder they're either creating or editing. */
+    private Reminder thisReminder;
+
     public static final String DAILY_TAB = "Daily";
     public static final String WEEKLY_TAB = "Weekly";
     public static final String CUSTOM_TAB = "Custom";
@@ -48,6 +56,14 @@ public class CreateReminderActivity extends AppCompatActivity implements View.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        isEditing = getIntent().getBooleanExtra(EXTRA_IS_EDITING, false);
+        if (isEditing) {
+            thisReminder = (Reminder)getIntent().getSerializableExtra(EXTRA_REMINDER);
+        } else {
+            thisReminder = new Reminder();
+        }
+
+
         setContentView(R.layout.activity_create_reminder);
         setUpToolbar();
 
@@ -69,8 +85,76 @@ public class CreateReminderActivity extends AppCompatActivity implements View.On
 
         /* Set up listener for new reminder button */
         this.createButton = (Button)findViewById(R.id.create_reminder_button);
+        if (isEditing) {
+            this.createButton.setText(R.string.save);
+        } else {
+            this.createButton.setText(R.string.create_reminder);
+        }
         enableCreateButtonIfNeeded();
         createButton.setOnClickListener(this);
+
+        /* If isEditing, then populate all the fields with the reminder values. */
+        if (isEditing) {
+            populateViewsWithReminder();
+        }
+    }
+
+    /* Populates all the views to display the attributes of |thisReminder| (title, frequency, and times) */
+    private void populateViewsWithReminder() {
+        /* Title */
+        reminderTitleEditText.setText(thisReminder.getTitle());
+        ImageButton clearButton = (ImageButton)findViewById(R.id.clear_button);
+        clearButton.setVisibility(View.VISIBLE);
+        clearButton.setClickable(true);
+
+        /* Frequency */
+        String freqType = thisReminder.getFrequencyType();
+        if (freqType.equals(DAILY_TAB)) {
+            selectedDailyTab();
+        } else if (freqType.equals(WEEKLY_TAB)) {
+            selectedWeeklyTab();
+        } else {
+            selectedCustomTab();
+        }
+        ArrayList<Integer> frequencyDays = thisReminder.getFrequencyDays();
+        System.out.println("Frequency Days:");
+        System.out.println(frequencyDays);
+        for (int i=0; i < frequencyDays.size(); i++) {
+            int indexOfDayView = -1;
+            switch (frequencyDays.get(i)) {
+                case Calendar.SUNDAY:
+                    indexOfDayView = 0;
+                    break;
+                case Calendar.MONDAY:
+                    indexOfDayView = 1;
+                    break;
+                case Calendar.TUESDAY:
+                    indexOfDayView = 2;
+                    break;
+                case Calendar.WEDNESDAY:
+                    indexOfDayView = 3;
+                    break;
+                case Calendar.THURSDAY:
+                    indexOfDayView = 4;
+                    break;
+                case Calendar.FRIDAY:
+                    indexOfDayView = 5;
+                    break;
+                case Calendar.SATURDAY:
+                    indexOfDayView = 6;
+                    break;
+            }
+            TextView day = days.get(indexOfDayView);
+            day.setBackgroundColor(ContextCompat.getColor(this, R.color.red));
+            day.setTextColor(ContextCompat.getColor(this, R.color.colorWhite));
+            day.setTag(DAY_IS_SELECTED);
+        }
+
+        /* Times */
+        ArrayList<ReminderTime> existingTimes = thisReminder.getTimes();
+        for (ReminderTime time: existingTimes) {
+            addTime(time.getTimeString());
+        }
     }
 
     /* Enables the create button if there is a reminder text, and at least one time added. */
@@ -159,6 +243,97 @@ public class CreateReminderActivity extends AppCompatActivity implements View.On
         }
     }
 
+    private void selectedDailyTab() {
+        TextView dailyTab = (TextView)findViewById(R.id.daily_tab_top);
+        TextView weeklyTab = (TextView)findViewById(R.id.weekly_tab_top);
+        TextView customTab = (TextView)findViewById(R.id.custom_tab_top);
+        View dailyRedBar = (View) findViewById(R.id.daily_tab_red_bottom);
+        View weeklyRedBar = (View) findViewById(R.id.weekly_tab_red_bottom);
+        View customRedBar = (View) findViewById(R.id.custom_tab_red_bottom);
+        final float scaleOne = getResources().getDisplayMetrics().density;
+        int selectedTabHeight = (int) (45 * scaleOne + 0.5f);
+        final float scaleTwo = getResources().getDisplayMetrics().density;
+        int unselectedTabHeight = (int) (50 * scaleTwo + 0.5f);
+        /* DAILY TAB */
+        frequencyTabSelected = DAILY_TAB;
+            /* Update the heights of each tab. */
+        dailyTab.getLayoutParams().height = selectedTabHeight;
+        weeklyTab.getLayoutParams().height = unselectedTabHeight;
+        customTab.getLayoutParams().height = unselectedTabHeight;
+            /* Show the red bar on the daily tab and hide it on the weekly/custom tabs. */
+        dailyRedBar.setVisibility(View.VISIBLE);
+        weeklyRedBar.setVisibility(View.GONE);
+        customRedBar.setVisibility(View.GONE);
+            /* Select all days */
+        for (TextView day: days) {
+            day.setBackgroundColor(ContextCompat.getColor(this, R.color.red));
+            day.setTextColor(ContextCompat.getColor(this, R.color.colorWhite));
+            day.setTag(DAY_IS_SELECTED);
+        }
+        LinearLayout weekCalendar = (LinearLayout)findViewById(R.id.week_calendar);
+        weekCalendar.setBackgroundColor(ContextCompat.getColor(this, R.color.colorWhite));
+    }
+
+    private void selectedWeeklyTab() {
+        TextView dailyTab = (TextView)findViewById(R.id.daily_tab_top);
+        TextView weeklyTab = (TextView)findViewById(R.id.weekly_tab_top);
+        TextView customTab = (TextView)findViewById(R.id.custom_tab_top);
+        View dailyRedBar = (View) findViewById(R.id.daily_tab_red_bottom);
+        View weeklyRedBar = (View) findViewById(R.id.weekly_tab_red_bottom);
+        View customRedBar = (View) findViewById(R.id.custom_tab_red_bottom);
+        final float scaleOne = getResources().getDisplayMetrics().density;
+        int selectedTabHeight = (int) (45 * scaleOne + 0.5f);
+        final float scaleTwo = getResources().getDisplayMetrics().density;
+        int unselectedTabHeight = (int) (50 * scaleTwo + 0.5f);
+        /* WEEKLY TAB */
+        frequencyTabSelected = WEEKLY_TAB;
+            /* Update the heights of each tab. */
+        dailyTab.getLayoutParams().height = unselectedTabHeight;
+        weeklyTab.getLayoutParams().height = selectedTabHeight;
+        customTab.getLayoutParams().height = unselectedTabHeight;
+            /* Show the red bar on the daily tab and hide it on the weekly/custom tabs. */
+        dailyRedBar.setVisibility(View.GONE);
+        weeklyRedBar.setVisibility(View.VISIBLE);
+        customRedBar.setVisibility(View.GONE);
+        for (TextView day: days) {
+            day.setBackgroundColor(ContextCompat.getColor(this, R.color.colorWhite));
+            day.setTextColor(ContextCompat.getColor(this, R.color.red));
+            day.setTag(DAY_IS_UNSELECTED);
+        }
+        LinearLayout weekCalendar = (LinearLayout)findViewById(R.id.week_calendar);
+        weekCalendar.setBackgroundColor(ContextCompat.getColor(this, R.color.red));
+    }
+
+    private void selectedCustomTab() {
+        TextView dailyTab = (TextView)findViewById(R.id.daily_tab_top);
+        TextView weeklyTab = (TextView)findViewById(R.id.weekly_tab_top);
+        TextView customTab = (TextView)findViewById(R.id.custom_tab_top);
+        View dailyRedBar = (View) findViewById(R.id.daily_tab_red_bottom);
+        View weeklyRedBar = (View) findViewById(R.id.weekly_tab_red_bottom);
+        View customRedBar = (View) findViewById(R.id.custom_tab_red_bottom);
+        final float scaleOne = getResources().getDisplayMetrics().density;
+        int selectedTabHeight = (int) (45 * scaleOne + 0.5f);
+        final float scaleTwo = getResources().getDisplayMetrics().density;
+        int unselectedTabHeight = (int) (50 * scaleTwo + 0.5f);
+        /* CUSTOM TAB */
+        frequencyTabSelected = CUSTOM_TAB;
+            /* Update the heights of each tab. */
+        dailyTab.getLayoutParams().height = unselectedTabHeight;
+        weeklyTab.getLayoutParams().height = unselectedTabHeight;
+        customTab.getLayoutParams().height = selectedTabHeight;
+            /* Show the red bar on the daily tab and hide it on the weekly/custom tabs. */
+        dailyRedBar.setVisibility(View.GONE);
+        weeklyRedBar.setVisibility(View.GONE);
+        customRedBar.setVisibility(View.VISIBLE);
+        for (TextView day: days) {
+            day.setBackgroundColor(ContextCompat.getColor(this, R.color.colorWhite));
+            day.setTextColor(ContextCompat.getColor(this, R.color.red));
+            day.setTag(DAY_IS_UNSELECTED);
+        }
+        LinearLayout weekCalendar = (LinearLayout)findViewById(R.id.week_calendar);
+        weekCalendar.setBackgroundColor(ContextCompat.getColor(this, R.color.red));
+    }
+
     /* Callback for when the user clicks on the "daily" "weekly" or "custom" tab.
      * Updates the views of each tab (showing or hiding the pink bottom bar) and
      * updates the day views accordingly. */
@@ -171,66 +346,12 @@ public class CreateReminderActivity extends AppCompatActivity implements View.On
         View weeklyRedBar = (View) findViewById(R.id.weekly_tab_red_bottom);
         View customRedBar = (View) findViewById(R.id.custom_tab_red_bottom);
 
-        final float scaleOne = getResources().getDisplayMetrics().density;
-        int selectedTabHeight = (int) (45 * scaleOne + 0.5f);
-        final float scaleTwo = getResources().getDisplayMetrics().density;
-        int unselectedTabHeight = (int) (50 * scaleTwo + 0.5f);
-
         if (v.equals(dailyTab)) {
-            /* DAILY TAB */
-            frequencyTabSelected = DAILY_TAB;
-            /* Update the heights of each tab. */
-            dailyTab.getLayoutParams().height = selectedTabHeight;
-            weeklyTab.getLayoutParams().height = unselectedTabHeight;
-            customTab.getLayoutParams().height = unselectedTabHeight;
-            /* Show the red bar on the daily tab and hide it on the weekly/custom tabs. */
-            dailyRedBar.setVisibility(View.VISIBLE);
-            weeklyRedBar.setVisibility(View.GONE);
-            customRedBar.setVisibility(View.GONE);
-            /* Select all days */
-            for (TextView day: days) {
-                day.setBackgroundColor(ContextCompat.getColor(this, R.color.red));
-                day.setTextColor(ContextCompat.getColor(this, R.color.colorWhite));
-                day.setTag(DAY_IS_SELECTED);
-            }
-            LinearLayout weekCalendar = (LinearLayout)findViewById(R.id.week_calendar);
-            weekCalendar.setBackgroundColor(ContextCompat.getColor(this, R.color.colorWhite));
+            selectedDailyTab();
         } else if (v.equals(weeklyTab)) {
-            /* WEEKLY TAB */
-            frequencyTabSelected = WEEKLY_TAB;
-            /* Update the heights of each tab. */
-            dailyTab.getLayoutParams().height = unselectedTabHeight;
-            weeklyTab.getLayoutParams().height = selectedTabHeight;
-            customTab.getLayoutParams().height = unselectedTabHeight;
-            /* Show the red bar on the daily tab and hide it on the weekly/custom tabs. */
-            dailyRedBar.setVisibility(View.GONE);
-            weeklyRedBar.setVisibility(View.VISIBLE);
-            customRedBar.setVisibility(View.GONE);
-            for (TextView day: days) {
-                day.setBackgroundColor(ContextCompat.getColor(this, R.color.colorWhite));
-                day.setTextColor(ContextCompat.getColor(this, R.color.red));
-                day.setTag(DAY_IS_UNSELECTED);
-            }
-            LinearLayout weekCalendar = (LinearLayout)findViewById(R.id.week_calendar);
-            weekCalendar.setBackgroundColor(ContextCompat.getColor(this, R.color.red));
+            selectedWeeklyTab();
         } else {
-            /* CUSTOM TAB */
-            frequencyTabSelected = CUSTOM_TAB;
-            /* Update the heights of each tab. */
-            dailyTab.getLayoutParams().height = unselectedTabHeight;
-            weeklyTab.getLayoutParams().height = unselectedTabHeight;
-            customTab.getLayoutParams().height = selectedTabHeight;
-            /* Show the red bar on the daily tab and hide it on the weekly/custom tabs. */
-            dailyRedBar.setVisibility(View.GONE);
-            weeklyRedBar.setVisibility(View.GONE);
-            customRedBar.setVisibility(View.VISIBLE);
-            for (TextView day: days) {
-                day.setBackgroundColor(ContextCompat.getColor(this, R.color.colorWhite));
-                day.setTextColor(ContextCompat.getColor(this, R.color.red));
-                day.setTag(DAY_IS_UNSELECTED);
-            }
-            LinearLayout weekCalendar = (LinearLayout)findViewById(R.id.week_calendar);
-            weekCalendar.setBackgroundColor(ContextCompat.getColor(this, R.color.red));
+            selectedCustomTab();
         }
     }
 
@@ -279,10 +400,9 @@ public class CreateReminderActivity extends AppCompatActivity implements View.On
         if (v.equals(createButton)) {
             /* Create reminder */
             Intent intent = new Intent();
-            Reminder newReminder = new Reminder();
-            newReminder.setTitle(this.reminderTitle);
+            thisReminder.setTitle(this.reminderTitle);
             /* Add frequency days */
-            newReminder.setFrequencyType(this.frequencyTabSelected);
+            thisReminder.setFrequencyType(this.frequencyTabSelected);
             for (int i=0; i < days.size(); i++) {
                 TextView day = days.get(i);
                 if ((Integer)day.getTag() == DAY_IS_SELECTED) {
@@ -310,15 +430,15 @@ public class CreateReminderActivity extends AppCompatActivity implements View.On
                             dayToAdd = Calendar.SATURDAY;
                             break;
                     }
-                    newReminder.addDayToFrequency(dayToAdd);
+                    thisReminder.addDayToFrequency(dayToAdd);
                 }
             }
             /* Add times */
             for (ReminderTime time: reminderTimes) {
-                newReminder.addTime(time);
+                thisReminder.addTime(time);
             }
 
-            intent.putExtra("created_reminder", newReminder);
+            intent.putExtra("created_reminder", thisReminder);
             setResult(RESULT_OK, intent);
             finish();
         } else if (v.equals(clearTitleButton)) {
@@ -343,6 +463,11 @@ public class CreateReminderActivity extends AppCompatActivity implements View.On
         myToolbar.setTitle("");
         Typeface font = Typeface.createFromAsset(getAssets(), "Roboto-Light.ttf");
         TextView toolbarTitle = (TextView) myToolbar.findViewById(R.id.toolbar_title);
+        if (isEditing) {
+            toolbarTitle.setText(R.string.edit_reminder);
+        } else {
+            toolbarTitle.setText(R.string.create_reminder);
+        }
         toolbarTitle.setTypeface(font);
         setSupportActionBar(myToolbar);
     }
@@ -382,7 +507,6 @@ public class CreateReminderActivity extends AppCompatActivity implements View.On
         ImageButton buttonPressed = (ImageButton)v;
         int indexPressed = buttonPressed.getId();
 
-        System.out.println(indexPressed);
         ReminderTimeView toRemove = reminderTimeViews.get(indexPressed);
 
         /* Remove reminder time view */

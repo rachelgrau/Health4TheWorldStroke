@@ -173,6 +173,10 @@ public class Reminder implements Serializable {
         this.isSectionHeader = isSectionHeader;
     }
 
+    public ArrayList<ReminderTime> getTimes() {
+        return times;
+    }
+
     public boolean isSectionHeader() {
         return this.isSectionHeader;
     }
@@ -184,5 +188,13 @@ public class Reminder implements Serializable {
         Calendar calendar = Calendar.getInstance();
         int today = calendar.get(Calendar.DAY_OF_WEEK);
         if (today == day) this.isToday = true;
+    }
+
+    public String getFrequencyType() {
+        return frequencyType;
+    }
+
+    public ArrayList<Integer> getFrequencyDays() {
+        return frequencyDays;
     }
 }
