@@ -27,10 +27,18 @@ import com.example.rachel.health4theworldstroke.Views.ReminderTimeView;
 
 import java.util.ArrayList;
 
+import static com.example.rachel.health4theworldstroke.Models.Reminder.FRI;
+import static com.example.rachel.health4theworldstroke.Models.Reminder.MON;
+import static com.example.rachel.health4theworldstroke.Models.Reminder.SAT;
+import static com.example.rachel.health4theworldstroke.Models.Reminder.SUN;
+import static com.example.rachel.health4theworldstroke.Models.Reminder.THURS;
+import static com.example.rachel.health4theworldstroke.Models.Reminder.TUES;
+import static com.example.rachel.health4theworldstroke.Models.Reminder.WED;
+
 public class CreateReminderActivity extends AppCompatActivity implements View.OnClickListener {
-    public static final String DAILY_TAB = "daily";
-    public static final String WEEKLY_TAB = "weekly";
-    public static final String CUSTOM_TAB = "custom";
+    public static final String DAILY_TAB = "Daily";
+    public static final String WEEKLY_TAB = "Weekly";
+    public static final String CUSTOM_TAB = "Custom";
 
     public static final int DAY_IS_SELECTED = 0;
     public static final int DAY_IS_UNSELECTED = 1;
@@ -278,9 +286,45 @@ public class CreateReminderActivity extends AppCompatActivity implements View.On
         if (v.equals(createButton)) {
             /* Create reminder */
             Intent intent = new Intent();
-            /* TO DO: pass new reminder back in intent */
             Reminder newReminder = new Reminder();
             newReminder.setTitle(this.reminderTitle);
+            /* Add frequency days */
+            newReminder.setFrequencyType(this.frequencyTabSelected);
+            for (int i=0; i < days.size(); i++) {
+                TextView day = days.get(i);
+                if ((Integer)day.getTag() == DAY_IS_SELECTED) {
+                    String dayToAdd = "";
+                    switch (i) {
+                        case 0:
+                            dayToAdd = SUN;
+                            break;
+                        case 1:
+                            dayToAdd = MON;
+                            break;
+                        case 2:
+                            dayToAdd = TUES;
+                            break;
+                        case 3:
+                            dayToAdd = WED;
+                            break;
+                        case 4:
+                            dayToAdd = THURS;
+                            break;
+                        case 5:
+                            dayToAdd = FRI;
+                            break;
+                        case 6:
+                            dayToAdd = SAT;
+                            break;
+                    }
+                    newReminder.addDayToFrequency(dayToAdd);
+                }
+            }
+            /* Add times */
+            for (ReminderTime time: reminderTimes) {
+                newReminder.addTime(time);
+            }
+
             intent.putExtra("created_reminder", newReminder);
             setResult(RESULT_OK, intent);
             finish();
@@ -324,6 +368,7 @@ public class CreateReminderActivity extends AppCompatActivity implements View.On
     public void addTime(String timeStr) {
         /* Add new reminder time to model */
         ReminderTime reminderTime = new ReminderTime();
+        reminderTime.setTimeStr(timeStr);
         reminderTimes.add(reminderTime);
 
         /* Add blank reminder time view */

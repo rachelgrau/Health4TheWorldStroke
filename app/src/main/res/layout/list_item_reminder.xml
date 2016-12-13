@@ -31,7 +31,7 @@
             android:fontFamily="Roboto-Medium"
             android:textSize="18dp"/>
         <TextView
-            android:id="@+id/reminder_time"
+            android:id="@+id/reminder_subtitle"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/reminder_title"
@@ -54,6 +54,4 @@
             android:background="@mipmap/info_icon"
             />
     </RelativeLayout>
-
-
 </LinearLayout>

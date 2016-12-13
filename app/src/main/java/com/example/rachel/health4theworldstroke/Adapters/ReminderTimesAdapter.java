@@ -53,10 +53,8 @@ public class ReminderTimesAdapter extends BaseAdapter {
         // Get views for this row item
         View rowView = mInflater.inflate(R.layout.list_item_reminder_time, parent, false);
         ReminderTime time = (ReminderTime)getItem(position);
-        EditText hourTextView = (EditText) rowView.findViewById(R.id.hour_text);
-        EditText minTextView = (EditText)rowView.findViewById(R.id.minute_text);
-        hourTextView.setText(time.getHourString());
-        minTextView.setText(time.getMinuteString());
+        EditText timeTextView = (EditText) rowView.findViewById(R.id.time_text);
+        timeTextView.setText(time.getTimeString());
         ImageButton timeButton = (ImageButton)rowView.findViewById(R.id.time_button);
         if (position < (mDataSource.size() - 1)) {
             /* If it's not the last element, the button should be a remove button. */

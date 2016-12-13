@@ -131,7 +131,9 @@ public class RemindersAdapter extends BaseAdapter {
                             }
                         }
                     });
-
+                    /* Set subtitle */
+                    TextView subtitle = (TextView) convertView.findViewById(R.id.reminder_subtitle);
+                    subtitle.setText(Reminder.generateSubtitle(theReminder));
                     break;
                 case TYPE_SEPARATOR:
                     convertView = mInflater.inflate(R.layout.reminder_section_header, null);

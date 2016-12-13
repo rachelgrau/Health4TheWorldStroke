@@ -40,4 +40,12 @@
     <string name="thursday">Th</string>
     <string name="friday">F</string>
     <string name="saturday">S</string>
+
+    <string name="sunday_plural">Sundays</string>
+    <string name="monday_plural">Mondays</string>
+    <string name="tuesday_plural">Tuesdays</string>
+    <string name="wednesday_plural">Wednesdays</string>
+    <string name="thursday_plural">Thursdays</string>
+    <string name="friday_plural">Fridays</string>
+    <string name="saturday_plural">Saturdays</string>
 </resources>
