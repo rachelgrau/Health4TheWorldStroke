@@ -5,8 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.rachel.health4theworldstroke.Activities.RemindersActivity;
 import com.example.rachel.health4theworldstroke.Models.Reminder;
 import com.example.rachel.health4theworldstroke.R;
 
@@ -23,11 +25,13 @@ public class RemindersAdapter extends BaseAdapter {
     private static final int TYPE_SEPARATOR = 1;
 
     private ArrayList<Reminder> mDataSource = new ArrayList<Reminder>();
+    private Context mContext;
     private TreeSet<Integer> sectionHeader = new TreeSet<Integer>();
 
     private LayoutInflater mInflater;
 
     public RemindersAdapter(Context context) {
+        mContext = context;
         mDataSource = new ArrayList<Reminder>();
         mInflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -92,7 +96,28 @@ public class RemindersAdapter extends BaseAdapter {
                 case TYPE_ITEM:
                     Reminder theReminder = mDataSource.get(position);
                     convertView = mInflater.inflate(R.layout.list_item_reminder, null);
-                    holder.textView = (TextView) convertView.findViewById(R.id.text);
+                    holder.textView = (TextView) convertView.findViewById(R.id.reminder_title);
+                    ImageButton checkButton = (ImageButton) convertView.findViewById(R.id.check_icon);
+                    checkButton.setTag(position); // set position
+                    checkButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Integer position = (Integer)view.getTag();
+                            Reminder r = mDataSource.get(position);
+                            boolean isCompleting = !r.isCompleted();
+                            if (isCompleting) {
+                                /* Completed reminder */
+                                view.setBackgroundResource(R.mipmap.check_selected);
+                            } else {
+                                /* Deselected reminder */
+                                view.setBackgroundResource(R.mipmap.check_deselected);
+                            }
+                            if(mContext instanceof RemindersActivity){
+                                ((RemindersActivity)mContext).clickedCheckButton(isCompleting, r);
+                            }
+                        }
+                    });
+
                     break;
                 case TYPE_SEPARATOR:
                     convertView = mInflater.inflate(R.layout.reminder_section_header, null);
@@ -111,4 +136,6 @@ public class RemindersAdapter extends BaseAdapter {
     public static class ViewHolder {
         public TextView textView;
     }
+
+
 }

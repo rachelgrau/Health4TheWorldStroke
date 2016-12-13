@@ -74,7 +74,9 @@ public class RemindersActivity extends AppCompatActivity implements View.OnClick
     private void generateRemindersForListView() {
         adapter.clearDataSource();
         /* Add first section header – today's reminders */
-        adapter.addSectionHeaderItem(new Reminder(getResources().getString(R.string.todays_reminders)));
+        Reminder sectionHeaderOne = new Reminder(getResources().getString(R.string.todays_reminders));
+        sectionHeaderOne.setIsSectionHeader(true);
+        adapter.addSectionHeaderItem(sectionHeaderOne);
         /* Loop through all reminders and only add those that are for today to the adapter's data source. */
         for (Reminder r:allReminders) {
             if (r.isToday()) {
@@ -82,7 +84,9 @@ public class RemindersActivity extends AppCompatActivity implements View.OnClick
             }
         }
         /* Add second section header – all reminders */
-        adapter.addSectionHeaderItem(new Reminder(getResources().getString(R.string.all_reminders)));
+        Reminder sectionHeaderTwo = new Reminder(getResources().getString(R.string.all_reminders));
+        sectionHeaderTwo.setIsSectionHeader(true);
+        adapter.addSectionHeaderItem(sectionHeaderTwo);
         /* Loop through all reminders and add each one to the data source. */
         for (Reminder r:allReminders) {
             adapter.addItem(r);
@@ -114,5 +118,14 @@ public class RemindersActivity extends AppCompatActivity implements View.OnClick
                 /* TO DO: transition to reminder detail view */
             }
         });
+    }
+
+    /* Callback for when the user "checks" or "unchecks" a reminder. */
+    public void clickedCheckButton(boolean selected, Reminder reminderSelected) {
+        for (Reminder r: this.allReminders) {
+            if (reminderSelected.equals(r)) {
+                r.setCompleted(!r.isCompleted());
+            }
+        }
     }
 }

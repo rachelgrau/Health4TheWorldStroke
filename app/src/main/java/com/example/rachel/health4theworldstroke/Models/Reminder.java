@@ -11,6 +11,8 @@ public class Reminder implements Serializable {
     private String title;
     private String frequency;
     private ArrayList<ReminderTime> times;
+    private boolean isSectionHeader;
+    private boolean isCompleted;
 
     private boolean isToday;
 
@@ -47,10 +49,21 @@ public class Reminder implements Serializable {
         return reminders;
     }
 
+    /* Given a reminder, returns a string of the format "{frequency} || {times} that can be used as a subtitle.
+     * For example:
+     * "Daily || 9:00 AM"
+     * "Weekly || Mondays 9AM"
+     * "Daily || 1:00 PM, 7:00 PM" */
+    public static String generateSubtitle(Reminder r) {
+        return "";
+    }
+
     public Reminder() {
         this.title = "";
         this.frequency = "";
         this.isToday = false;
+        this.isSectionHeader = true;
+        this.isCompleted = false;
         this.times = new ArrayList<ReminderTime>();
     }
 
@@ -76,5 +89,21 @@ public class Reminder implements Serializable {
 
     public void addTime(ReminderTime time) {
         this.times.add(time);
+    }
+
+    public void setCompleted(boolean completed) {
+        this.isCompleted = completed;
+    }
+
+    public boolean isCompleted() {
+        return this.isCompleted;
+    }
+
+    public void setIsSectionHeader(boolean isSectionHeader) {
+        this.isSectionHeader = isSectionHeader;
+    }
+
+    public boolean isSectionHeader() {
+        return this.isSectionHeader;
     }
 }

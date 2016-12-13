@@ -1,17 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:gravity="center_vertical" >
+    android:layout_height="60dp"
+    android:gravity="center_vertical"
+    android:background="@color/colorWhite">
 
-    <TextView
-        android:id="@+id/text"
+    <ImageButton
+        android:id="@+id/check_icon"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginLeft="16dp"
+        android:background="@mipmap/check_deselected"
+        />
+
+    <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="#FFF"
-        android:gravity="center_vertical"
-        android:padding="5dp"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="#FF000000" />
+        android:layout_gravity="center_vertical">
+        <TextView
+            android:id="@+id/reminder_title"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFF"
+            android:paddingLeft="16dp"
+            android:paddingBottom="5dp"
+            android:paddingTop="10dp"
+            android:text="title"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/darkestGray"
+            android:fontFamily="Roboto-Medium"
+            android:textSize="18dp"/>
+        <TextView
+            android:id="@+id/reminder_time"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/reminder_title"
+            android:background="#FFF"
+            android:gravity="center_vertical"
+            android:text="subtitle"
+            android:paddingLeft="16dp"
+            android:paddingBottom="10dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/red"
+            android:textSize="12dp"/>
+    </RelativeLayout>
+
 
 </LinearLayout>

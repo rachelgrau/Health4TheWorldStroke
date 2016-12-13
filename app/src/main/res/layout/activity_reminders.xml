@@ -31,10 +31,10 @@
 
     <!--Button to add new reminder-->
     <ImageButton
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:id="@+id/add_reminder_button"
-        android:layout_marginTop="-25dp"
+        android:layout_marginTop="-30dp"
         android:layout_marginLeft="10dp"
         android:elevation="5dp"
         android:layout_below="@id/reminders_toolbar"
