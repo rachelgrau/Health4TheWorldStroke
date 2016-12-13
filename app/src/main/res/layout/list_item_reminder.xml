@@ -43,6 +43,16 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/red"
             android:textSize="12dp"/>
+        <ImageButton
+            android:id="@+id/info_button"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginRight="16dp"
+            android:gravity="center_vertical"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:background="@mipmap/info_icon"
+            />
     </RelativeLayout>
 
 

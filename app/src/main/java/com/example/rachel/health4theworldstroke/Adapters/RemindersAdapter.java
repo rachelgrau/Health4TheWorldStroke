@@ -97,6 +97,7 @@ public class RemindersAdapter extends BaseAdapter {
                     Reminder theReminder = mDataSource.get(position);
                     convertView = mInflater.inflate(R.layout.list_item_reminder, null);
                     holder.textView = (TextView) convertView.findViewById(R.id.reminder_title);
+                    /* Set up callback for completing this reminder. */
                     ImageButton checkButton = (ImageButton) convertView.findViewById(R.id.check_icon);
                     checkButton.setTag(position); // set position
                     checkButton.setOnClickListener(new View.OnClickListener() {
@@ -112,8 +113,21 @@ public class RemindersAdapter extends BaseAdapter {
                                 /* Deselected reminder */
                                 view.setBackgroundResource(R.mipmap.check_deselected);
                             }
-                            if(mContext instanceof RemindersActivity){
+                            if (mContext instanceof RemindersActivity){
                                 ((RemindersActivity)mContext).clickedCheckButton(isCompleting, r);
+                            }
+                        }
+                    });
+                    /* Set up callback for clicking on edit button. */
+                    ImageButton editButton = (ImageButton) convertView.findViewById(R.id.info_button);
+                    editButton.setTag(position);
+                    editButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Integer position = (Integer)view.getTag();
+                            Reminder r = mDataSource.get(position);
+                            if (mContext instanceof RemindersActivity){
+                                ((RemindersActivity)mContext).clickedEditButton(r);
                             }
                         }
                     });

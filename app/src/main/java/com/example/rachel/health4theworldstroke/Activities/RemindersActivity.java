@@ -128,4 +128,10 @@ public class RemindersActivity extends AppCompatActivity implements View.OnClick
             }
         }
     }
+
+    /* Callback for when the user clicks the info button on a reminder. */
+    public void clickedEditButton(Reminder reminderSelected) {
+        /* TO DO: start new activity in edit mode */
+        System.out.println("Wants to edit reminder: " + reminderSelected.getTitle());
+    }
 }
