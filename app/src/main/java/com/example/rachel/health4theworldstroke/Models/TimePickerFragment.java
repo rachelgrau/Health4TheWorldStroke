@@ -8,6 +8,7 @@ import android.text.format.DateFormat;
 import android.widget.TimePicker;
 
 import com.example.rachel.health4theworldstroke.Activities.CreateReminderActivity;
+import com.example.rachel.health4theworldstroke.Utilities;
 
 import java.util.Calendar;
 
@@ -31,7 +32,13 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
 
     //onTimeSet() callback method
     public void onTimeSet(TimePicker view, int hourOfDay, int minute){
+        String timeStr = "";
+        if (view.is24HourView()) {
+            timeStr = Utilities.getMilitaryTimeString(hourOfDay, minute);
+        } else {
+            timeStr = Utilities.getAmPmTimeString(hourOfDay, minute);
+        }
         CreateReminderActivity theActivity = (CreateReminderActivity)getActivity();
-        theActivity.addTime(String.valueOf(hourOfDay) + ":" + String.valueOf(minute));
+        theActivity.addTime(timeStr);
     }
 }
