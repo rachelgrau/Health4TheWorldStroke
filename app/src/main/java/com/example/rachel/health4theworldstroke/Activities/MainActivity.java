@@ -7,6 +7,8 @@ import android.view.View;
 
 import com.example.rachel.health4theworldstroke.R;
 
+import static com.example.rachel.health4theworldstroke.Activities.LearnActivity.EXTRA_IS_READ;
+
 public class MainActivity extends AppCompatActivity {
     public final static String EXTRA_MESSAGE = "com.example.health4theworldstroke.MESSAGE";
 
@@ -23,11 +25,13 @@ public class MainActivity extends AppCompatActivity {
 
     public void videoSelected(View view) {
         Intent intent = new Intent(this, LearnActivity.class);
+        intent.putExtra(EXTRA_IS_READ, false);
         startActivity(intent);
     }
 
-    public void learnSelected(View view) {
+    public void readSelected(View view) {
         Intent intent = new Intent(this, LearnActivity.class);
+        intent.putExtra(EXTRA_IS_READ, true);
         startActivity(intent);
     }
 
