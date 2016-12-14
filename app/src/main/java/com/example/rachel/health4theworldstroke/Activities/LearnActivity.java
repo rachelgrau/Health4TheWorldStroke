@@ -20,9 +20,20 @@ import com.example.rachel.health4theworldstroke.R;
 import java.util.ArrayList;
 
 public class LearnActivity extends AppCompatActivity {
-    public static final String EXTRA_IS_READ = "isRead";
+    public static final String EXTRA_PAGE_TYPE = "pageType";
+    public static final String EXTRA_VIDEO_CATEGORY = "videoCategory";
+    public static final String EXTRA_TITLE = "title";
 
-    private boolean isRead; // true if displaying read content, false if displaying video content
+    public static final String PAGE_TYPE_READ = "Read";
+    public static final String PAGE_TYPE_VIDEO = "Video";
+    public static final String PAGE_TYPE_VIDEO_SUBCATEGORY = "VideoSubcategory";
+
+    /* Page type can be:
+     * Read
+     * Video (Strengthening, stretching, functional mobility, exercises)
+     * Video sub-category */
+    private String pageType;
+    private String videoCategory = ""; // if displaying videosubcategories, this string holds the main category
 
     private ListView listView; // list of read or video content, depending which tab is selected
     private LearnContentAdapter adapter;
@@ -31,11 +42,14 @@ public class LearnActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.isRead = this.getIntent().getBooleanExtra(EXTRA_IS_READ, true);
-        if (isRead) {
+        this.pageType = this.getIntent().getStringExtra(EXTRA_PAGE_TYPE);
+        if (pageType.equals(PAGE_TYPE_READ)) {
             content = ReadLearnContent.getReadContent();
-        } else {
-            content = VideoLearnContent.getVideoContent();
+        } else if (pageType.equals(PAGE_TYPE_VIDEO)) {
+            content = VideoLearnContent.getVideoCategories();
+        } else if (pageType.equals(PAGE_TYPE_VIDEO_SUBCATEGORY)) {
+            videoCategory = this.getIntent().getStringExtra(EXTRA_VIDEO_CATEGORY);
+            content = VideoLearnContent.getVideoSubcategories(videoCategory);
         }
         setContentView(R.layout.activity_learn);
         setUpToolbar();
@@ -48,10 +62,13 @@ public class LearnActivity extends AppCompatActivity {
         myToolbar.setTitle("");
         Typeface font = Typeface.createFromAsset(getAssets(), "Roboto-Light.ttf");
         TextView toolbarTitle = (TextView) myToolbar.findViewById(R.id.toolbar_title);
-        if (isRead) {
+
+        if (pageType.equals(PAGE_TYPE_READ)) {
             toolbarTitle.setText(R.string.learn);
-        } else {
+        } else if (pageType.equals(PAGE_TYPE_VIDEO)) {
             toolbarTitle.setText(R.string.video);
+        } else if (pageType.equals(PAGE_TYPE_VIDEO_SUBCATEGORY)) {
+            toolbarTitle.setText(videoCategory);
         }
         toolbarTitle.setTypeface(font);
         setSupportActionBar(myToolbar);
@@ -69,17 +86,30 @@ public class LearnActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)  {
                 /* Transition to content activity */
-                if (isRead) {
+                if (pageType.equals(PAGE_TYPE_READ)) {
                     // To read activity
                     ReadLearnContent selectedContent = (ReadLearnContent)content.get(position);
                     Intent readIntent = new Intent(context, ReadContentActivity.class);
-                    readIntent.putExtra("title", selectedContent.title);
+                    readIntent.putExtra(EXTRA_TITLE, selectedContent.title);
                     startActivity(readIntent);
-                } else {
-                    // To video activity
+                } else if (pageType.equals(PAGE_TYPE_VIDEO)) {
+                    VideoLearnContent selectedContent = (VideoLearnContent)content.get(position);
+                    if (VideoLearnContent.categoryHasSubcategories(selectedContent.title)) {
+                        // If it's one of these, we need to start another LearnActivity, this time with video subcategories
+                        Intent videoSubcategoryIntent = new Intent(context, LearnActivity.class);
+                        videoSubcategoryIntent.putExtra(EXTRA_PAGE_TYPE, PAGE_TYPE_VIDEO_SUBCATEGORY);
+                        videoSubcategoryIntent.putExtra(EXTRA_VIDEO_CATEGORY, selectedContent.title);
+                        startActivity(videoSubcategoryIntent);
+                    } else {
+                        // If it's one of these, show the video content! No subcategories.
+                        Intent videoIntent = new Intent(context, VideoContentActivity.class);
+                        videoIntent.putExtra(EXTRA_TITLE, selectedContent.title);
+                        startActivity(videoIntent);
+                    }
+                } else if (pageType.equals(PAGE_TYPE_VIDEO_SUBCATEGORY)) {
                     VideoLearnContent selectedContent = (VideoLearnContent)content.get(position);
                     Intent videoIntent = new Intent(context, VideoContentActivity.class);
-                    videoIntent.putExtra("title", selectedContent.title);
+                    videoIntent.putExtra(EXTRA_TITLE, selectedContent.title);
                     startActivity(videoIntent);
                 }
             }

@@ -10,6 +10,8 @@ import android.widget.VideoView;
 
 import com.example.rachel.health4theworldstroke.R;
 
+import static com.example.rachel.health4theworldstroke.Activities.LearnActivity.EXTRA_TITLE;
+
 public class VideoContentActivity extends AppCompatActivity {
     public String title;
 
@@ -20,7 +22,7 @@ public class VideoContentActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_content);
-        this.title = this.getIntent().getExtras().getString("title");
+        this.title = this.getIntent().getExtras().getString(EXTRA_TITLE);
         setUpToolbar();
         loadVideo();
     }

@@ -8,30 +8,66 @@ import java.util.ArrayList;
 
 public class VideoLearnContent extends LearnContent{
 
-    public static ArrayList<LearnContent> getVideoContent() {
+    public static ArrayList<LearnContent> getVideoCategories() {
         ArrayList<LearnContent> content = new ArrayList<LearnContent>();
 
-        VideoLearnContent physicalTherapy = new VideoLearnContent();
-        physicalTherapy.title = "Physical Therapy Exercises";
+        VideoLearnContent strengthening = new VideoLearnContent();
+        strengthening.title = "Strengthening";
 
-        VideoLearnContent occupationalTherapy = new VideoLearnContent();
-        occupationalTherapy.title = "Occupational Therapy Exercises";
+        VideoLearnContent stretching = new VideoLearnContent();
+        stretching.title = "Stretching";
 
-        VideoLearnContent recreationTherapy = new VideoLearnContent();
-        recreationTherapy.title = "Recreation Therapy Exercises";
+        VideoLearnContent functionalMobility = new VideoLearnContent();
+        functionalMobility.title = "Functional Mobility";
 
-        VideoLearnContent bloodPressure = new VideoLearnContent();
-        bloodPressure.title = "Blood Pressure";
+        VideoLearnContent mindExercises = new VideoLearnContent();
+        mindExercises.title = "Mind Exercises";
 
-        VideoLearnContent heartRate = new VideoLearnContent();
-        heartRate.title = "Heart Rate";
-
-        content.add(physicalTherapy);
-        content.add(occupationalTherapy);
-        content.add(recreationTherapy);
-        content.add(bloodPressure);
-        content.add(heartRate);
+        content.add(strengthening);
+        content.add(stretching);
+        content.add(functionalMobility);
+        content.add(mindExercises);
 
         return content;
+    }
+
+    public static ArrayList<LearnContent> getVideoSubcategories(String mainCategory) {
+        ArrayList<LearnContent> content = new ArrayList<LearnContent>();
+
+        if (mainCategory.equals("Strengthening")) {
+            VideoLearnContent legs = new VideoLearnContent();
+            legs.title = "Legs";
+
+            VideoLearnContent arms = new VideoLearnContent();
+            arms.title = "Arms";
+
+            VideoLearnContent coordination = new VideoLearnContent();
+            coordination.title = "Coordination";
+
+            content.add(legs);
+            content.add(arms);
+            content.add(coordination);
+        } else if (mainCategory.equals("Stretching")) {
+            VideoLearnContent legAndFoot = new VideoLearnContent();
+            legAndFoot.title = "Leg and foot";
+
+            VideoLearnContent armAndHand = new VideoLearnContent();
+            armAndHand.title = "Arm and hand";
+
+            content.add(legAndFoot);
+            content.add(armAndHand);
+        }
+        return content;
+    }
+
+    /* Returns true if |mainCategory| is a category that has subcategories and false otherwise. */
+    public static boolean categoryHasSubcategories(String mainCategory) {
+        if (mainCategory.equals("Strengthening")) {
+            return true;
+        } else if (mainCategory.equals("Stretching")) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
