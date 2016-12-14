@@ -1,7 +1,9 @@
 package com.example.rachel.health4theworldstroke.Activities;
 
+import android.app.AlertDialog;
 import android.app.DialogFragment;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Build;
@@ -29,6 +31,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import static com.example.rachel.health4theworldstroke.Activities.RemindersActivity.EXTRA_CREATED_REMINDER;
+import static com.example.rachel.health4theworldstroke.Activities.RemindersActivity.EXTRA_DELETED_REMINDER;
 import static com.example.rachel.health4theworldstroke.Activities.RemindersActivity.EXTRA_IS_EDITING;
 import static com.example.rachel.health4theworldstroke.Activities.RemindersActivity.EXTRA_REMINDER;
 
@@ -70,6 +73,9 @@ public class CreateReminderActivity extends AppCompatActivity implements View.On
 
         reminderTitle = "";
 
+        /* Set up delete reminder button (only appears if editing) */
+        setUpDeleteReminder();
+
         /* Set up listener for add reminder time button */
         ImageButton addReminderTimeButton = (ImageButton)findViewById(R.id.add_reminder_time_button);
         addReminderTimeButton.setOnClickListener(this);
@@ -97,6 +103,16 @@ public class CreateReminderActivity extends AppCompatActivity implements View.On
         /* If isEditing, then populate all the fields with the reminder values. */
         if (isEditing) {
             populateViewsWithReminder();
+        }
+    }
+
+    private void setUpDeleteReminder() {
+        ImageButton deleteReminderButton = (ImageButton)findViewById(R.id.delete_reminder_button);
+        if (isEditing) {
+            deleteReminderButton.setVisibility(View.VISIBLE);
+            deleteReminderButton.setOnClickListener(this);
+        } else {
+            deleteReminderButton.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -398,6 +414,7 @@ public class CreateReminderActivity extends AppCompatActivity implements View.On
         Button createButton = (Button)findViewById(R.id.create_reminder_button);
         ImageButton clearTitleButton = (ImageButton)findViewById(R.id.clear_button);
         ImageButton addReminderTimeButton = (ImageButton)findViewById(R.id.add_reminder_time_button);
+        ImageButton deleteReminderButton = (ImageButton)findViewById(R.id.delete_reminder_button);
         if (v.equals(createButton)) {
             /* Create reminder */
             Intent intent = new Intent();
@@ -441,6 +458,7 @@ public class CreateReminderActivity extends AppCompatActivity implements View.On
 
             intent.putExtra(EXTRA_CREATED_REMINDER, thisReminder);
             intent.putExtra(EXTRA_IS_EDITING, this.isEditing);
+            intent.putExtra(EXTRA_DELETED_REMINDER, false);
             setResult(RESULT_OK, intent);
             finish();
         } else if (v.equals(clearTitleButton)) {
@@ -454,7 +472,23 @@ public class CreateReminderActivity extends AppCompatActivity implements View.On
         } else if (v.equals(addReminderTimeButton)) {
             DialogFragment newFragment = new TimePickerFragment();
             newFragment.show(getFragmentManager(),"TimePicker");
-        } else {
+        } else if (v.equals(deleteReminderButton)){
+            /* Confirmation dialog */
+            new AlertDialog.Builder(this)
+                    .setTitle(R.string.delete_reminder_title)
+                    .setMessage(R.string.delete_reminder_message)
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                            /* Delete reminder! */
+                            Intent intent = new Intent();
+                            intent.putExtra(EXTRA_CREATED_REMINDER, thisReminder);
+                            intent.putExtra(EXTRA_IS_EDITING, isEditing);
+                            intent.putExtra(EXTRA_DELETED_REMINDER, true);
+                            setResult(RESULT_OK, intent);
+                            finish();
+                        }})
+                    .setNegativeButton(android.R.string.no, null).show();
 
         }
     }

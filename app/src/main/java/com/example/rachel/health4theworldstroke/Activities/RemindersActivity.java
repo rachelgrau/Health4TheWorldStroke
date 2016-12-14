@@ -23,6 +23,8 @@ public class RemindersActivity extends AppCompatActivity implements View.OnClick
     public static final String EXTRA_IS_EDITING = "isEditing";
     public static final String EXTRA_REMINDER = "reminder";
     public static final String EXTRA_CREATED_REMINDER = "created_reminder";
+    public static final String EXTRA_DELETED_REMINDER = "deleted_reminder";
+
 
     private static final int TODAYS_REMINDER_SECTION = 0;
     private static final int ALL_REMINDER_SECTION = 1;
@@ -64,11 +66,24 @@ public class RemindersActivity extends AppCompatActivity implements View.OnClick
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == CREATE_REMINDER) {
-            if(resultCode == RESULT_OK){
-                /* TO DO: get info sent from create reminder */
+            if (resultCode == RESULT_OK){
                 Reminder newReminder = (Reminder)data.getSerializableExtra(EXTRA_CREATED_REMINDER);
                 boolean wasEditing = data.getBooleanExtra(EXTRA_IS_EDITING, false);
-                if (wasEditing) {
+                boolean deletedReminder = data.getBooleanExtra(EXTRA_DELETED_REMINDER, false);
+                if (deletedReminder) {
+                    /* Means they deleted the reminder */
+                    Reminder reminderToDelete = (Reminder)data.getSerializableExtra(EXTRA_CREATED_REMINDER);
+                    if (reminderBeingEdited != null) {
+                        for (int i=0; i < allReminders.size(); i++) {
+                            Reminder r = allReminders.get(i);
+                            if (r.equals(reminderBeingEdited)) {
+                                allReminders.remove(i);
+                                break;
+                            }
+                        }
+                    }
+                    reminderBeingEdited = null;
+                } else if (wasEditing) {
                     /* If they were editing the reminder, then replace it in |allReminders| with the newly edited one */
                     if (reminderBeingEdited != null) {
                         for (int i=0; i < allReminders.size(); i++) {

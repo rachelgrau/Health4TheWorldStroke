@@ -50,4 +50,7 @@
     <string name="thursday_plural">Thursdays</string>
     <string name="friday_plural">Fridays</string>
     <string name="saturday_plural">Saturdays</string>
+
+    <string name="delete_reminder_message">Are you sure you want to delete this reminder?</string>
+    <string name="delete_reminder_title">Delete Reminder</string>
 </resources>
