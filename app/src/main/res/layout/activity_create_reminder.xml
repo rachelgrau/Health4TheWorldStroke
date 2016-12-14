@@ -80,7 +80,10 @@
                 android:textSize="25sp"
                 android:textColor="@color/red"
                 android:gravity="center_vertical"
-                android:background="@android:color/transparent"/>
+                android:background="@android:color/transparent"
+                android:maxLines="1"
+                android:scrollHorizontally="true"
+                android:ellipsize="end"/>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
