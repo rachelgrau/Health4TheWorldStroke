@@ -18,7 +18,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void helpMeSpeakSelected(View view) {
         Intent intent = new Intent(this, HelpMeSpeakActivity.class);
-//        intent.putExtra(EXTRA_MESSAGE, "Help Me Speak!");
+        startActivity(intent);
+    }
+
+    public void videoSelected(View view) {
+        Intent intent = new Intent(this, LearnActivity.class);
         startActivity(intent);
     }
 
