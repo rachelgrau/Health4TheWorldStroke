@@ -28,6 +28,7 @@ import com.example.rachel.health4theworldstroke.Views.ReminderTimeView;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import static com.example.rachel.health4theworldstroke.Activities.RemindersActivity.EXTRA_CREATED_REMINDER;
 import static com.example.rachel.health4theworldstroke.Activities.RemindersActivity.EXTRA_IS_EDITING;
 import static com.example.rachel.health4theworldstroke.Activities.RemindersActivity.EXTRA_REMINDER;
 
@@ -438,7 +439,8 @@ public class CreateReminderActivity extends AppCompatActivity implements View.On
                 thisReminder.addTime(time);
             }
 
-            intent.putExtra("created_reminder", thisReminder);
+            intent.putExtra(EXTRA_CREATED_REMINDER, thisReminder);
+            intent.putExtra(EXTRA_IS_EDITING, this.isEditing);
             setResult(RESULT_OK, intent);
             finish();
         } else if (v.equals(clearTitleButton)) {

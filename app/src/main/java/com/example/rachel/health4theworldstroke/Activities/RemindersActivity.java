@@ -22,6 +22,7 @@ public class RemindersActivity extends AppCompatActivity implements View.OnClick
     public static final int CREATE_REMINDER = 0;
     public static final String EXTRA_IS_EDITING = "isEditing";
     public static final String EXTRA_REMINDER = "reminder";
+    public static final String EXTRA_CREATED_REMINDER = "created_reminder";
 
     private static final int TODAYS_REMINDER_SECTION = 0;
     private static final int ALL_REMINDER_SECTION = 1;
@@ -29,6 +30,9 @@ public class RemindersActivity extends AppCompatActivity implements View.OnClick
     private ArrayList<Reminder> allReminders;
     private RemindersAdapter adapter;
     private ListView listView;
+
+    /* If the user selects a reminder to be edited, save that reminder here while they edit */
+    private Reminder reminderBeingEdited;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,13 +64,28 @@ public class RemindersActivity extends AppCompatActivity implements View.OnClick
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == CREATE_REMINDER) {
-            System.out.println("Result code is: " + resultCode);
-            System.out.println("Result code should be: " + RESULT_OK);
             if(resultCode == RESULT_OK){
-                System.out.println("result ok!");
                 /* TO DO: get info sent from create reminder */
-                Reminder newReminder = (Reminder)data.getSerializableExtra("created_reminder");
-                allReminders.add(newReminder);
+                Reminder newReminder = (Reminder)data.getSerializableExtra(EXTRA_CREATED_REMINDER);
+                boolean wasEditing = data.getBooleanExtra(EXTRA_IS_EDITING, false);
+                if (wasEditing) {
+                    /* If they were editing the reminder, then replace it in |allReminders| with the newly edited one */
+                    if (reminderBeingEdited != null) {
+                        for (int i=0; i < allReminders.size(); i++) {
+                            Reminder r = allReminders.get(i);
+                            if (r.equals(reminderBeingEdited)) {
+                                allReminders.remove(i);
+                                allReminders.add(i, newReminder);
+                                break;
+                            }
+                        }
+                    }
+                    reminderBeingEdited = null;
+                } else {
+                    /* Just add the newly created reminder */
+                    allReminders.add(newReminder);
+                }
+                /* Update list view! */
                 generateRemindersForListView();
             }
         }
@@ -138,6 +157,7 @@ public class RemindersActivity extends AppCompatActivity implements View.OnClick
         Intent intent = new Intent(this, CreateReminderActivity.class);
         intent.putExtra(EXTRA_IS_EDITING, true);
         intent.putExtra(EXTRA_REMINDER, reminderSelected);
+        this.reminderBeingEdited = reminderSelected;
         startActivityForResult(intent, CREATE_REMINDER);
     }
 }
