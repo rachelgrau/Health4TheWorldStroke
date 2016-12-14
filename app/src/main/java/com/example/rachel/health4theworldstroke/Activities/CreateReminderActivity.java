@@ -421,6 +421,7 @@ public class CreateReminderActivity extends AppCompatActivity implements View.On
             thisReminder.setTitle(this.reminderTitle);
             /* Add frequency days */
             thisReminder.setFrequencyType(this.frequencyTabSelected);
+            thisReminder.clearFrequencyDays();
             for (int i=0; i < days.size(); i++) {
                 TextView day = days.get(i);
                 if ((Integer)day.getTag() == DAY_IS_SELECTED) {

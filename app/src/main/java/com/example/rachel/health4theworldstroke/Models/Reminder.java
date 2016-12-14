@@ -197,4 +197,9 @@ public class Reminder implements Serializable {
     public ArrayList<Integer> getFrequencyDays() {
         return frequencyDays;
     }
+
+    public void clearFrequencyDays() {
+        frequencyDays.clear();
+    }
+
 }

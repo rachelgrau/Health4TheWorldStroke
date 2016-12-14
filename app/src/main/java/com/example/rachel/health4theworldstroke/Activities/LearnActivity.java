@@ -108,9 +108,18 @@ public class LearnActivity extends AppCompatActivity {
                     }
                 } else if (pageType.equals(PAGE_TYPE_VIDEO_SUBCATEGORY)) {
                     VideoLearnContent selectedContent = (VideoLearnContent)content.get(position);
-                    Intent videoIntent = new Intent(context, VideoContentActivity.class);
-                    videoIntent.putExtra(EXTRA_TITLE, selectedContent.title);
-                    startActivity(videoIntent);
+                    if (VideoLearnContent.categoryHasSubcategories(selectedContent.title)) {
+                        // If it's one of these, we need to start another LearnActivity, this time with video subcategories
+                        Intent videoSubcategoryIntent = new Intent(context, LearnActivity.class);
+                        videoSubcategoryIntent.putExtra(EXTRA_PAGE_TYPE, PAGE_TYPE_VIDEO_SUBCATEGORY);
+                        videoSubcategoryIntent.putExtra(EXTRA_VIDEO_CATEGORY, selectedContent.title);
+                        startActivity(videoSubcategoryIntent);
+                    } else {
+                        // If it's one of these, show the video content! No subcategories.
+                        Intent videoIntent = new Intent(context, VideoContentActivity.class);
+                        videoIntent.putExtra(EXTRA_TITLE, selectedContent.title);
+                        startActivity(videoIntent);
+                    }
                 }
             }
         });

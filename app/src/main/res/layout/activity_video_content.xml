@@ -1,36 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_video_content"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.rachel.health4theworldstroke.Activities.VideoContentActivity">
-
-    <!--Toolbar-->
-    <android.support.v7.widget.Toolbar
-        style="@style/ToolBarStyle"
-        android:id="@+id/video_content_toolbar"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fillViewport="true">
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/activity_video_content"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:elevation="4dp"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        tools:layout_editor_absoluteX="8dp" >
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite"
+        tools:context="com.example.rachel.health4theworldstroke.Activities.VideoContentActivity">
 
-        <TextView
+        <!--Toolbar-->
+        <android.support.v7.widget.Toolbar
             style="@style/ToolBarStyle"
-            android:layout_width="wrap_content"
+            android:id="@+id/video_content_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:elevation="4dp"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+            tools:layout_editor_absoluteX="8dp" >
+
+            <TextView
+                style="@style/ToolBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:textColor="@color/colorWhite"
+                android:layout_gravity="center"
+                android:id="@+id/toolbar_title" />
+        </android.support.v7.widget.Toolbar>
+
+        <!--List of videos-->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="25sp"
-            android:textColor="@color/colorWhite"
-            android:layout_gravity="center"
-            android:id="@+id/toolbar_title" />
-    </android.support.v7.widget.Toolbar>
+            android:id="@+id/videos"
+            android:layout_below="@id/video_content_toolbar"
+            android:orientation="vertical">
+        </LinearLayout>
 
-    <VideoView
-        android:id="@+id/video_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"/>
-
-</RelativeLayout>
+    </RelativeLayout>
+</ScrollView>
