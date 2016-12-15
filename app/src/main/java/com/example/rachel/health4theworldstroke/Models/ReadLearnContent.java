@@ -23,30 +23,17 @@ public class ReadLearnContent extends LearnContent{
     public static ArrayList<LearnContent> getReadContent() {
         ArrayList<LearnContent> content = new ArrayList<LearnContent>();
 
-        ReadLearnContent heartRate = new ReadLearnContent();
-        heartRate.title = HEART_RATE;
+        ReadLearnContent bloodPressure = new ReadLearnContent(BLOOD_PRESSURE);
+        ReadLearnContent heartRate = new ReadLearnContent(HEART_RATE);
+        ReadLearnContent bloodSugar = new ReadLearnContent(BLOOD_SUGAR);
+        ReadLearnContent exercises = new ReadLearnContent(EXERCISES);
+        ReadLearnContent diet = new ReadLearnContent(DIET);
+        ReadLearnContent showerBath = new ReadLearnContent(SHOWER_BATH);
+        ReadLearnContent bladderBowel = new ReadLearnContent(BLADDER_BOWEL);
+        ReadLearnContent homeMod = new ReadLearnContent(HOME_MODIFICATION);
+        ReadLearnContent faq = new ReadLearnContent(FAQ);
 
-        ReadLearnContent bloodSugar = new ReadLearnContent();
-        bloodSugar.title = BLOOD_SUGAR;
-
-        ReadLearnContent exercises = new ReadLearnContent();
-        exercises.title = EXERCISES;
-
-        ReadLearnContent diet = new ReadLearnContent();
-        diet.title = DIET;
-
-        ReadLearnContent showerBath = new ReadLearnContent();
-        showerBath.title = SHOWER_BATH;
-
-        ReadLearnContent bladderBowel = new ReadLearnContent();
-        bladderBowel.title = BLADDER_BOWEL;
-
-        ReadLearnContent homeMod = new ReadLearnContent();
-        homeMod.title = HOME_MODIFICATION;
-
-        ReadLearnContent faq = new ReadLearnContent();
-        faq.title = FAQ;
-
+        content.add(bloodPressure);
         content.add(heartRate);
         content.add(bloodSugar);
         content.add(exercises);
@@ -59,5 +46,8 @@ public class ReadLearnContent extends LearnContent{
         return content;
     }
 
+    public ReadLearnContent(String title) {
+        this.title = title;
+    }
 
 }

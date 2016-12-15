@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.VideoView;
 
+import com.example.rachel.health4theworldstroke.Models.VideoLearnContent;
 import com.example.rachel.health4theworldstroke.R;
 
 import static com.example.rachel.health4theworldstroke.Activities.LearnActivity.EXTRA_TITLE;
@@ -31,13 +32,13 @@ public class VideoContentActivity extends AppCompatActivity {
     public static final String U1 = "U1";
     public static final String U2 = "U2";
     public static final String U3 = "U3";
-    public static final String U4 = "Elbow flexion";
-    public static final String U5 = "Leg control 1";
-    public static final String U6 = "Leg control 2";
-    public static final String U7 = "Shoulder flexion";
-    public static final String U8 = "Toe dorsiflexion";
-    public static final String S1 = "Knee flexion";
-    public static final String S2 = "Hip flexion";
+    public static final String U4 = "Elbow";
+    public static final String U5 = "Leg";
+    public static final String U6 = "Leg";
+    public static final String U7 = "Shoulder";
+    public static final String U8 = "Toe";
+    public static final String S1 = "Knee";
+    public static final String S2 = "Hip";
     public static final String S3 = "S3";
     public static final String S4 = "S4";
     public static final String S5 = "S5";
@@ -69,7 +70,6 @@ public class VideoContentActivity extends AppCompatActivity {
     }
 
     private void loadVideos() {
-        addVideoHeaderWithTitle(title);
         if (title.equals(S1)) {
             addVideoWithURI(getUriPath(R.raw.s1_knee_flexion));
         } else if (title.equals(S2)) {
@@ -87,6 +87,7 @@ public class VideoContentActivity extends AppCompatActivity {
         } else {
             /* TO DO: when we get more videos, add them here! */
         }
+        addVideoFooterWithTitle(VideoLearnContent.getInstructionsForVideo(title));
     }
 
     /* Returns the URI Path to the video with the given name, or the empty string if there is none. */
@@ -96,7 +97,7 @@ public class VideoContentActivity extends AppCompatActivity {
         return uriPath;
     }
 
-    public void addVideoHeaderWithTitle(String title) {
+    public void addVideoFooterWithTitle(String title) {
         LinearLayout layout = (LinearLayout) findViewById(R.id.videos);
         TextView header = new TextView(this);
         header.setText(title);

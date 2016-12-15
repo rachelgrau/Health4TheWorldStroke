@@ -11,6 +11,7 @@ import static com.example.rachel.health4theworldstroke.Activities.VideoContentAc
 import static com.example.rachel.health4theworldstroke.Activities.VideoContentActivity.MIND_EXERCISES;
 import static com.example.rachel.health4theworldstroke.Activities.VideoContentActivity.S1;
 import static com.example.rachel.health4theworldstroke.Activities.VideoContentActivity.S2;
+import static com.example.rachel.health4theworldstroke.Activities.VideoContentActivity.S3;
 import static com.example.rachel.health4theworldstroke.Activities.VideoContentActivity.S4;
 import static com.example.rachel.health4theworldstroke.Activities.VideoContentActivity.S5;
 import static com.example.rachel.health4theworldstroke.Activities.VideoContentActivity.S6;
@@ -19,7 +20,9 @@ import static com.example.rachel.health4theworldstroke.Activities.VideoContentAc
 import static com.example.rachel.health4theworldstroke.Activities.VideoContentActivity.S9;
 import static com.example.rachel.health4theworldstroke.Activities.VideoContentActivity.STRENGTHENING;
 import static com.example.rachel.health4theworldstroke.Activities.VideoContentActivity.STRETCHING;
+import static com.example.rachel.health4theworldstroke.Activities.VideoContentActivity.U1;
 import static com.example.rachel.health4theworldstroke.Activities.VideoContentActivity.U2;
+import static com.example.rachel.health4theworldstroke.Activities.VideoContentActivity.U3;
 import static com.example.rachel.health4theworldstroke.Activities.VideoContentActivity.U4;
 import static com.example.rachel.health4theworldstroke.Activities.VideoContentActivity.U5;
 import static com.example.rachel.health4theworldstroke.Activities.VideoContentActivity.U6;
@@ -155,5 +158,46 @@ public class VideoLearnContent extends LearnContent{
         } else {
             return false;
         }
+    }
+
+    public static String getInstructionsForVideo(String title) {
+        String instructions = "";
+        if (title.equals(U1)) {
+
+        } else if (title.equals(U2)) {
+
+        } else if (title.equals(U3)) {
+
+        } else if (title.equals(U4)) {
+            instructions = "Please repeat 10 times every day with active assitance from caregiver if needed.";
+        } else if (title.equals(U5)) {
+            instructions = "Please repeat 10 times every day with active assitance from caregiver if needed.";
+        } else if (title.equals(U6)) {
+            instructions = "Please repeat 10 times every day with active assitance from caregiver if needed.";
+        } else if (title.equals(U7)) {
+            instructions = "Please repeat 10 times every day with active assitance from caregiver if needed.";
+        } else if (title.equals(U8)) {
+            instructions = "Please repeat 10 times every day with active assitance from caregiver if needed.";
+        } else if (title.equals(S1)) {
+            instructions = "Please repeat 10 times every day with active assitance from caregiver if needed.";
+        } else if (title.equals(S2)) {
+            instructions = "Please repeat 10 times every day with active assitance from caregiver if needed.";
+        } else if (title.equals(S3)) {
+
+        } else if (title.equals(S4)) {
+
+        } else if (title.equals(S5)) {
+
+        } else if (title.equals(S6)) {
+
+        } else if (title.equals(S7)) {
+
+        } else if (title.equals(S8)) {
+
+        } else if (title.equals(S9)) {
+
+        }
+
+        return instructions;
     }
 }

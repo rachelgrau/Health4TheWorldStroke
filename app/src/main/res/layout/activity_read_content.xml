@@ -30,16 +30,12 @@
                 android:layout_gravity="center"
                 android:id="@+id/toolbar_title" />
         </android.support.v7.widget.Toolbar>
-        <TextView
-            style="@style/ToolBarStyle"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="20dp"
-            android:padding="20dp"
-            android:background="@android:color/black"
-            android:layout_gravity="center"
             android:id="@+id/content"
-            android:layout_below="@id/read_content_toolbar"/>
+            android:layout_below="@id/read_content_toolbar"
+            android:orientation="vertical">
+        </LinearLayout>
     </RelativeLayout>
 </ScrollView>
