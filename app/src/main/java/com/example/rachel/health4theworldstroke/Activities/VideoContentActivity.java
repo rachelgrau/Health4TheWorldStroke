@@ -1,6 +1,8 @@
 package com.example.rachel.health4theworldstroke.Activities;
 
 import android.graphics.Typeface;
+import android.media.MediaPlayer;
+import android.media.MediaPlayer.OnPreparedListener;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -43,9 +45,6 @@ public class VideoContentActivity extends AppCompatActivity {
     public static final String S7 = "S7";
     public static final String S8 = "S8";
     public static final String S9 = "S9";
-
-
-
 
     public String title;
 
@@ -118,7 +117,14 @@ public class VideoContentActivity extends AppCompatActivity {
         Uri uri2 = Uri.parse(uriPath);
         video.setVideoURI(uri2);
         video.requestFocus();
+        video.setOnPreparedListener(new OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mp) {
+                mp.setLooping(true);
+            }
+        });
         video.start();
+
 
         layout.addView(video);
     }
