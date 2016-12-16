@@ -258,6 +258,7 @@ public class Reminder implements Serializable {
         ContentValues values = new ContentValues();
         values.put(ReminderContract.ReminderEntry.COLUMN_NAME_TITLE, title);
         values.put(ReminderContract.ReminderEntry.COLUMN_NAME_FREQUENCY_TYPE, frequencyType);
+        values.put(ReminderContract.ReminderEntry.COLUMN_NAME_FREQUENCY_DAYS, frequencyDays);
         long newRowId = db.insert(ReminderContract.ReminderEntry.TABLE_NAME, null, values);
     }
 }

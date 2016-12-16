@@ -69,7 +69,8 @@ public class RemindersActivity extends AppCompatActivity implements View.OnClick
         String[] projection = {
                 ReminderContract.ReminderEntry._ID,
                 ReminderContract.ReminderEntry.COLUMN_NAME_TITLE,
-                ReminderContract.ReminderEntry.COLUMN_NAME_FREQUENCY_TYPE
+                ReminderContract.ReminderEntry.COLUMN_NAME_FREQUENCY_TYPE,
+                ReminderContract.ReminderEntry.COLUMN_NAME_FREQUENCY_DAYS
         };
 
 //        // Filter results WHERE "title" = 'My Title'
@@ -93,6 +94,11 @@ public class RemindersActivity extends AppCompatActivity implements View.OnClick
         c.moveToFirst();
         long itemId = c.getLong(c.getColumnIndexOrThrow(ReminderContract.ReminderEntry._ID));
         String theTitle = c.getString(c.getColumnIndexOrThrow(ReminderContract.ReminderEntry.COLUMN_NAME_TITLE));
+        String freqType = c.getString(c.getColumnIndexOrThrow(ReminderContract.ReminderEntry.COLUMN_NAME_FREQUENCY_TYPE));
+        String freqDays = c.getString(c.getColumnIndexOrThrow(ReminderContract.ReminderEntry.COLUMN_NAME_FREQUENCY_DAYS));
+        System.out.println("Title: " + theTitle);
+        System.out.println("Type: " + freqType);
+        System.out.println("Days: " + freqDays);
     }
 
     public void onClick(View v) {

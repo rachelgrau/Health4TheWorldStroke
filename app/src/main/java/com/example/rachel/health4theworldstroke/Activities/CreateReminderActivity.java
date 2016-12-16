@@ -120,7 +120,6 @@ public class CreateReminderActivity extends AppCompatActivity implements View.On
 
     /* Populates all the views to display the attributes of |thisReminder| (title, frequency, and times) */
     private void populateViewsWithReminder() {
-        System.out.println("FREQ DAYS: " + thisReminder.getFrequencyDays());
         /* Title */
         reminderTitleEditText.setText(thisReminder.getTitle());
         ImageButton clearButton = (ImageButton)findViewById(R.id.clear_button);
