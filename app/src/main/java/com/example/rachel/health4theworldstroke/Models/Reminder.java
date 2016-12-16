@@ -22,7 +22,7 @@ public class Reminder implements Serializable {
     private String frequencyType;
     private long dbId; // if reminder already exists in the DB, otherwise -1
 
-    //if it's weekly or custom, this holds the days in format of bit string, starting with Sunday, where 0 = day not included. Ex: MWF = "0101010"
+    // If it's weekly or custom, this holds the days in format of bit string, starting with Sunday, where 0 = day not included. Ex: MWF = "0101010"
     private String frequencyDays;
 
     private ArrayList<ReminderTime> times;
@@ -167,6 +167,16 @@ public class Reminder implements Serializable {
 
     public void setFrequencyDays(String daysBitString) {
         frequencyDays = daysBitString;
+
+        Calendar calendar = Calendar.getInstance();
+        int today = calendar.get(Calendar.DAY_OF_WEEK) - 1; // Calendar has Sunday = 1, we have it as 0
+
+        System.out.println(daysBitString);
+        if (frequencyDays.substring(today, today + 1).equals("1")) {
+            isToday = true;
+        } else {
+            isToday = false;
+        }
     }
 
     public Reminder(String title) {
