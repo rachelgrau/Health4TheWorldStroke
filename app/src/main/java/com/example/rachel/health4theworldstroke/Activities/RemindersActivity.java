@@ -2,6 +2,8 @@ package com.example.rachel.health4theworldstroke.Activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +15,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.rachel.health4theworldstroke.Adapters.RemindersAdapter;
+import com.example.rachel.health4theworldstroke.Database.ReminderContract;
+import com.example.rachel.health4theworldstroke.Database.ReminderDbHelper;
 import com.example.rachel.health4theworldstroke.Models.Reminder;
 import com.example.rachel.health4theworldstroke.R;
 
@@ -33,12 +37,16 @@ public class RemindersActivity extends AppCompatActivity implements View.OnClick
     private RemindersAdapter adapter;
     private ListView listView;
 
+    ReminderDbHelper rDbHelper;
+
     /* If the user selects a reminder to be edited, save that reminder here while they edit */
     private Reminder reminderBeingEdited;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        loadRemindersFromDb();
+
         setContentView(R.layout.activity_reminders);
         setUpToolbar();
         setUpListView();
@@ -48,6 +56,43 @@ public class RemindersActivity extends AppCompatActivity implements View.OnClick
         /* Set up listener for new reminder button */
         ImageButton addReminderButton = (ImageButton)findViewById(R.id.add_reminder_button);
         addReminderButton.setOnClickListener(this);
+    }
+
+    /* Loads all stored reminders from the database and creates a Reminder object for each one. Puts those
+     * reminder objects in allReminders ArrayList. */
+    private void loadRemindersFromDb() {
+        rDbHelper = new ReminderDbHelper(getApplicationContext());
+                /* Read from DB */
+        SQLiteDatabase db = rDbHelper.getReadableDatabase();
+        // Define a projection that specifies which columns from the database
+        // you will actually use after this query.
+        String[] projection = {
+                ReminderContract.ReminderEntry._ID,
+                ReminderContract.ReminderEntry.COLUMN_NAME_TITLE,
+                ReminderContract.ReminderEntry.COLUMN_NAME_FREQUENCY_TYPE
+        };
+
+//        // Filter results WHERE "title" = 'My Title'
+//        String selection = FeedEntry.COLUMN_NAME_TITLE + " = ?";
+//        String[] selectionArgs = { "My Title" };
+//
+//        // How you want the results sorted in the resulting Cursor
+//        String sortOrder =
+//                ReminderContract.COLUMN_NAME_SUBTITLE + " DESC";
+
+        Cursor c = db.query(
+                ReminderContract.ReminderEntry.TABLE_NAME,// The table to query
+                projection,                               // The columns to return
+                null,                                // The columns for the WHERE clause
+                null,                            // The values for the WHERE clause
+                null,                                     // don't group the rows
+                null,                                     // don't filter by row groups
+                null                                 // The sort order
+        );
+
+        c.moveToFirst();
+        long itemId = c.getLong(c.getColumnIndexOrThrow(ReminderContract.ReminderEntry._ID));
+        String theTitle = c.getString(c.getColumnIndexOrThrow(ReminderContract.ReminderEntry.COLUMN_NAME_TITLE));
     }
 
     public void onClick(View v) {

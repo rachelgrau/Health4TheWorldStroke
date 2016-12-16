@@ -1,5 +1,10 @@
 package com.example.rachel.health4theworldstroke.Models;
 
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
+
+import com.example.rachel.health4theworldstroke.Database.ReminderContract;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -16,8 +21,8 @@ public class Reminder implements Serializable {
     private String title;
     private String frequencyType;
 
-    //if it's weekly or custom, this holds the days
-    private ArrayList<Integer> frequencyDays;
+    //if it's weekly or custom, this holds the days in format of bit string, starting with Sunday, where 0 = day not included. Ex: MWF = "0101010"
+    private String frequencyDays;
 
     private ArrayList<ReminderTime> times;
     private boolean isSectionHeader;
@@ -35,19 +40,19 @@ public class Reminder implements Serializable {
 
     public static String getPluralDayStringFromDay(int day) {
         switch (day) {
-            case Calendar.SUNDAY:
+            case 0:
                 return SUN;
-            case Calendar.MONDAY:
+            case 1:
                 return MON;
-            case Calendar.TUESDAY:
+            case 2:
                 return TUES;
-            case Calendar.WEDNESDAY:
+            case 3:
                 return WED;
-            case Calendar.THURSDAY:
+            case 4:
                 return THURS;
-            case Calendar.FRIDAY:
+            case 5:
                 return FRI;
-            case Calendar.SATURDAY:
+            case 6:
                 return SAT;
             default:
                 return "";
@@ -100,15 +105,28 @@ public class Reminder implements Serializable {
         if (r.frequencyType.equals(DAILY_TAB)) {
             /* Add a list of times */
         } else if (r.frequencyType.equals(WEEKLY_TAB)) {
-            String freqDay = Reminder.getPluralDayStringFromDay(r.frequencyDays.get(0));
-            str += (freqDay + " ");
+            int freqDay = r.frequencyDays.indexOf('1');
+            String freqDayStr = Reminder.getPluralDayStringFromDay(freqDay);
+            str += (freqDayStr + " ");
         } else if (r.frequencyType.equals(CUSTOM_TAB)) {
-            for (int i=0; i < r.frequencyDays.size(); i++) {
-                String freqDay = Reminder.getPluralDayStringFromDay(r.frequencyDays.get(i));
-                if (i < r.frequencyDays.size() - 1) {
-                    str += (freqDay + ", ");
-                } else {
-                    str += (freqDay + " ");
+            for (int i=0; i < r.frequencyDays.length(); i++) {
+                /* Generate string of format "Mondays, Wednesdays, Fridays" from the bit string.  */
+                if (r.frequencyDays.charAt(i) == '1') {
+                    /* Means we need to add this day. Now figure out if it's the LAST day we'll add so we know not to put a trailing comma. */
+                    String freqDay = Reminder.getPluralDayStringFromDay(i);
+                    if (i == (r.frequencyDays.length() - 1)) {
+                        /* If it's Saturday, then it's definitely the last day. */
+                        str += (freqDay + " ");
+                    } else {
+                        /* If it's not Saturday, let's see if there are any more 1's in the bit string. */
+                        String rest = r.frequencyDays.substring(i + 1);
+                        if (rest.contains("1")) {
+                            /* Not the last day! */
+                            str += (freqDay + ", ");
+                        } else {
+                            str += (freqDay + " ");
+                        }
+                    }
                 }
             }
         }
@@ -134,7 +152,7 @@ public class Reminder implements Serializable {
         this.isSectionHeader = false;
         this.isCompleted = false;
         this.times = new ArrayList<ReminderTime>();
-        this.frequencyDays = new ArrayList<Integer>();
+        this.frequencyDays = "1111111";
     }
 
     public Reminder(String title) {
@@ -181,12 +199,20 @@ public class Reminder implements Serializable {
         return this.isSectionHeader;
     }
 
-    /* Adds a day to include this reminder on. */
+    /* Adds a day to include this reminder on. 0 = Sunday, 1 = Monday, etc. */
     public void addDayToFrequency(int day) {
-        this.frequencyDays.add(day);
+        /* Update the bit string */
+        String building = "";
+        String firstPart = frequencyDays.substring(0, day);
+        building = firstPart + "1";
+        if (day < 6) {
+            building += frequencyDays.substring(day + 1);
+        }
+        frequencyDays = building;
+
         /* Update isToday field */
         Calendar calendar = Calendar.getInstance();
-        int today = calendar.get(Calendar.DAY_OF_WEEK);
+        int today = calendar.get(Calendar.DAY_OF_WEEK) - 1; // Calendar has Sunday = 1, we have it as 0
         if (today == day) this.isToday = true;
     }
 
@@ -194,12 +220,44 @@ public class Reminder implements Serializable {
         return frequencyType;
     }
 
-    public ArrayList<Integer> getFrequencyDays() {
+    public String getFrequencyDays() {
         return frequencyDays;
     }
 
     public void clearFrequencyDays() {
-        frequencyDays.clear();
+        frequencyDays = "0000000";
     }
 
+
+    /* Returns a bit String form of the days that this reminder should occur. A "0" means the day is not included, a "1" means the day is included.
+     * Starting with Sunday.
+     * Ex: if the reminder occurs on Mondyas, Wednesdays, and Fridays, this method returns "0101010". */
+    private String getFrequencyDaysAsString() {
+//        String bitString = "0000000";
+//        for (Integer i: frequencyDays) {
+//
+//        }
+        return "";
+    }
+
+    /* Returns an array of the frequency days (same format of this.frequencyDays) when given a bit string like the one returned from
+     * getFrequencyDaysAsString.
+     */
+    private ArrayList<Integer> getFrequencyDayArrayFromString(String s) {
+        ArrayList<Integer> frequencyDaysArray = new ArrayList<Integer>();
+        for (int i=0; i < s.length(); i++) {
+            if (s.substring(i, i+1).equals("1")) {
+                frequencyDaysArray.add(i);
+            }
+        }
+        return frequencyDaysArray;
+    }
+
+    /* Stores this reminder in the database. */
+    public void storeInDatabase(SQLiteDatabase db) {
+        ContentValues values = new ContentValues();
+        values.put(ReminderContract.ReminderEntry.COLUMN_NAME_TITLE, title);
+        values.put(ReminderContract.ReminderEntry.COLUMN_NAME_FREQUENCY_TYPE, frequencyType);
+        long newRowId = db.insert(ReminderContract.ReminderEntry.TABLE_NAME, null, values);
+    }
 }

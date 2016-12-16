@@ -21,6 +21,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.rachel.health4theworldstroke.Database.ReminderDbHelper;
 import com.example.rachel.health4theworldstroke.Models.Reminder;
 import com.example.rachel.health4theworldstroke.Models.ReminderTime;
 import com.example.rachel.health4theworldstroke.Models.TimePickerFragment;
@@ -28,7 +29,6 @@ import com.example.rachel.health4theworldstroke.R;
 import com.example.rachel.health4theworldstroke.Views.ReminderTimeView;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
 import static com.example.rachel.health4theworldstroke.Activities.RemindersActivity.EXTRA_CREATED_REMINDER;
 import static com.example.rachel.health4theworldstroke.Activities.RemindersActivity.EXTRA_DELETED_REMINDER;
@@ -57,16 +57,18 @@ public class CreateReminderActivity extends AppCompatActivity implements View.On
     private ArrayList<ReminderTime> reminderTimes;
     private ArrayList<ReminderTimeView> reminderTimeViews;
 
+    ReminderDbHelper rDbHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        rDbHelper = new ReminderDbHelper(getApplicationContext());
         isEditing = getIntent().getBooleanExtra(EXTRA_IS_EDITING, false);
         if (isEditing) {
             thisReminder = (Reminder)getIntent().getSerializableExtra(EXTRA_REMINDER);
         } else {
             thisReminder = new Reminder();
         }
-
 
         setContentView(R.layout.activity_create_reminder);
         setUpToolbar();
@@ -118,6 +120,7 @@ public class CreateReminderActivity extends AppCompatActivity implements View.On
 
     /* Populates all the views to display the attributes of |thisReminder| (title, frequency, and times) */
     private void populateViewsWithReminder() {
+        System.out.println("FREQ DAYS: " + thisReminder.getFrequencyDays());
         /* Title */
         reminderTitleEditText.setText(thisReminder.getTitle());
         ImageButton clearButton = (ImageButton)findViewById(R.id.clear_button);
@@ -133,38 +136,15 @@ public class CreateReminderActivity extends AppCompatActivity implements View.On
         } else {
             selectedCustomTab();
         }
-        ArrayList<Integer> frequencyDays = thisReminder.getFrequencyDays();
-        System.out.println("Frequency Days:");
-        System.out.println(frequencyDays);
-        for (int i=0; i < frequencyDays.size(); i++) {
-            int indexOfDayView = -1;
-            switch (frequencyDays.get(i)) {
-                case Calendar.SUNDAY:
-                    indexOfDayView = 0;
-                    break;
-                case Calendar.MONDAY:
-                    indexOfDayView = 1;
-                    break;
-                case Calendar.TUESDAY:
-                    indexOfDayView = 2;
-                    break;
-                case Calendar.WEDNESDAY:
-                    indexOfDayView = 3;
-                    break;
-                case Calendar.THURSDAY:
-                    indexOfDayView = 4;
-                    break;
-                case Calendar.FRIDAY:
-                    indexOfDayView = 5;
-                    break;
-                case Calendar.SATURDAY:
-                    indexOfDayView = 6;
-                    break;
+       String frequencyDays = thisReminder.getFrequencyDays();
+
+        for (int i=0; i < frequencyDays.length(); i++) {
+            if (frequencyDays.charAt(i) == '1') {
+                TextView day = days.get(i);
+                day.setBackgroundColor(ContextCompat.getColor(this, R.color.red));
+                day.setTextColor(ContextCompat.getColor(this, R.color.colorWhite));
+                day.setTag(DAY_IS_SELECTED);
             }
-            TextView day = days.get(indexOfDayView);
-            day.setBackgroundColor(ContextCompat.getColor(this, R.color.red));
-            day.setTextColor(ContextCompat.getColor(this, R.color.colorWhite));
-            day.setTag(DAY_IS_SELECTED);
         }
 
         /* Times */
@@ -425,31 +405,7 @@ public class CreateReminderActivity extends AppCompatActivity implements View.On
             for (int i=0; i < days.size(); i++) {
                 TextView day = days.get(i);
                 if ((Integer)day.getTag() == DAY_IS_SELECTED) {
-                    int dayToAdd = -1;
-                    switch (i) {
-                        case 0:
-                            dayToAdd = Calendar.SUNDAY;
-                            break;
-                        case 1:
-                            dayToAdd = Calendar.MONDAY;
-                            break;
-                        case 2:
-                            dayToAdd = Calendar.TUESDAY;
-                            break;
-                        case 3:
-                            dayToAdd = Calendar.WEDNESDAY;
-                            break;
-                        case 4:
-                            dayToAdd = Calendar.THURSDAY;
-                            break;
-                        case 5:
-                            dayToAdd = Calendar.FRIDAY;
-                            break;
-                        case 6:
-                            dayToAdd = Calendar.SATURDAY;
-                            break;
-                    }
-                    thisReminder.addDayToFrequency(dayToAdd);
+                    thisReminder.addDayToFrequency(i);
                 }
             }
             /* Add times */
@@ -461,6 +417,10 @@ public class CreateReminderActivity extends AppCompatActivity implements View.On
             intent.putExtra(EXTRA_IS_EDITING, this.isEditing);
             intent.putExtra(EXTRA_DELETED_REMINDER, false);
             setResult(RESULT_OK, intent);
+
+            /* Save reminder */
+            thisReminder.storeInDatabase(rDbHelper.getWritableDatabase());
+
             finish();
         } else if (v.equals(clearTitleButton)) {
             /* Clear text in title EditText */
