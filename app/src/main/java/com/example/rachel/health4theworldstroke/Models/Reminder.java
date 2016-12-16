@@ -20,6 +20,7 @@ import static com.example.rachel.health4theworldstroke.Activities.CreateReminder
 public class Reminder implements Serializable {
     private String title;
     private String frequencyType;
+    private long dbId; // if reminder already exists in the DB, otherwise -1
 
     //if it's weekly or custom, this holds the days in format of bit string, starting with Sunday, where 0 = day not included. Ex: MWF = "0101010"
     private String frequencyDays;
@@ -147,12 +148,25 @@ public class Reminder implements Serializable {
 
     public Reminder() {
         this.title = "";
+        this.dbId = -1;
         this.frequencyType = "";
         this.isToday = false;
         this.isSectionHeader = false;
         this.isCompleted = false;
         this.times = new ArrayList<ReminderTime>();
         this.frequencyDays = "1111111";
+    }
+
+    public void setDbId(long theID) {
+        this.dbId = theID;
+    }
+
+    public long getDbId() {
+        return dbId;
+    }
+
+    public void setFrequencyDays(String daysBitString) {
+        frequencyDays = daysBitString;
     }
 
     public Reminder(String title) {

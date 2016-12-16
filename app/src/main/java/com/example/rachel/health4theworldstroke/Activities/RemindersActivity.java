@@ -45,12 +45,12 @@ public class RemindersActivity extends AppCompatActivity implements View.OnClick
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        allReminders = new ArrayList<Reminder>();
         loadRemindersFromDb();
 
         setContentView(R.layout.activity_reminders);
         setUpToolbar();
         setUpListView();
-        allReminders = new ArrayList<Reminder>();
         generateRemindersForListView();
 
         /* Set up listener for new reminder button */
@@ -96,9 +96,13 @@ public class RemindersActivity extends AppCompatActivity implements View.OnClick
         String theTitle = c.getString(c.getColumnIndexOrThrow(ReminderContract.ReminderEntry.COLUMN_NAME_TITLE));
         String freqType = c.getString(c.getColumnIndexOrThrow(ReminderContract.ReminderEntry.COLUMN_NAME_FREQUENCY_TYPE));
         String freqDays = c.getString(c.getColumnIndexOrThrow(ReminderContract.ReminderEntry.COLUMN_NAME_FREQUENCY_DAYS));
-        System.out.println("Title: " + theTitle);
-        System.out.println("Type: " + freqType);
-        System.out.println("Days: " + freqDays);
+
+        Reminder savedReminder = new Reminder();
+        savedReminder.setDbId(itemId);
+        savedReminder.setTitle(theTitle);
+        savedReminder.setFrequencyType(freqType);
+        savedReminder.setFrequencyDays(freqDays);
+        allReminders.add(savedReminder);
     }
 
     public void onClick(View v) {
