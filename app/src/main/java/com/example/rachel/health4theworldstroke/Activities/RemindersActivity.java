@@ -91,18 +91,24 @@ public class RemindersActivity extends AppCompatActivity implements View.OnClick
                 null                                 // The sort order
         );
 
+        int count = c.getCount();
         c.moveToFirst();
-        long itemId = c.getLong(c.getColumnIndexOrThrow(ReminderContract.ReminderEntry._ID));
-        String theTitle = c.getString(c.getColumnIndexOrThrow(ReminderContract.ReminderEntry.COLUMN_NAME_TITLE));
-        String freqType = c.getString(c.getColumnIndexOrThrow(ReminderContract.ReminderEntry.COLUMN_NAME_FREQUENCY_TYPE));
-        String freqDays = c.getString(c.getColumnIndexOrThrow(ReminderContract.ReminderEntry.COLUMN_NAME_FREQUENCY_DAYS));
+        for (int i=0; i < count; i++) {
+            long itemId = c.getLong(c.getColumnIndexOrThrow(ReminderContract.ReminderEntry._ID));
+            String theTitle = c.getString(c.getColumnIndexOrThrow(ReminderContract.ReminderEntry.COLUMN_NAME_TITLE));
+            String freqType = c.getString(c.getColumnIndexOrThrow(ReminderContract.ReminderEntry.COLUMN_NAME_FREQUENCY_TYPE));
+            String freqDays = c.getString(c.getColumnIndexOrThrow(ReminderContract.ReminderEntry.COLUMN_NAME_FREQUENCY_DAYS));
+            Reminder savedReminder = new Reminder();
+            savedReminder.setDbId(itemId);
+            savedReminder.setTitle(theTitle);
+            savedReminder.setFrequencyType(freqType);
+            savedReminder.setFrequencyDays(freqDays);
+            allReminders.add(savedReminder);
 
-        Reminder savedReminder = new Reminder();
-        savedReminder.setDbId(itemId);
-        savedReminder.setTitle(theTitle);
-        savedReminder.setFrequencyType(freqType);
-        savedReminder.setFrequencyDays(freqDays);
-        allReminders.add(savedReminder);
+            if (!c.isLast()) {
+                c.moveToNext();
+            }
+        }
     }
 
     public void onClick(View v) {

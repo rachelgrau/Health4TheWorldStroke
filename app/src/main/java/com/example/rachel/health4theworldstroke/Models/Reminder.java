@@ -267,12 +267,36 @@ public class Reminder implements Serializable {
         return frequencyDaysArray;
     }
 
-    /* Stores this reminder in the database. */
-    public void storeInDatabase(SQLiteDatabase db) {
+    /* Creates this reminder in the database. */
+    public void createInDatabase(SQLiteDatabase db) {
         ContentValues values = new ContentValues();
         values.put(ReminderContract.ReminderEntry.COLUMN_NAME_TITLE, title);
         values.put(ReminderContract.ReminderEntry.COLUMN_NAME_FREQUENCY_TYPE, frequencyType);
         values.put(ReminderContract.ReminderEntry.COLUMN_NAME_FREQUENCY_DAYS, frequencyDays);
-        long newRowId = db.insert(ReminderContract.ReminderEntry.TABLE_NAME, null, values);
+        this.dbId = db.insert(ReminderContract.ReminderEntry.TABLE_NAME, null, values);
+    }
+
+    /* Updates this reminder in the database */
+    public void updateInDatabase(SQLiteDatabase db) {
+        // New value for one column
+        ContentValues values = new ContentValues();
+        values.put(ReminderContract.ReminderEntry.COLUMN_NAME_TITLE, title);
+        values.put(ReminderContract.ReminderEntry.COLUMN_NAME_FREQUENCY_TYPE, frequencyType);
+        values.put(ReminderContract.ReminderEntry.COLUMN_NAME_FREQUENCY_DAYS, frequencyDays);
+        // Which row to update, based on the ID
+        String selection = ReminderContract.ReminderEntry._ID + "=" + this.dbId;
+        int count = db.update(
+                ReminderContract.ReminderEntry.TABLE_NAME,
+                values,
+                selection,
+                null);
+    }
+
+    /* Deletes this reminder in the database */
+    public void deleteInDatabase(SQLiteDatabase db) {
+        // Define 'where' part of query.
+        String selection = ReminderContract.ReminderEntry._ID + "=" + this.dbId;
+        // Specify arguments in placeholder order.
+        db.delete(ReminderContract.ReminderEntry.TABLE_NAME, selection, null);
     }
 }

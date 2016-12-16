@@ -418,7 +418,11 @@ public class CreateReminderActivity extends AppCompatActivity implements View.On
             setResult(RESULT_OK, intent);
 
             /* Save reminder */
-            thisReminder.storeInDatabase(rDbHelper.getWritableDatabase());
+            if (isEditing) {
+                thisReminder.updateInDatabase(rDbHelper.getWritableDatabase());
+            } else {
+                thisReminder.createInDatabase(rDbHelper.getWritableDatabase());
+            }
 
             finish();
         } else if (v.equals(clearTitleButton)) {
@@ -446,6 +450,7 @@ public class CreateReminderActivity extends AppCompatActivity implements View.On
                             intent.putExtra(EXTRA_IS_EDITING, isEditing);
                             intent.putExtra(EXTRA_DELETED_REMINDER, true);
                             setResult(RESULT_OK, intent);
+                            thisReminder.deleteInDatabase(rDbHelper.getWritableDatabase());
                             finish();
                         }})
                     .setNegativeButton(android.R.string.no, null).show();
