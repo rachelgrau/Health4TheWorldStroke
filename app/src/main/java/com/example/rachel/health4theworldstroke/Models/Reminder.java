@@ -283,6 +283,7 @@ public class Reminder implements Serializable {
         values.put(ReminderContract.ReminderEntry.COLUMN_NAME_TITLE, title);
         values.put(ReminderContract.ReminderEntry.COLUMN_NAME_FREQUENCY_TYPE, frequencyType);
         values.put(ReminderContract.ReminderEntry.COLUMN_NAME_FREQUENCY_DAYS, frequencyDays);
+        values.put(ReminderContract.ReminderEntry.COLUMN_NAME_IS_COMPLETED, isCompleted);
         this.dbId = db.insert(ReminderContract.ReminderEntry.TABLE_NAME, null, values);
     }
 
@@ -293,6 +294,7 @@ public class Reminder implements Serializable {
         values.put(ReminderContract.ReminderEntry.COLUMN_NAME_TITLE, title);
         values.put(ReminderContract.ReminderEntry.COLUMN_NAME_FREQUENCY_TYPE, frequencyType);
         values.put(ReminderContract.ReminderEntry.COLUMN_NAME_FREQUENCY_DAYS, frequencyDays);
+        values.put(ReminderContract.ReminderEntry.COLUMN_NAME_IS_COMPLETED, isCompleted);
         // Which row to update, based on the ID
         String selection = ReminderContract.ReminderEntry._ID + "=" + this.dbId;
         int count = db.update(

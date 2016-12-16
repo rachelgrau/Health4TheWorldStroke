@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class ReminderDbHelper extends SQLiteOpenHelper {
     // If you change the database schema, you must increment the database version.
-    public static final int DATABASE_VERSION = 2;
+    public static final int DATABASE_VERSION = 3;
     public static final String DATABASE_NAME = "FeedReader.db";
 
     private static final String TEXT_TYPE = " TEXT";
@@ -20,6 +20,7 @@ public class ReminderDbHelper extends SQLiteOpenHelper {
                     ReminderContract.ReminderEntry._ID + " INTEGER PRIMARY KEY," +
                     ReminderContract.ReminderEntry.COLUMN_NAME_TITLE + TEXT_TYPE + COMMA_SEP +
                     ReminderContract.ReminderEntry.COLUMN_NAME_FREQUENCY_TYPE + TEXT_TYPE + COMMA_SEP +
+                    ReminderContract.ReminderEntry.COLUMN_NAME_IS_COMPLETED + TEXT_TYPE + COMMA_SEP +
                     ReminderContract.ReminderEntry.COLUMN_NAME_FREQUENCY_DAYS + TEXT_TYPE + " )";
 
     private static final String SQL_DELETE_ENTRIES =

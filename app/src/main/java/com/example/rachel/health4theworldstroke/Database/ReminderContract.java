@@ -17,6 +17,7 @@ public class ReminderContract {
         public static final String COLUMN_NAME_TITLE = "title";
         public static final String COLUMN_NAME_FREQUENCY_TYPE = "frequencyType";
         public static final String COLUMN_NAME_FREQUENCY_DAYS = "frequencyDays";
+        public static final String COLUMN_NAME_IS_COMPLETED = "isCompleted";
     }
 
 }

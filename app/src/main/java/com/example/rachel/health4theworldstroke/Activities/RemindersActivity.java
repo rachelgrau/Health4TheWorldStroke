@@ -70,7 +70,8 @@ public class RemindersActivity extends AppCompatActivity implements View.OnClick
                 ReminderContract.ReminderEntry._ID,
                 ReminderContract.ReminderEntry.COLUMN_NAME_TITLE,
                 ReminderContract.ReminderEntry.COLUMN_NAME_FREQUENCY_TYPE,
-                ReminderContract.ReminderEntry.COLUMN_NAME_FREQUENCY_DAYS
+                ReminderContract.ReminderEntry.COLUMN_NAME_FREQUENCY_DAYS,
+                ReminderContract.ReminderEntry.COLUMN_NAME_IS_COMPLETED
         };
 
 //        // Filter results WHERE "title" = 'My Title'
@@ -98,11 +99,13 @@ public class RemindersActivity extends AppCompatActivity implements View.OnClick
             String theTitle = c.getString(c.getColumnIndexOrThrow(ReminderContract.ReminderEntry.COLUMN_NAME_TITLE));
             String freqType = c.getString(c.getColumnIndexOrThrow(ReminderContract.ReminderEntry.COLUMN_NAME_FREQUENCY_TYPE));
             String freqDays = c.getString(c.getColumnIndexOrThrow(ReminderContract.ReminderEntry.COLUMN_NAME_FREQUENCY_DAYS));
+            boolean isCompleted = c.getInt(c.getColumnIndexOrThrow(ReminderContract.ReminderEntry.COLUMN_NAME_IS_COMPLETED)) > 0;
             Reminder savedReminder = new Reminder();
             savedReminder.setDbId(itemId);
             savedReminder.setTitle(theTitle);
             savedReminder.setFrequencyType(freqType);
             savedReminder.setFrequencyDays(freqDays);
+            savedReminder.setCompleted(isCompleted);
             allReminders.add(savedReminder);
 
             if (!c.isLast()) {
@@ -223,6 +226,7 @@ public class RemindersActivity extends AppCompatActivity implements View.OnClick
         for (Reminder r: this.allReminders) {
             if (reminderSelected.equals(r)) {
                 r.setCompleted(!r.isCompleted());
+                r.updateInDatabase(rDbHelper.getWritableDatabase());
             }
         }
     }
