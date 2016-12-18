@@ -157,6 +157,10 @@ public class Reminder implements Serializable {
         this.frequencyDays = "1111111";
     }
 
+    public void setTimes(ArrayList<ReminderTime> reminderTimes) {
+        this.times = reminderTimes;
+    }
+
     public void setDbId(long theID) {
         this.dbId = theID;
     }
@@ -171,7 +175,6 @@ public class Reminder implements Serializable {
         Calendar calendar = Calendar.getInstance();
         int today = calendar.get(Calendar.DAY_OF_WEEK) - 1; // Calendar has Sunday = 1, we have it as 0
 
-        System.out.println(daysBitString);
         if (frequencyDays.substring(today, today + 1).equals("1")) {
             isToday = true;
         } else {
@@ -277,6 +280,37 @@ public class Reminder implements Serializable {
         return frequencyDaysArray;
     }
 
+    /* Given a string of times separated by commas, creates an array of ReminderTimes and stores it in the private
+     * ivar |times| */
+    public void convertTimeStringToTimes(String str) {
+        int indexOfComma = str.indexOf(',');
+        while (indexOfComma > 0) {
+            ReminderTime rt = new ReminderTime();
+            rt.setTimeStr(str.substring(0, indexOfComma));
+            addTime(rt);
+            str = str.substring(indexOfComma + 1);
+            indexOfComma = str.indexOf(',');
+        }
+        if (str.length() > 0) {
+            ReminderTime rt = new ReminderTime();
+            rt.setTimeStr(str);
+            addTime(rt);
+        }
+    }
+
+    /* Converts the array of times into a string of times separated by commas, like "20:30, 5:23, 11:01" */
+    private String getTimeStringFromTimes() {
+        String timeStr = "";
+        for (int i=0; i < times.size(); i++) {
+            ReminderTime rt = times.get(i);
+            timeStr += (rt.getTimeString());
+            if (i < (times.size() - 1)) {
+                timeStr += ",";
+            }
+        }
+        return timeStr;
+    }
+
     /* Creates this reminder in the database. */
     public void createInDatabase(SQLiteDatabase db) {
         ContentValues values = new ContentValues();
@@ -284,6 +318,7 @@ public class Reminder implements Serializable {
         values.put(ReminderContract.ReminderEntry.COLUMN_NAME_FREQUENCY_TYPE, frequencyType);
         values.put(ReminderContract.ReminderEntry.COLUMN_NAME_FREQUENCY_DAYS, frequencyDays);
         values.put(ReminderContract.ReminderEntry.COLUMN_NAME_IS_COMPLETED, isCompleted);
+        values.put(ReminderContract.ReminderEntry.COLUMN_NAME_TIMES, getTimeStringFromTimes());
         this.dbId = db.insert(ReminderContract.ReminderEntry.TABLE_NAME, null, values);
     }
 
@@ -295,6 +330,7 @@ public class Reminder implements Serializable {
         values.put(ReminderContract.ReminderEntry.COLUMN_NAME_FREQUENCY_TYPE, frequencyType);
         values.put(ReminderContract.ReminderEntry.COLUMN_NAME_FREQUENCY_DAYS, frequencyDays);
         values.put(ReminderContract.ReminderEntry.COLUMN_NAME_IS_COMPLETED, isCompleted);
+        values.put(ReminderContract.ReminderEntry.COLUMN_NAME_TIMES, getTimeStringFromTimes());
         // Which row to update, based on the ID
         String selection = ReminderContract.ReminderEntry._ID + "=" + this.dbId;
         int count = db.update(

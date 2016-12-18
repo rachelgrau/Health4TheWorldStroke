@@ -393,7 +393,6 @@
             android:layout_gravity="center_horizontal"
             android:scaleType="fitXY"
             android:background="@mipmap/add_button"
-            android:onClick="reminderTimeButtonPressed"
             android:layout_marginTop="10dp"
             />
 

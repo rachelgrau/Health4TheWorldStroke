@@ -408,9 +408,7 @@ public class CreateReminderActivity extends AppCompatActivity implements View.On
                 }
             }
             /* Add times */
-            for (ReminderTime time: reminderTimes) {
-                thisReminder.addTime(time);
-            }
+            thisReminder.setTimes(reminderTimes);
 
             intent.putExtra(EXTRA_CREATED_REMINDER, thisReminder);
             intent.putExtra(EXTRA_IS_EDITING, this.isEditing);
@@ -522,6 +520,7 @@ public class CreateReminderActivity extends AppCompatActivity implements View.On
             ReminderTimeView cur = reminderTimeViews.get(i);
             cur.setButtonId(i);
         }
+        thisReminder.updateInDatabase(rDbHelper.getWritableDatabase());
         enableCreateButtonIfNeeded();
     }
 }
