@@ -29,9 +29,9 @@ public class VideoContentActivity extends AppCompatActivity {
     public static final String FUNCTIONAL_MOBILITY = "Functional mobility";
     public static final String MIND_EXERCISES = "Mind exercises";
     /* Videos */
-    public static final String U1 = "U1";
+    public static final String U1 = "Bridge hip lift";
     public static final String U2 = "U2";
-    public static final String U3 = "U3";
+    public static final String U3 = "Arm + trunk strengthening";
     public static final String U4 = "Elbow";
     public static final String U5 = "Leg";
     public static final String U6 = "Leg";
@@ -39,7 +39,7 @@ public class VideoContentActivity extends AppCompatActivity {
     public static final String U8 = "Toe";
     public static final String S1 = "Knee";
     public static final String S2 = "Hip";
-    public static final String S3 = "S3";
+    public static final String S3 = "Sit to stand";
     public static final String S4 = "S4";
     public static final String S5 = "S5";
     public static final String S6 = "S6";
@@ -74,6 +74,12 @@ public class VideoContentActivity extends AppCompatActivity {
             addVideoWithURI(getUriPath(R.raw.s1_knee_flexion));
         } else if (title.equals(S2)) {
             addVideoWithURI(getUriPath(R.raw.s2_hip_flexion));
+        } else if (title.equals(S3)) {
+            addVideoWithURI(getUriPath(R.raw.s3_sit_to_stand));
+        } else if (title.equals(U1)) {
+            addVideoWithURI(getUriPath(R.raw.u1_bridge_hip_lift));
+        } else if (title.equals(U3)){
+            addVideoWithURI(getUriPath(R.raw.u3_arm_trunk_strengthening));
         } else if (title.equals(U4)) {
             addVideoWithURI(getUriPath(R.raw.u4_elbow_flexion));
         } else if (title.equals(U5)) {

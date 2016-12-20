@@ -135,6 +135,18 @@ public class VideoLearnContent extends LearnContent{
             content.add(s5);
             content.add(s6);
             content.add(u2);
+        } else if (mainCategory.equals(FUNCTIONAL_MOBILITY)) {
+            System.out.println("Functional mobility");
+            VideoLearnContent u1 = new VideoLearnContent();
+            u1.title = U1;
+            VideoLearnContent u3 = new VideoLearnContent();
+            u3.title = U3;
+            VideoLearnContent s3 = new VideoLearnContent();
+            s3.title = S3;
+
+            content.add(u1);
+            content.add(u3);
+            content.add(s3);
         }
         return content;
     }
@@ -155,6 +167,8 @@ public class VideoLearnContent extends LearnContent{
             return true;
         } else if (mainCategory.equals(ARMS_AND_HANDS)) {
             return true;
+        } else if (mainCategory.equals(FUNCTIONAL_MOBILITY)) {
+            return true;
         } else {
             return false;
         }
@@ -163,27 +177,27 @@ public class VideoLearnContent extends LearnContent{
     public static String getInstructionsForVideo(String title) {
         String instructions = "";
         if (title.equals(U1)) {
-
+            instructions = "Please repeat 10 times every day with active assistance from caregiver if needed.";
         } else if (title.equals(U2)) {
 
         } else if (title.equals(U3)) {
-
+            instructions = "Please repeat 10 times every day with active assistance from caregiver if needed.";
         } else if (title.equals(U4)) {
-            instructions = "Please repeat 10 times every day with active assitance from caregiver if needed.";
+            instructions = "Please repeat 10 times every day with active assistance from caregiver if needed.";
         } else if (title.equals(U5)) {
-            instructions = "Please repeat 10 times every day with active assitance from caregiver if needed.";
+            instructions = "Please repeat 10 times every day with active assistance from caregiver if needed.";
         } else if (title.equals(U6)) {
-            instructions = "Please repeat 10 times every day with active assitance from caregiver if needed.";
+            instructions = "Please repeat 10 times every day with active assistance from caregiver if needed.";
         } else if (title.equals(U7)) {
-            instructions = "Please repeat 10 times every day with active assitance from caregiver if needed.";
+            instructions = "Please repeat 10 times every day with active assistance from caregiver if needed.";
         } else if (title.equals(U8)) {
-            instructions = "Please repeat 10 times every day with active assitance from caregiver if needed.";
+            instructions = "Please repeat 10 times every day with active assistance from caregiver if needed.";
         } else if (title.equals(S1)) {
-            instructions = "Please repeat 10 times every day with active assitance from caregiver if needed.";
+            instructions = "Please repeat 10 times every day with active assistance from caregiver if needed.";
         } else if (title.equals(S2)) {
-            instructions = "Please repeat 10 times every day with active assitance from caregiver if needed.";
+            instructions = "Please repeat 10 times every day with active assistance from caregiver if needed.";
         } else if (title.equals(S3)) {
-
+            instructions = "Please repeat 10 times every day with active assistance from caregiver if needed.";
         } else if (title.equals(S4)) {
 
         } else if (title.equals(S5)) {
