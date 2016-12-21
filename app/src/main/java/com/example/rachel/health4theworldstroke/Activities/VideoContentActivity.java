@@ -142,6 +142,7 @@ public class VideoContentActivity extends AppCompatActivity {
     public void addVideoFooterWithTitle(String title) {
         LinearLayout layout = (LinearLayout) findViewById(R.id.videos);
         TextView header = new TextView(this);
+        header.setTextSize(20);
         header.setText(title);
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(GridLayout.LayoutParams.MATCH_PARENT, GridLayout.LayoutParams.WRAP_CONTENT);
         layoutParams.setMargins(35, 35, 35, 35);
