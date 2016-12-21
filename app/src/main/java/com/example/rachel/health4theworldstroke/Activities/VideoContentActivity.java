@@ -126,7 +126,9 @@ public class VideoContentActivity extends AppCompatActivity {
             /* Dorsiflexors */
             addVideoFooterWithTitle(VideoLearnContent.getInstructionsForVideo(title));
             addImagesWithURI(R.drawable.dorsiflexors1, R.drawable.dorsiflexors2);
-
+        } else if (title.equals(MIND_EXERCISES)) {
+            /* TEMP UNTIL WE GET MIND EXERCISES*/
+            addVideoFooterWithTitle("Coming soon!");
         }
     }
 
