@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.GridLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.VideoView;
@@ -72,28 +73,61 @@ public class VideoContentActivity extends AppCompatActivity {
     private void loadVideos() {
         if (title.equals(S1)) {
             addVideoWithURI(getUriPath(R.raw.s1_knee_flexion));
+            addVideoFooterWithTitle(VideoLearnContent.getInstructionsForVideo(title));
         } else if (title.equals(S2)) {
             addVideoWithURI(getUriPath(R.raw.s2_hip_flexion));
+            addVideoFooterWithTitle(VideoLearnContent.getInstructionsForVideo(title));
         } else if (title.equals(S3)) {
             addVideoWithURI(getUriPath(R.raw.s3_sit_to_stand));
+            addVideoFooterWithTitle(VideoLearnContent.getInstructionsForVideo(title));
         } else if (title.equals(U1)) {
             addVideoWithURI(getUriPath(R.raw.u1_bridge_hip_lift));
+            addVideoFooterWithTitle(VideoLearnContent.getInstructionsForVideo(title));
         } else if (title.equals(U3)){
             addVideoWithURI(getUriPath(R.raw.u3_arm_trunk_strengthening));
+            addVideoFooterWithTitle(VideoLearnContent.getInstructionsForVideo(title));
         } else if (title.equals(U4)) {
             addVideoWithURI(getUriPath(R.raw.u4_elbow_flexion));
+            addVideoFooterWithTitle(VideoLearnContent.getInstructionsForVideo(title));
         } else if (title.equals(U5)) {
             addVideoWithURI(getUriPath(R.raw.u5_leg_control));
+            addVideoFooterWithTitle(VideoLearnContent.getInstructionsForVideo(title));
         } else if (title.equals(U6)) {
             addVideoWithURI(getUriPath(R.raw.u6_leg_control));
+            addVideoFooterWithTitle(VideoLearnContent.getInstructionsForVideo(title));
         } else if (title.equals(U7)) {
             addVideoWithURI(getUriPath(R.raw.u7_shoulder_flexion));
+            addVideoFooterWithTitle(VideoLearnContent.getInstructionsForVideo(title));
         } else if (title.equals(U8)) {
             addVideoWithURI(getUriPath(R.raw.u8_toe_dorsiflexion));
-        } else {
-            /* TO DO: when we get more videos, add them here! */
+            addVideoFooterWithTitle(VideoLearnContent.getInstructionsForVideo(title));
+        } else if (title.equals(S4)) {
+            /* Adductors */
+            addVideoFooterWithTitle(VideoLearnContent.getInstructionsForVideo(title));
+            addImagesWithURI(R.drawable.adductors1, R.drawable.adductors2);
+        } else if (title.equals(S7)) {
+            /* Hamstrings */
+            addVideoFooterWithTitle(VideoLearnContent.getInstructionsForVideo(title));
+            addImagesWithURI(R.drawable.hamstrings1, R.drawable.hamstrings2);
+        }  else if (title.equals(S8)) {
+            /* Hand */
+            addVideoFooterWithTitle(VideoLearnContent.getInstructionsForVideo(title));
+            addImagesWithURI(R.drawable.hand1, R.drawable.hand2);
+
+        }  else if (title.equals(S5)) {
+            /* Shoulder */
+            addVideoFooterWithTitle(VideoLearnContent.getInstructionsForVideo(title));
+            addImagesWithURI(R.drawable.shoulder1, R.drawable.shoulder2);
+        }  else if (title.equals(S6)) {
+            /* Arm */
+            addVideoFooterWithTitle(VideoLearnContent.getInstructionsForVideo(title));
+            addImagesWithURI(R.drawable.arm1, R.drawable.arm2);
+        }  else if (title.equals(S9)) {
+            /* Dorsiflexors */
+            addVideoFooterWithTitle(VideoLearnContent.getInstructionsForVideo(title));
+            addImagesWithURI(R.drawable.dorsiflexors1, R.drawable.dorsiflexors2);
+
         }
-        addVideoFooterWithTitle(VideoLearnContent.getInstructionsForVideo(title));
     }
 
     /* Returns the URI Path to the video with the given name, or the empty string if there is none. */
@@ -134,5 +168,25 @@ public class VideoContentActivity extends AppCompatActivity {
 
 
         layout.addView(video);
+    }
+
+    public void addImagesWithURI(int imgOne, int imgTwo) {
+        LinearLayout layout = (LinearLayout) findViewById(R.id.videos);
+
+        ImageView imageViewOne = new ImageView(this);
+        //setting image resource
+        imageViewOne.setImageResource(imgOne);
+        //setting image position
+        imageViewOne.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                800));
+        ImageView imageViewTwo = new ImageView(this);
+        //setting image resource
+        imageViewTwo.setImageResource(imgTwo);
+        //setting image position
+        imageViewTwo.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                800));
+
+        layout.addView(imageViewOne);
+        layout.addView(imageViewTwo);
     }
 }
