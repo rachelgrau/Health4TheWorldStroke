@@ -128,13 +128,10 @@ public class VideoLearnContent extends LearnContent{
             s5.title = S5;
             VideoLearnContent s6 = new VideoLearnContent();
             s6.title = S6;
-            VideoLearnContent u2 = new VideoLearnContent();
-            u2.title = U2;
 
             content.add(s8);
             content.add(s5);
             content.add(s6);
-            content.add(u2);
         } else if (mainCategory.equals(FUNCTIONAL_MOBILITY)) {
             System.out.println("Functional mobility");
             VideoLearnContent u1 = new VideoLearnContent();
@@ -199,17 +196,17 @@ public class VideoLearnContent extends LearnContent{
         } else if (title.equals(S3)) {
             instructions = "Please repeat 10 times every day with active assistance from caregiver if needed.";
         } else if (title.equals(S4)) {
-
+            instructions = "You can do this exercise lying down or sitting in a stable chair. Lying on your back, slide the affected leg out to the side for 30 seconds and back in. Repeat 3 times.";
         } else if (title.equals(S5)) {
-
+            instructions = "Lie on your side with involved arm resting on hip. Bring shoulder up towards the ear and then gently back down.";
         } else if (title.equals(S6)) {
-
+            instructions = "Lie on your side with the involved side up and arm resting on hip. Gently bring the lower arm towards the leg. Hold for 30 seconds. Repeat 3 times. Make sure that you hold the shoulder and stop it from moving forward.";
         } else if (title.equals(S7)) {
-
+            instructions = "You can do this exercise lying down or sitting in a stable chair. Lie down on your back with your knees bent and straighten the knee upwards towards the sky for 30 seconds.";
         } else if (title.equals(S8)) {
-
+            instructions = "Side lying with the involved side up and arm resting on the hip. Support the elbow on the hip but use your other hand to move the wrist up and away from the stomach. Bring the wrist back to its resting position. Support the wrist with one hand and try to open the fingers with the other hand. Progress to trying to open the hand when the wrist is moved up and away from the stomach. Hold the stretch for 30 seconds. Repeat 3 times.";
         } else if (title.equals(S9)) {
-
+            instructions = "You can do this exercise lying down or sitting in a stable chair. Push the foot upwards towards torso and hold for 30 sec. Repeat 3 times.";
         }
 
         return instructions;

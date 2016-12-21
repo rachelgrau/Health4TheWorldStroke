@@ -40,12 +40,12 @@ public class VideoContentActivity extends AppCompatActivity {
     public static final String S1 = "Knee";
     public static final String S2 = "Hip";
     public static final String S3 = "Sit to stand";
-    public static final String S4 = "S4";
-    public static final String S5 = "S5";
-    public static final String S6 = "S6";
-    public static final String S7 = "S7";
-    public static final String S8 = "S8";
-    public static final String S9 = "S9";
+    public static final String S4 = "Adductors";
+    public static final String S5 = "Shoulder stretches";
+    public static final String S6 = "Arm stretch";
+    public static final String S7 = "Hamstrings";
+    public static final String S8 = "Hand stretch";
+    public static final String S9 = "Dorsiflexors";
 
     public String title;
 
