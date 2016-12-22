@@ -24,7 +24,8 @@
         <activity android:name=".Activities.ReadContentActivity" />
         <activity android:name=".Activities.VideoContentActivity" />
         <activity android:name=".Activities.CreateReminderActivity" />
-        <activity android:name=".Activities.InfoActivity"></activity>
+        <activity android:name=".Activities.InfoActivity" />
+        <activity android:name=".Activities.DisclaimerActivity"></activity>
     </application>
 
 </manifest>
