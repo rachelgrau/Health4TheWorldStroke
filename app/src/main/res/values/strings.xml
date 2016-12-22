@@ -64,4 +64,6 @@
     <string name="bladder_bowel_content">BLADDER BOWEL CONTENT</string>
     <string name="home_mod_content">HOME MOD CONTENT</string>
     <string name="faq_content">FAQ CONTENT</string>
+
+    <string name="info_title">Info</string>
 </resources>
