@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+//        fakeFirstAppOpening();
     }
 
     /* If it's the first time they're using the app, show them the terms page and wait for them to accept. */
@@ -72,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void infoClicked(View view) {
-        Intent intent = new Intent(this, InfoActivity.class);
+        Intent intent = new Intent(this, InfoListActivity.class);
         startActivity(intent);
     }
 }
