@@ -105,7 +105,34 @@ public class InfoActivity extends AppCompatActivity {
     }
 
     public void setUpAboutUs() {
-
+        addHeaderWithText("Mobile App Introduction");
+        addTextViewWithText("The HEALTH4THEWORLD STROKE HOPE APP is a free of cost educational tool to spread knowledge about stroke risk factors, secondary prevention, post stroke mobility & exercise education and speech strategies.  It has been created by Health4TheWorld which is a non profit organization inspired by the unmet medical needs worldwide. The mission of the organization is solving health inequities through innovation & technology and bringing smiles around the world. Please learn more about us at health4theworld.org.");
+        addTextViewWithText("With an estimated incidence of 16.9 million and a prevalence of 33 million according to the World Health Organization, stroke is a dominant diseased entity in the category of cardiovascular diseases, and is a leading cause of serious long-term disability. The global burden of stroke falls disproportionately on low and middle-income countries, prompting us to improve global health educational outreach. We hope that this stroke educational app will be helpful.");
+        addTextViewWithText("The app has several features that we hope you will find useful!");
+        addIndentedTextViewWithText("• Stroke Educational Content – Information on causes and risk factors of stroke with guidelines from the American Stroke Association, American Heart Association, evidence based articles and other healthcare sources. It is good to remember that these are general educational tips and not recommendations for clinical care. Both the patient and trained health professionals should sit together to work on a personalized prevention regimen for stroke.");
+        addIndentedTextViewWithText("• Video Animation and Exercise Tips for Stroke Recovery –Education for exercise and rehabilitation after stroke has been summarized by Physical Medicine and Rehabilitation experts from Stanford, University of California, San Francisco and University of Southern California. The exercises here are general and are intended to serve as educational guide not as medical advice.  These should be done with an occupational therapist and/or physical therapist, which can help with the correct technique and designing a regimen that will benefit a stroke patient best. A caregiver should always be present to help. These are divided into strengthening, stretching and functional mobility. Please advise your patients about the correct technique, frequency and regimen of these exercises.");
+        addIndentedTextViewWithText("• Reminders for Medications and Appointments: Medication and Appointment compliance is a major issue and this tool is hopefully helpful!  Please set reminders for your patients if possible.");
+        addIndentedTextViewWithText("• Speech Strategies After Stroke: The press button voice output can help with very basic communication. The aim is to translate these to different languages so health professions and patients in remote parts of the world who lack health access can benefit from these.");
+        addTextViewWithText("THANK YOU.");
+        addTextViewWithText("This application wouldn’t have been possible without work of a dream team!");
+        addSubheaderWithText("Founders");
+        addTextViewWithText("Dr. Bhavya Rehani, Dr. Bill Dillon & Dr. Ankur Bharija");
+        addSubheaderWithText("Software engineer and developer of the app");
+        addTextViewWithText("Rachel Grau");
+        addSubheaderWithText("Animations");
+        addTextViewWithText("by Ernesto Aguilar");
+        addSubheaderWithText("Illustrations");
+        addTextViewWithText("by Julie Kim, Bhavya Rehani, Ankur Bharija");
+        addSubheaderWithText("Content Editing");
+        addTextViewWithText("by Dr. Lilly Zhang, Isaiah Brown and Dr Bhavya Rehani");
+        addSubheaderWithText("Movies");
+        addTextViewWithText("by Jack McGill");
+        addSubheaderWithText("Medical Advisory Board for the App");
+        addTextViewWithText("Dr. Marc Fisher:  Dr Fisher currently serves as editor-in-chief of Stroke and Senior Physician on the Stroke Service at BIDMC, Harvard Medical School. He is well renowned and has published extensively over 260 peer-reviewed articles and has edited or co-edited 13 books.");
+        addTextViewWithText("Dr. Jeffrey Teraoke: Dr. Teraoke is Chief, PM &R at Palo Alto VA Medical Center. He is the program director of PM&R Residency Program and Director, Polytrauma, VA Palo Alto Health System");
+        addTextViewWithText("Dr. Erica A Pitsch, PT, MPT, DPT, NCS: Health Science Assistant Clinical Professor, UCSF. Dr. Pitsch specializes in neurologic physical therapy and uses several treatment strategies and approaches, all focused on promoting optimal challenge, function, and recovery in persons with neurologic illness");
+        addTextViewWithText("Loren Ward, PT, DPT is licensed Physical Therapist who began her career in Physical Therapy in 2007, while earning her Doctorate at MGH Institute of Health Professions in Massachusetts. She did internships at Rehabilitation of Chicago, Spaulding Rehabilitation and National Rehabilitation Hospital and now works at Stanford Veteran’s Affairs System. Loren is an advocate of functional independence and strives to help her patients reach their own level of independence regardless of their limitations.");
+        addTextViewWithText("Rose Hamm, PT, DPT, CWS, FACCWS: Rose received a BS in Physical Therapy from the University of North Carolina, Chapel Hill, and an MS and post-graduate DPT from the University of Southern California.  She is currently Adjunct Assistant Professor of Clinical Physical Therapy at the University of Southern California and practices at Keck Hospital at USC.");
     }
 
     public void setUpTerms() {
