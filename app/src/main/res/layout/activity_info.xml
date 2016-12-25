@@ -37,6 +37,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/text_linear_layout"
             android:layout_below="@id/info_toolbar"
+            android:layout_marginBottom="20dp"
             android:orientation="vertical">
         </LinearLayout>
     </RelativeLayout>
