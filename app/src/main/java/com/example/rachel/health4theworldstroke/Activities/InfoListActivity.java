@@ -51,7 +51,6 @@ public class InfoListActivity extends AppCompatActivity {
         content.add(INFO_TYPE_ABOUT_US);
         content.add(INFO_TYPE_TERMS);
         content.add(INFO_TYPE_PRIVACY_POLICY);
-        content.add(INFO_TYPE_COPYRIGHT);
 
         /* Populate list view with read content to start */
         listView = (ListView)findViewById(R.id.info_list_view);
