@@ -34,8 +34,8 @@ public class VideoContentActivity extends AppCompatActivity {
     public static final String U2 = "U2";
     public static final String U3 = "Arm + trunk strengthening";
     public static final String U4 = "Elbow";
-    public static final String U5 = "Leg";
-    public static final String U6 = "Leg";
+    public static final String U5 = "Leg 1";
+    public static final String U6 = "Leg 2";
     public static final String U7 = "Shoulder";
     public static final String U8 = "Toe";
     public static final String S1 = "Knee";
