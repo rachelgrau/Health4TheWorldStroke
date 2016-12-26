@@ -106,6 +106,7 @@ public class InfoActivity extends AppCompatActivity {
 
     public void setUpAboutUs() {
         addHeaderWithText("Mobile App Introduction");
+        addLineBreak();
         addTextViewWithText("The HEALTH4THEWORLD STROKE HOPE APP is a free of cost educational tool to spread knowledge about stroke risk factors, secondary prevention, post stroke mobility & exercise education and speech strategies.  It has been created by Health4TheWorld which is a non profit organization inspired by the unmet medical needs worldwide. The mission of the organization is solving health inequities through innovation & technology and bringing smiles around the world. Please learn more about us at health4theworld.org.");
         addTextViewWithText("With an estimated incidence of 16.9 million and a prevalence of 33 million according to the World Health Organization, stroke is a dominant diseased entity in the category of cardiovascular diseases, and is a leading cause of serious long-term disability. The global burden of stroke falls disproportionately on low and middle-income countries, prompting us to improve global health educational outreach. We hope that this stroke educational app will be helpful.");
         addTextViewWithText("The app has several features that we hope you will find useful!");

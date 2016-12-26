@@ -10,6 +10,7 @@ public class ReadLearnContent extends LearnContent{
     public String text;
 
     /* READ TOPICS */
+    public static final String RISK_FACTORS = "Risk Factors";
     public static final String BLOOD_PRESSURE = "Blood Pressure";
     public static final String HEART_RATE = "Heart Rate";
     public static final String BLOOD_SUGAR = "Blood Sugar";
@@ -19,10 +20,12 @@ public class ReadLearnContent extends LearnContent{
     public static final String BLADDER_BOWEL = "Bladder/bowel";
     public static final String HOME_MODIFICATION = "Home Modification";
     public static final String FAQ = "FAQ";
+    public static final String RESOURCES = "Resources";
 
     public static ArrayList<LearnContent> getReadContent() {
         ArrayList<LearnContent> content = new ArrayList<LearnContent>();
 
+        ReadLearnContent riskFactors = new ReadLearnContent(RISK_FACTORS);
         ReadLearnContent bloodPressure = new ReadLearnContent(BLOOD_PRESSURE);
         ReadLearnContent heartRate = new ReadLearnContent(HEART_RATE);
         ReadLearnContent bloodSugar = new ReadLearnContent(BLOOD_SUGAR);
@@ -32,7 +35,9 @@ public class ReadLearnContent extends LearnContent{
         ReadLearnContent bladderBowel = new ReadLearnContent(BLADDER_BOWEL);
         ReadLearnContent homeMod = new ReadLearnContent(HOME_MODIFICATION);
         ReadLearnContent faq = new ReadLearnContent(FAQ);
+        ReadLearnContent resources = new ReadLearnContent(RESOURCES);
 
+        content.add(riskFactors);
         content.add(bloodPressure);
         content.add(heartRate);
         content.add(bloodSugar);
@@ -42,6 +47,7 @@ public class ReadLearnContent extends LearnContent{
         content.add(bladderBowel);
         content.add(homeMod);
         content.add(faq);
+        content.add(resources);
 
         return content;
     }
