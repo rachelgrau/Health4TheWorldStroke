@@ -76,7 +76,7 @@
             app:layout_constraintTop_toBottomOf="@+id/videoButton" />
 
         <TextView
-            android:text="&quot;The sun himself is weak when he first rises, and gathers strength and courage as the day gets on. &quot;\n\n - Charles Dickens"
+            android:text="&quot;Sometimes the bad things that happen in our lives put us directly on the path to the best things that will ever happen to us.&quot;\n\n - Nicole Reed"
             android:id="@+id/quoteLabel"
             android:layout_width="0dp"
             android:textAlignment="textEnd"
