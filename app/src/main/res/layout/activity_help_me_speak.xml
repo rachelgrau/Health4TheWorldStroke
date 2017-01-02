@@ -5,7 +5,7 @@
     android:id="@+id/activity_help_me_speak"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.rachel.health4theworldstroke.Activities.HelpMeSpeakActivity">
+    tools:context="com.rachelgrau.rachel.health4theworldstroke.Activities.HelpMeSpeakActivity">
 
     <!--Toolbar-->
     <android.support.v7.widget.Toolbar

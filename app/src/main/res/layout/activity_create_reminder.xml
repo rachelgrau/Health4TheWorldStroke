@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="@color/gray"
-        tools:context="com.example.rachel.health4theworldstroke.Activities.CreateReminderActivity">
+        tools:context="com.rachelgrau.rachel.health4theworldstroke.Activities.CreateReminderActivity">
 
         <!--Toolbar-->
         <android.support.v7.widget.Toolbar

@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorWhite"
-        tools:context="com.example.rachel.health4theworldstroke.Activities.ReadContentActivity">
+        tools:context="com.rachelgrau.rachel.health4theworldstroke.Activities.ReadContentActivity">
 
         <!--Toolbar-->
         <android.support.v7.widget.Toolbar
@@ -17,6 +17,7 @@
             android:id="@+id/read_content_toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorWhite"
             android:elevation="4dp"
             android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
             tools:layout_editor_absoluteX="8dp" >
@@ -26,7 +27,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="25sp"
-                android:textColor="@color/colorWhite"
+                android:textColor="@android:color/black"
+                android:background="@color/colorWhite"
                 android:layout_gravity="center"
                 android:id="@+id/toolbar_title" />
         </android.support.v7.widget.Toolbar>
