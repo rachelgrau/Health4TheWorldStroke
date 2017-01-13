@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.VideoView;
 
@@ -161,9 +162,13 @@ public class VideoContentActivity extends AppCompatActivity {
 
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(GridLayout.LayoutParams.MATCH_PARENT, GridLayout.LayoutParams.WRAP_CONTENT);
         video.setLayoutParams(layoutParams);
-
+        MediaController mediaController = new MediaController(this);
+        mediaController.setAnchorView(video);
+        video.setMediaController(mediaController);
         Uri uri2 = Uri.parse(uriPath);
         video.setVideoURI(uri2);
+        video.setKeepScreenOn(true);
+        video.start();
         video.requestFocus();
         video.setOnPreparedListener(new OnPreparedListener() {
             @Override
@@ -171,9 +176,22 @@ public class VideoContentActivity extends AppCompatActivity {
                 mp.setLooping(true);
             }
         });
-        video.start();
-
         layout.addView(video);
+
+        // old code
+        //        Uri uri2 = Uri.parse(uriPath);
+//        video.setVideoURI(uri2);
+//        video.requestFocus();
+//        video.setOnPreparedListener(new OnPreparedListener() {
+//            @Override
+//            public void onPrepared(MediaPlayer mp) {
+//                mp.setLooping(true);
+//            }
+//        });
+//        video.start();
+//
+//        layout.addView(video);
+
     }
 
     /* Adds the given images to the layout. */
