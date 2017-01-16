@@ -49,6 +49,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void generalInfoSelected(View view) {
+        Intent intent = new Intent(this, InfoListActivity.class);
+        startActivity(intent);
+    }
 
     public void helpMeSpeakSelected(View view) {
         Intent intent = new Intent(this, HelpMeSpeakActivity.class);

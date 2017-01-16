@@ -14,11 +14,11 @@
         android:background="@color/colorPrimaryDark">
 
         <ImageView
-            android:layout_height="72dp"
+            android:layout_height="60dp"
             app:srcCompat="@color/colorAccent"
             android:clickable="true"
-            android:id="@+id/helpMeSpeakButton"
-            android:onClick="helpMeSpeakSelected"
+            android:id="@+id/generalInfoButton"
+            android:onClick="generalInfoSelected"
             android:layout_marginTop="20dp"
             app:layout_constraintTop_toBottomOf="@+id/quoteLabel"
             app:layout_constraintRight_toRightOf="parent"
@@ -26,7 +26,19 @@
             android:layout_width="0dp" />
 
         <ImageView
-            android:layout_height="72dp"
+            android:layout_height="60dp"
+            app:srcCompat="@color/colorAccent"
+            android:clickable="true"
+            android:id="@+id/helpMeSpeakButton"
+            android:onClick="helpMeSpeakSelected"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/generalInfoButton"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_width="0dp" />
+
+        <ImageView
+            android:layout_height="60dp"
             app:srcCompat="@color/colorAccent"
             android:clickable="true"
             android:id="@+id/videoButton"
@@ -42,7 +54,7 @@
             app:srcCompat="@color/colorAccent"
             android:id="@+id/remindersButton"
             android:clickable="true"
-            android:layout_height="72dp"
+            android:layout_height="60dp"
             android:onClick="remindersSelected"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -67,7 +79,7 @@
             android:id="@+id/learnButton"
             android:layout_width="0dp"
             android:clickable="true"
-            android:layout_height="72dp"
+            android:layout_height="60dp"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -92,13 +104,21 @@
             android:layout_marginLeft="16dp"
             android:layout_marginTop="25dp"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_height="175dp" />
+            android:layout_height="180dp" />
+
+        <ImageView
+            android:layout_width="20dp"
+            app:srcCompat="@color/indigo"
+            android:id="@+id/indigoBar"
+            android:layout_height="60dp"
+            app:layout_constraintLeft_toLeftOf="@+id/generalInfoButton"
+            app:layout_constraintTop_toTopOf="@+id/generalInfoButton" />
 
         <ImageView
             android:layout_width="20dp"
             app:srcCompat="@color/green"
             android:id="@+id/greenBar"
-            android:layout_height="72dp"
+            android:layout_height="60dp"
             app:layout_constraintLeft_toLeftOf="@+id/helpMeSpeakButton"
             app:layout_constraintTop_toTopOf="@+id/helpMeSpeakButton" />
 
@@ -106,7 +126,7 @@
             android:layout_width="20dp"
             app:srcCompat="@color/lightPink"
             android:id="@+id/pinkBar"
-            android:layout_height="72dp"
+            android:layout_height="60dp"
             app:layout_constraintTop_toTopOf="@+id/videoButton"
             tools:layout_editor_absoluteX="0dp" />
 
@@ -114,18 +134,32 @@
             android:layout_width="20dp"
             app:srcCompat="@color/orange"
             android:id="@+id/orangeBar"
-            android:layout_height="72dp"
+            android:layout_height="60dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="@+id/learnButton" />
 
         <ImageView
             android:layout_width="20dp"
-            android:layout_height="72dp"
+            android:layout_height="60dp"
             app:srcCompat="@color/red"
             android:id="@+id/redBar"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginTop="8dp"
             app:layout_constraintTop_toBottomOf="@+id/learnButton" />
+
+        <TextView
+            android:text="@string/general_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/generalInfoLabel"
+            android:textColor="@color/colorWhite"
+            android:textSize="20sp"
+            android:fontFamily="sans-serif-light"
+            app:layout_constraintTop_toTopOf="@+id/generalInfoButton"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="14dp"
+            app:layout_constraintLeft_toRightOf="@+id/indigoBar"
+            android:layout_marginLeft="14dp" />
 
         <TextView
             android:text="@string/learn"
@@ -136,7 +170,7 @@
             android:textSize="20sp"
             android:fontFamily="sans-serif-light"
             app:layout_constraintTop_toTopOf="@+id/learnButton"
-            android:layout_marginTop="22dp"
+            android:layout_marginTop="16dp"
             android:layout_marginStart="14dp"
             app:layout_constraintLeft_toRightOf="@+id/orangeBar"
             android:layout_marginLeft="14dp" />
@@ -153,7 +187,7 @@
             app:layout_constraintLeft_toRightOf="@+id/redBar"
             android:layout_marginLeft="14dp"
             app:layout_constraintTop_toTopOf="@+id/remindersButton"
-            android:layout_marginTop="22dp" />
+            android:layout_marginTop="16dp" />
 
         <TextView
             android:text="@string/video"
@@ -165,7 +199,7 @@
             android:fontFamily="sans-serif-light"
             app:layout_constraintLeft_toLeftOf="@+id/videoButton"
             app:layout_constraintTop_toTopOf="@+id/videoButton"
-            android:layout_marginTop="22dp"
+            android:layout_marginTop="16dp"
             android:layout_marginStart="32dp"
             android:layout_marginLeft="32dp" />
 
@@ -181,20 +215,7 @@
             app:layout_constraintLeft_toRightOf="@+id/greenBar"
             android:layout_marginLeft="16dp"
             app:layout_constraintTop_toTopOf="@+id/helpMeSpeakButton"
-            android:layout_marginTop="22dp" />
-
-        <ImageButton
-            android:id="@+id/infoButton"
-            android:background="@mipmap/white_info"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            app:layout_constraintBottom_toTopOf="@+id/helpMeSpeakButton"
-            android:layout_marginBottom="8dp"
-            android:layout_marginStart="16dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            android:layout_marginLeft="16dp"
-            android:clickable="true"
-            android:onClick="infoClicked"/>
+            android:layout_marginTop="16dp" />
 
     </android.support.constraint.ConstraintLayout>
 </ScrollView>
