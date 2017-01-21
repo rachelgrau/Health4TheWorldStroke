@@ -1,8 +1,6 @@
 package com.rachelgrau.rachel.health4theworldstroke.Activities;
 
 import android.graphics.Typeface;
-import android.media.MediaPlayer;
-import android.media.MediaPlayer.OnPreparedListener;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -49,6 +47,18 @@ public class VideoContentActivity extends AppCompatActivity {
     public static final String S8 = "Hand stretch";
     public static final String S9 = "Dorsiflexors";
 
+    public static final String U1_URL = "https://s3.amazonaws.com/h4twappvideos/UCSF+%231+Bridge_Hip_Lift.mov";
+    public static final String U3_URL = "https://s3.amazonaws.com/h4twappvideos/UCSF+%23+3+Arm_%26_Trunk_Strengthening_With_VC_Cane.mov";
+    public static final String U4_URL = "https://s3.amazonaws.com/h4twappvideos/%23U4_Elbow_Flexion.mov";
+    public static final String U5_URL = "https://s3.amazonaws.com/h4twappvideos/%23U5_Leg_Control.mov";
+    public static final String U6_URL = "https://s3.amazonaws.com/h4twappvideos/%23U6_Leg_Control.mov";
+    public static final String U7_URL = "https://s3.amazonaws.com/h4twappvideos/%23U7_Shoulder_Flexion.mov";
+    public static final String U8_URL = "https://s3.amazonaws.com/h4twappvideos/%23U8_Toe_Dorsiflexion.mov";
+    public static final String S1_URL = "https://s3.amazonaws.com/h4twappvideos/%23S1_Knee_Flexion.mov";
+    public static final String S2_URL = "https://s3.amazonaws.com/h4twappvideos/%23S2_Hip_Flexion.mov";
+    public static final String S3_URL = "https://s3.amazonaws.com/h4twappvideos/Stanford+VA+%233_Sit_To_Stand.mov";
+
+
     public String title;
 
     @Override
@@ -75,34 +85,34 @@ public class VideoContentActivity extends AppCompatActivity {
       and adds it to the layout. */
     private void loadVideos() {
         if (title.equals(S1)) {
-            addVideoWithURI(getUriPath(R.raw.s1_knee_flexion));
+            addVideoWithURL(S1_URL);
             addVideoFooterWithTitle(VideoLearnContent.getInstructionsForVideo(title));
         } else if (title.equals(S2)) {
-            addVideoWithURI(getUriPath(R.raw.s2_hip_flexion));
+            addVideoWithURL(S2_URL);
             addVideoFooterWithTitle(VideoLearnContent.getInstructionsForVideo(title));
         } else if (title.equals(S3)) {
-            addVideoWithURI(getUriPath(R.raw.s3_sit_to_stand));
+            addVideoWithURL(S3_URL);
             addVideoFooterWithTitle(VideoLearnContent.getInstructionsForVideo(title));
         } else if (title.equals(U1)) {
-            addVideoWithURI(getUriPath(R.raw.u1_bridge_hip_lift));
+            addVideoWithURL(U1_URL);
             addVideoFooterWithTitle(VideoLearnContent.getInstructionsForVideo(title));
         } else if (title.equals(U3)){
-            addVideoWithURI(getUriPath(R.raw.u3_arm_trunk_strengthening));
+            addVideoWithURL(U3_URL);
             addVideoFooterWithTitle(VideoLearnContent.getInstructionsForVideo(title));
         } else if (title.equals(U4)) {
-            addVideoWithURI(getUriPath(R.raw.u4_elbow_flexion));
+            addVideoWithURL(U4_URL);
             addVideoFooterWithTitle(VideoLearnContent.getInstructionsForVideo(title));
         } else if (title.equals(U5)) {
-            addVideoWithURI(getUriPath(R.raw.u5_leg_control));
+            addVideoWithURL(U5_URL);
             addVideoFooterWithTitle(VideoLearnContent.getInstructionsForVideo(title));
         } else if (title.equals(U6)) {
-            addVideoWithURI(getUriPath(R.raw.u6_leg_control));
+            addVideoWithURL(U6_URL);
             addVideoFooterWithTitle(VideoLearnContent.getInstructionsForVideo(title));
         } else if (title.equals(U7)) {
-            addVideoWithURI(getUriPath(R.raw.u7_shoulder_flexion));
+            addVideoWithURL(U7_URL);
             addVideoFooterWithTitle(VideoLearnContent.getInstructionsForVideo(title));
         } else if (title.equals(U8)) {
-            addVideoWithURI(getUriPath(R.raw.u8_toe_dorsiflexion));
+            addVideoWithURL(U8_URL);
             addVideoFooterWithTitle(VideoLearnContent.getInstructionsForVideo(title));
         } else if (title.equals(S4)) {
             /* Adductors */
@@ -155,27 +165,36 @@ public class VideoContentActivity extends AppCompatActivity {
     }
 
     /* Adds a video with the given URI path to the layout. */
-    public void addVideoWithURI(String uriPath) {
+    public void addVideoWithURL(String url) {
         LinearLayout layout = (LinearLayout) findViewById(R.id.videos);
 
         VideoView video = new VideoView(this);
-
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(GridLayout.LayoutParams.MATCH_PARENT, GridLayout.LayoutParams.WRAP_CONTENT);
         video.setLayoutParams(layoutParams);
+    //Use a media controller so that you can scroll the video contents
+    //and also to pause, start the video.
         MediaController mediaController = new MediaController(this);
         mediaController.setAnchorView(video);
         video.setMediaController(mediaController);
-        Uri uri2 = Uri.parse(uriPath);
-        video.setVideoURI(uri2);
-        video.setKeepScreenOn(true);
+        video.setVideoURI(Uri.parse(url));
         video.start();
-        video.requestFocus();
-        video.setOnPreparedListener(new OnPreparedListener() {
-            @Override
-            public void onPrepared(MediaPlayer mp) {
-                mp.setLooping(true);
-            }
-        });
+
+//        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(GridLayout.LayoutParams.MATCH_PARENT, GridLayout.LayoutParams.WRAP_CONTENT);
+//        video.setLayoutParams(layoutParams);
+//        MediaController mediaController = new MediaController(this);
+//        mediaController.setAnchorView(video);
+//        video.setMediaController(mediaController);
+//        Uri uri2 = Uri.parse(uriPath);
+//        video.setVideoURI(uri2);
+//        video.setKeepScreenOn(true);
+//        video.start();
+//        video.requestFocus();
+//        video.setOnPreparedListener(new OnPreparedListener() {
+//            @Override
+//            public void onPrepared(MediaPlayer mp) {
+//                mp.setLooping(true);
+//            }
+//        });
         layout.addView(video);
 
         // old code
