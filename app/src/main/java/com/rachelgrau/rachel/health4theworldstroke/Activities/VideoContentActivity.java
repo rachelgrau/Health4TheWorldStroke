@@ -1,6 +1,8 @@
 package com.rachelgrau.rachel.health4theworldstroke.Activities;
 
 import android.graphics.Typeface;
+import android.media.MediaPlayer;
+import android.media.MediaPlayer.OnPreparedListener;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,7 +10,6 @@ import android.support.v7.widget.Toolbar;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.VideoView;
 
@@ -47,16 +48,16 @@ public class VideoContentActivity extends AppCompatActivity {
     public static final String S8 = "Hand stretch";
     public static final String S9 = "Dorsiflexors";
 
-    public static final String U1_URL = "https://s3.amazonaws.com/h4twappvideos/UCSF+%231+Bridge_Hip_Lift.mov";
-    public static final String U3_URL = "https://s3.amazonaws.com/h4twappvideos/UCSF+%23+3+Arm_%26_Trunk_Strengthening_With_VC_Cane.mov";
-    public static final String U4_URL = "https://s3.amazonaws.com/h4twappvideos/%23U4_Elbow_Flexion.mov";
-    public static final String U5_URL = "https://s3.amazonaws.com/h4twappvideos/%23U5_Leg_Control.mov";
-    public static final String U6_URL = "https://s3.amazonaws.com/h4twappvideos/%23U6_Leg_Control.mov";
-    public static final String U7_URL = "https://s3.amazonaws.com/h4twappvideos/%23U7_Shoulder_Flexion.mov";
-    public static final String U8_URL = "https://s3.amazonaws.com/h4twappvideos/%23U8_Toe_Dorsiflexion.mov";
-    public static final String S1_URL = "https://s3.amazonaws.com/h4twappvideos/%23S1_Knee_Flexion.mov";
-    public static final String S2_URL = "https://s3.amazonaws.com/h4twappvideos/%23S2_Hip_Flexion.mov";
-    public static final String S3_URL = "https://s3.amazonaws.com/h4twappvideos/Stanford+VA+%233_Sit_To_Stand.mov";
+    public static final String U1_URL = "https://s3.amazonaws.com/h4twappvideoswithcopyright/Bridge+Hip+Lift.mp4";
+    public static final String U3_URL = "https://s3.amazonaws.com/h4twappvideoswithcopyright/Arm+and+Trunk+Strengthening.mp4";
+    public static final String U4_URL = "https://s3.amazonaws.com/h4twappvideoswithcopyright/Elbow+Flexion.mp4";
+    public static final String U5_URL = "https://s3.amazonaws.com/h4twappvideoswithcopyright/Leg+Control+1.mp4";
+    public static final String U6_URL = "https://s3.amazonaws.com/h4twappvideoswithcopyright/Leg+Control+2.mp4";
+    public static final String U7_URL = "https://s3.amazonaws.com/h4twappvideoswithcopyright/Shoulder+Flexion.mp4";
+    public static final String U8_URL = "https://s3.amazonaws.com/h4twappvideoswithcopyright/Toe+Dorsiflexion.mp4";
+    public static final String S1_URL = "https://s3.amazonaws.com/h4twappvideoswithcopyright/Knee+Flexion.mp4";
+    public static final String S2_URL = "https://s3.amazonaws.com/h4twappvideoswithcopyright/Hip+Flexion.mp4";
+    public static final String S3_URL = "https://s3.amazonaws.com/h4twappvideoswithcopyright/Sit+to+Stand.mp4";
 
 
     public String title;
@@ -171,46 +172,17 @@ public class VideoContentActivity extends AppCompatActivity {
         VideoView video = new VideoView(this);
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(GridLayout.LayoutParams.MATCH_PARENT, GridLayout.LayoutParams.WRAP_CONTENT);
         video.setLayoutParams(layoutParams);
-    //Use a media controller so that you can scroll the video contents
-    //and also to pause, start the video.
-        MediaController mediaController = new MediaController(this);
-        mediaController.setAnchorView(video);
-        video.setMediaController(mediaController);
         video.setVideoURI(Uri.parse(url));
         video.start();
-
-//        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(GridLayout.LayoutParams.MATCH_PARENT, GridLayout.LayoutParams.WRAP_CONTENT);
-//        video.setLayoutParams(layoutParams);
-//        MediaController mediaController = new MediaController(this);
-//        mediaController.setAnchorView(video);
-//        video.setMediaController(mediaController);
-//        Uri uri2 = Uri.parse(uriPath);
-//        video.setVideoURI(uri2);
-//        video.setKeepScreenOn(true);
-//        video.start();
-//        video.requestFocus();
-//        video.setOnPreparedListener(new OnPreparedListener() {
-//            @Override
-//            public void onPrepared(MediaPlayer mp) {
-//                mp.setLooping(true);
-//            }
-//        });
+        video.setKeepScreenOn(true);
+        video.requestFocus();
+        video.setOnPreparedListener(new OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mp) {
+                mp.setLooping(true);
+            }
+        });
         layout.addView(video);
-
-        // old code
-        //        Uri uri2 = Uri.parse(uriPath);
-//        video.setVideoURI(uri2);
-//        video.requestFocus();
-//        video.setOnPreparedListener(new OnPreparedListener() {
-//            @Override
-//            public void onPrepared(MediaPlayer mp) {
-//                mp.setLooping(true);
-//            }
-//        });
-//        video.start();
-//
-//        layout.addView(video);
-
     }
 
     /* Adds the given images to the layout. */

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.rachelgrau.rachel.health4theworldstroke">
+
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
-            android:name="com.rachelgrau.rachel.health4theworldstroke.Activities.MainActivity"
+            android:name=".Activities.MainActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -18,15 +20,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.rachelgrau.rachel.health4theworldstroke.Activities.HelpMeSpeakActivity" />
-        <activity android:name="com.rachelgrau.rachel.health4theworldstroke.Activities.LearnActivity" />
-        <activity android:name="com.rachelgrau.rachel.health4theworldstroke.Activities.RemindersActivity" />
-        <activity android:name="com.rachelgrau.rachel.health4theworldstroke.Activities.ReadContentActivity" />
-        <activity android:name="com.rachelgrau.rachel.health4theworldstroke.Activities.VideoContentActivity" />
-        <activity android:name="com.rachelgrau.rachel.health4theworldstroke.Activities.CreateReminderActivity" />
-        <activity android:name="com.rachelgrau.rachel.health4theworldstroke.Activities.InfoActivity" />
-        <activity android:name="com.rachelgrau.rachel.health4theworldstroke.Activities.DisclaimerActivity" />
-        <activity android:name="com.rachelgrau.rachel.health4theworldstroke.Activities.InfoListActivity"></activity>
+        <activity android:name=".Activities.HelpMeSpeakActivity" />
+        <activity android:name=".Activities.LearnActivity" />
+        <activity android:name=".Activities.RemindersActivity" />
+        <activity android:name=".Activities.ReadContentActivity" />
+        <activity android:name=".Activities.VideoContentActivity" />
+        <activity android:name=".Activities.CreateReminderActivity" />
+        <activity android:name=".Activities.InfoActivity" />
+        <activity android:name=".Activities.DisclaimerActivity" />
+        <activity android:name=".Activities.InfoListActivity" />
+        <activity android:name=".Activities.RedLearnContentActivity"></activity>
     </application>
 
 </manifest>

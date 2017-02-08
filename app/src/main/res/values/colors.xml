@@ -13,4 +13,6 @@
     <color name="lightPink">#EBBBD3</color>
     <color name="redPink">#ED4A5A</color>
     <color name="indigo">#507FFF</color>
+
+    <color name="redBackground">#E8324A</color>
 </resources>

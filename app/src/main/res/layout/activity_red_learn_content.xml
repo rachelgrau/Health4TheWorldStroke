@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fillViewport="true">
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/activity_red_learn_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/redBackground"
+        tools:context="com.rachelgrau.rachel.health4theworldstroke.Activities.RedLearnContentActivity">
+
+        <!--Toolbar-->
+        <android.support.v7.widget.Toolbar
+            style="@style/ToolBarStyle"
+            android:id="@+id/read_content_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorWhite"
+            android:elevation="4dp"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+            tools:layout_editor_absoluteX="8dp" >
+
+            <TextView
+                style="@style/ToolBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:textColor="@android:color/black"
+                android:background="@color/colorWhite"
+                android:layout_gravity="center"
+                android:id="@+id/toolbar_title" />
+        </android.support.v7.widget.Toolbar>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:id="@+id/content"
+            android:layout_below="@id/read_content_toolbar"
+            android:orientation="vertical">
+        </LinearLayout>
+    </RelativeLayout>
+</ScrollView>
