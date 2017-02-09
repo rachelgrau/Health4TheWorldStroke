@@ -19,9 +19,7 @@ import com.rachelgrau.rachel.health4theworldstroke.R;
 
 import java.util.ArrayList;
 
-import static com.rachelgrau.rachel.health4theworldstroke.Models.ReadLearnContent.BLOOD_PRESSURE;
-import static com.rachelgrau.rachel.health4theworldstroke.Models.ReadLearnContent.BLOOD_SUGAR;
-import static com.rachelgrau.rachel.health4theworldstroke.Models.ReadLearnContent.HEART_RATE;
+import static com.rachelgrau.rachel.health4theworldstroke.Models.ReadLearnContent.RESOURCES;
 
 public class LearnActivity extends AppCompatActivity {
     public static final String EXTRA_PAGE_TYPE = "pageType";
@@ -94,12 +92,12 @@ public class LearnActivity extends AppCompatActivity {
                     // To read activity
                     ReadLearnContent selectedContent = (ReadLearnContent)content.get(position);
                     String selectedContentTitle = selectedContent.title;
-                    if (selectedContentTitle.equals(BLOOD_SUGAR) || selectedContentTitle.equals(BLOOD_PRESSURE) || selectedContentTitle.equals(HEART_RATE)) {
-                        Intent readIntent = new Intent(context, RedLearnContentActivity.class);
+                    if (selectedContentTitle.equals(RESOURCES)) {
+                        Intent readIntent = new Intent(context, ReadContentActivity.class);
                         readIntent.putExtra(EXTRA_TITLE, selectedContent.title);
                         startActivity(readIntent);
                     } else {
-                        Intent readIntent = new Intent(context, ReadContentActivity.class);
+                        Intent readIntent = new Intent(context, RedLearnContentActivity.class);
                         readIntent.putExtra(EXTRA_TITLE, selectedContent.title);
                         startActivity(readIntent);
                     }
