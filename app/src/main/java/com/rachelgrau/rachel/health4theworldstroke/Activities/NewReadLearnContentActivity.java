@@ -112,6 +112,8 @@ public class NewReadLearnContentActivity extends AppCompatActivity {
         secondParSpannable.setSpan( new CustomTypefaceSpan("sans-serif",Typeface.createFromAsset(getAssets(), "Roboto-Bold.ttf")), firstPart.length() + secondPart.length() + thirdPart.length(), firstPart.length() + secondPart.length() + thirdPart.length() + fourthPart.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         secondParSpannable.setSpan( new CustomTypefaceSpan("sans-serif",Typeface.createFromAsset(getAssets(), "Roboto-Light.ttf")), firstPart.length() + secondPart.length() + thirdPart.length() + fourthPart.length(), firstPart.length() + secondPart.length() + thirdPart.length() + fourthPart.length() + fifthPart.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         addTextViewWithText(secondParSpannable);
+
+        addImageWithURI(R.drawable.blood_sugar);
     }
 
     public void setUpBloodPressure() {
@@ -136,6 +138,8 @@ public class NewReadLearnContentActivity extends AppCompatActivity {
         secondParSpannable.setSpan( new CustomTypefaceSpan("sans-serif",Typeface.createFromAsset(getAssets(), "Roboto-Bold.ttf")), firstPart.length(), firstPart.length() + secondPart.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         secondParSpannable.setSpan( new CustomTypefaceSpan("sans-serif",Typeface.createFromAsset(getAssets(), "Roboto-Light.ttf")), firstPart.length() + secondPart.length(), firstPart.length() + secondPart.length() + thirdPart.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         addTextViewWithText(secondParSpannable);
+
+        addImageWithURI(R.drawable.blood_pressure);
     }
 
     public void setUpHeartRate() {
@@ -164,6 +168,8 @@ public class NewReadLearnContentActivity extends AppCompatActivity {
         secondParSpannable.setSpan( new CustomTypefaceSpan("sans-serif",Typeface.createFromAsset(getAssets(), "Roboto-Bold.ttf")), firstPart.length() + secondPart.length() + thirdPart.length(), firstPart.length() + secondPart.length() + thirdPart.length() + fourthPart.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         secondParSpannable.setSpan( new CustomTypefaceSpan("sans-serif",Typeface.createFromAsset(getAssets(), "Roboto-Light.ttf")), firstPart.length() + secondPart.length() + thirdPart.length() + fourthPart.length(), firstPart.length() + secondPart.length() + thirdPart.length() + fourthPart.length() + fifthPart.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         addTextViewWithText(secondParSpannable);
+
+        addImageWithURI(R.drawable.heart_rate);
     }
 
     public void setUpShowerBath() {
@@ -205,6 +211,8 @@ public class NewReadLearnContentActivity extends AppCompatActivity {
         Spannable bulletFourSpannable = new SpannableString(bulletFourFirst);
         bulletFourSpannable.setSpan( new CustomTypefaceSpan("sans-serif",Typeface.createFromAsset(getAssets(), "Roboto-Light.ttf")), 0, bulletFourFirst.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         addTextViewWithText(bulletFourSpannable);
+
+        addImageWithURI(R.drawable.grab_bars_new);
     }
 
     public void setUpExercises() {
@@ -277,6 +285,9 @@ public class NewReadLearnContentActivity extends AppCompatActivity {
         bulletSixSpannable.setSpan( new CustomTypefaceSpan("sans-serif",Typeface.createFromAsset(getAssets(), "Roboto-Bold.ttf")), bulletSixFirst.length(), bulletSixFirst.length() + bulletSixSecond.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         bulletSixSpannable.setSpan( new CustomTypefaceSpan("sans-serif",Typeface.createFromAsset(getAssets(), "Roboto-Light.ttf")), bulletSixFirst.length() + bulletSixSecond.length(), bulletSixFirst.length() + bulletSixSecond.length() + bulletSixThird.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         addTextViewWithText(bulletSixSpannable);
+
+        addImageWithURI(R.drawable.yoga);
+        addImageWithURI(R.drawable.walking);
     }
 
     public void setUpDiet() {
@@ -333,6 +344,8 @@ public class NewReadLearnContentActivity extends AppCompatActivity {
         spannable.setSpan( new CustomTypefaceSpan("sans-serif",Typeface.createFromAsset(getAssets(), "Roboto-Light.ttf")), 0, bedroomExplanation.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         addTextViewWithText(spannable);
 
+        addImageWithURI(R.drawable.weak_side_bed);
+
         String general = "General";
         spannable = new SpannableString(general);
         spannable.setSpan( new CustomTypefaceSpan("sans-serif",Typeface.createFromAsset(getAssets(), "Roboto-Bold.ttf")), 0, general.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -341,6 +354,8 @@ public class NewReadLearnContentActivity extends AppCompatActivity {
         spannable = new SpannableString(generalExplanation);
         spannable.setSpan( new CustomTypefaceSpan("sans-serif",Typeface.createFromAsset(getAssets(), "Roboto-Light.ttf")), 0, generalExplanation.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         addTextViewWithText(spannable);
+
+        addImageWithURI(R.drawable.slippery_carpet);
 
         String bath = "Bath";
         spannable = new SpannableString(bath);
@@ -354,6 +369,8 @@ public class NewReadLearnContentActivity extends AppCompatActivity {
         spannable = new SpannableString(bathExplanationTwo);
         spannable.setSpan( new CustomTypefaceSpan("sans-serif",Typeface.createFromAsset(getAssets(), "Roboto-Light.ttf")), 0, bathExplanationTwo.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         addTextViewWithText(spannable);
+
+        addImageWithURI(R.drawable.grab_bars_new);
     }
 
     public void setUpFAQ() {
