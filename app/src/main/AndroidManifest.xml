@@ -29,7 +29,11 @@
         <activity android:name=".Activities.InfoActivity" />
         <activity android:name=".Activities.DisclaimerActivity" />
         <activity android:name=".Activities.InfoListActivity" />
-        <activity android:name=".Activities.RedLearnContentActivity"></activity>
+        <activity android:name=".Activities.RedLearnContentActivity" />
+        <activity
+            android:name=".Activities.NewReadLearnContentActivity"
+            android:label="@string/title_activity_new_read_learn_content"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
     </application>
 
 </manifest>

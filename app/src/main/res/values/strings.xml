@@ -70,4 +70,6 @@
 
     <string name="pref_previously_started">previously_started</string>
     <string name="accept">I Accept</string>
+    <string name="title_activity_learn_content">LearnContent</string>
+    <string name="title_activity_new_read_learn_content">NewReadLearnContentActivity</string>
 </resources>

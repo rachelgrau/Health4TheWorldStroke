@@ -97,7 +97,7 @@ public class LearnActivity extends AppCompatActivity {
                         readIntent.putExtra(EXTRA_TITLE, selectedContent.title);
                         startActivity(readIntent);
                     } else {
-                        Intent readIntent = new Intent(context, RedLearnContentActivity.class);
+                        Intent readIntent = new Intent(context, NewReadLearnContentActivity.class);
                         readIntent.putExtra(EXTRA_TITLE, selectedContent.title);
                         startActivity(readIntent);
                     }

@@ -27,7 +27,8 @@ import static com.rachelgrau.rachel.health4theworldstroke.Models.ReadLearnConten
 import static com.rachelgrau.rachel.health4theworldstroke.Models.ReadLearnContent.RISK_FACTORS;
 import static com.rachelgrau.rachel.health4theworldstroke.Models.ReadLearnContent.SHOWER_BATH;
 
-public class RedLearnContentActivity extends AppCompatActivity {
+public class NewReadLearnContentActivity extends AppCompatActivity {
+
     public String title;
 
     @Override
@@ -448,4 +449,5 @@ public class RedLearnContentActivity extends AppCompatActivity {
                 800));
         ll.addView(imageViewOne);
     }
+
 }
